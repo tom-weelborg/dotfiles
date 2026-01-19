@@ -15,6 +15,7 @@
       desktop = nixpkgs.lib.nixosSystem{
         modules = [
           ./configuration.nix
+          ./modules/shared.nix
         ];
       };
     };
