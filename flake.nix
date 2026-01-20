@@ -30,6 +30,19 @@
           inputs.home-manager.nixosModules.default
         ];
       };
+      work = nixpkgs.lib.nixosSystem{
+        specialArgs = {
+          inherit
+            variables
+            ;
+        };
+        modules = [
+          ./configuration.nix
+          ./modules/shared.nix
+          ./hosts/work
+          inputs.home-manager.nixosModules.default
+        ];
+      };
     };
   };
 }
