@@ -1,0 +1,13 @@
+{
+    "editor.stickyScroll.enabled": false,
+
+    "explorer.autoReveal": false,
+    "explorer.compactFolders": false,
+
+    "window.openFoldersInNewWindow": "on",
+
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.editor.wrapTabs": true,
+    "workbench.tree.enableStickyScroll": false,
+}
