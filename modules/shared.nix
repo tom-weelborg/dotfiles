@@ -4,6 +4,7 @@
     ./git
     ./home
     ./jetbrains
+    ./obsidian
     ./vscodium
   ];
 }
