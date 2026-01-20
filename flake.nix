@@ -3,9 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
+    home-manager = {
+      url = "github:nix-community/home-manager?ref=release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, ... }@inputs:
   let
     variables = import ./variables.nix;
 
@@ -23,6 +27,7 @@
         modules = [
           ./configuration.nix
           ./modules/shared.nix
+          inputs.home-manager.nixosModules.default
         ];
       };
     };
