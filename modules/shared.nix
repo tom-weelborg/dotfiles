@@ -9,6 +9,7 @@
     ./obsidian
     ./pinta
     ./shotcut
+    ./vlc
     ./vscodium
   ];
 }
