@@ -6,6 +6,7 @@
     ./home
     ./jetbrains
     ./obsidian
+    ./pinta
     ./vscodium
   ];
 }
