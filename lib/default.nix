@@ -1,0 +1,3 @@
+{
+  readDirIfExists = import ./readDirIfExists.nix;
+}
