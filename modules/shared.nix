@@ -8,6 +8,7 @@
     ./obs
     ./obsidian
     ./pinta
+    ./shotcut
     ./vscodium
   ];
 }
