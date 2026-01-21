@@ -5,6 +5,7 @@
     ./git
     ./home
     ./jetbrains
+    ./obs
     ./obsidian
     ./pinta
     ./vscodium
