@@ -11,7 +11,11 @@
 
   outputs = { self, nixpkgs, ... }@inputs:
   let
-    variables = import ./variables.nix;
+    utils = import ./lib;
+
+    variables = import ./variables.nix // utils.importIfExists {
+      path = ./variables.private.nix;
+    };
 
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
