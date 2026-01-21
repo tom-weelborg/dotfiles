@@ -5,6 +5,7 @@
     ./git
     ./home
     ./jetbrains
+    ./keepassxc
     ./obs
     ./obsidian
     ./pinta
