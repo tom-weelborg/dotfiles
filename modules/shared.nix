@@ -3,6 +3,7 @@
   imports = [
     ./docker
     ./git
+    ./gnome
     ./home
     ./jetbrains
     ./keepassxc
