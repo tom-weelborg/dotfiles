@@ -13,8 +13,9 @@
   let
     utils = import ./lib;
 
-    variables = import ./variables.nix // utils.importIfExists {
-      path = ./variables.private.nix;
+    vars = import ./variables.nix;
+    variables = vars // utils.importIfExists {
+      path = vars.privateVariablesPath;
     };
 
     system = "x86_64-linux";
