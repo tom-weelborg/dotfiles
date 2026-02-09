@@ -2,6 +2,7 @@
 {
   imports = [
     ./docker
+    ./fastfetch
     ./firefox
     ./git
     ./gnome
