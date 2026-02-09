@@ -7,6 +7,7 @@
     ./home
     ./jetbrains
     ./keepassxc
+    ./makemkv
     ./obs
     ./obsidian
     ./pinta

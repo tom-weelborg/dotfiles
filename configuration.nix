@@ -16,6 +16,8 @@
   
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernelModules = [ "sg" ];
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -92,7 +94,13 @@
   users.users.${variables.username}  = {
     isNormalUser = true;
     description = "${variables.displayname}";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "cdrom"
+      "plugdev"
+      "networkmanager"
+      "video"
+      "wheel"
+    ];
     packages = with pkgs; [
     #  thunderbird
     ];
