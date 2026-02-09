@@ -7,6 +7,10 @@
       url = "github:nix-community/home-manager?ref=release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -33,6 +37,7 @@
           ./configuration.nix
           ./modules/shared.nix
           inputs.home-manager.nixosModules.default
+          inputs.nur.modules.nixos.default
         ];
       };
       work = nixpkgs.lib.nixosSystem{
@@ -46,6 +51,7 @@
           ./modules/shared.nix
           ./hosts/work/laptops/2026-01
           inputs.home-manager.nixosModules.default
+          inputs.nur.modules.nixos.default
         ];
       };
     };

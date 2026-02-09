@@ -2,6 +2,7 @@
 {
   imports = [
     ./docker
+    ./firefox
     ./git
     ./gnome
     ./home

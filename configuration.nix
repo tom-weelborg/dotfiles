@@ -106,9 +106,6 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   xdg.mime.defaultApplications = {
     "text/html" = "firefox.desktop";
     "x-scheme-handler/http" = "firefox.desktop";
