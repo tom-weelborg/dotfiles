@@ -44,7 +44,7 @@
         modules = [
           ./configuration.nix
           ./modules/shared.nix
-          ./hosts/work
+          ./hosts/work/laptops/2026-01
           inputs.home-manager.nixosModules.default
         ];
       };
