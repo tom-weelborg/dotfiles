@@ -16,9 +16,9 @@ in
               ublock-origin
             ];
           };
-        };
-        settings = {
-          "browser.translations.neverTranslateLanguages" = "de,en";
+          settings = {
+            "browser.translations.neverTranslateLanguages" = "de,en";
+          };
         };
       };
     };
