@@ -23,37 +23,16 @@
     };
 
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
   in
   {
-    nixosConfigurations = {
-      desktop = nixpkgs.lib.nixosSystem{
-        specialArgs = {
-          inherit
-            variables
-            ;
-        };
-        modules = [
-          ./configuration.nix
-          ./modules/shared.nix
-          inputs.home-manager.nixosModules.default
-          inputs.nur.modules.nixos.default
-        ];
-      };
-      work = nixpkgs.lib.nixosSystem{
-        specialArgs = {
-          inherit
-            variables
-            ;
-        };
-        modules = [
-          ./configuration.nix
-          ./modules/shared.nix
-          ./hosts/work/laptops/2026-01
-          inputs.home-manager.nixosModules.default
-          inputs.nur.modules.nixos.default
-        ];
-      };
-    };
+    nixosConfigurations =
+      utils.discoverHosts {
+        inherit
+          inputs
+          system
+          variables
+          ;
+        lib = nixpkgs.lib;
+      } ./hosts [];
   };
 }
