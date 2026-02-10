@@ -17,6 +17,9 @@ in
             ];
           };
         };
+        settings = {
+          "browser.translations.neverTranslateLanguages" = "de,en";
+        };
       };
     };
   };
