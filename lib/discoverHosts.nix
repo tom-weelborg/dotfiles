@@ -3,6 +3,8 @@ let
   isHostDir = path:
     builtins.pathExists (path + "/default.nix");
 
+  discoverModules = import ./discoverModules.nix lib;
+
   discover = basePath: prefix:
     let
       entries = builtins.readDir basePath;
@@ -22,12 +24,11 @@ let
                     inherit system;
                     modules = [
                       ../configuration.nix
-                      ../modules/shared.nix
                       ../overlays
                       inputs.home-manager.nixosModules.default
                       inputs.nur.modules.nixos.default
                       (import (path + "/default.nix"))
-                    ];
+                    ] ++ lib.attrValues (discoverModules ../modules);
                     specialArgs = {
                       inherit
                         variables
