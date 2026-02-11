@@ -17,5 +17,6 @@
 
   imports = [
     ./hardware-configuration.nix
+    ../../../../modules/git/work.nix
   ];
 }
