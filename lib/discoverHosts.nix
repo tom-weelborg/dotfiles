@@ -23,6 +23,7 @@ let
                     modules = [
                       ../configuration.nix
                       ../modules/shared.nix
+                      ../overlays
                       inputs.home-manager.nixosModules.default
                       inputs.nur.modules.nixos.default
                       (import (path + "/default.nix"))
