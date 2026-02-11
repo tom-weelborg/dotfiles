@@ -8,6 +8,7 @@
   };
 
   imports = [
+    ./hardware-configuration.nix
     ../../../../modules/displaylink
     ../../../../modules/git/work.nix
     ../../../../modules/microsoft
