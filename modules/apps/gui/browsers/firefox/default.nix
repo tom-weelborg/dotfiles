@@ -4,8 +4,8 @@ let
 in
 {
   options = {
-    modules.firefox = {
-      enable = lib.mkEnableOption "firefox";
+    modules.apps.gui.browsers.firefox = {
+      enable = lib.mkEnableOption "Firefox";
       extraExtensions = lib.mkOption {
         type = lib.types.listOf lib.types.package;
         default = [];
@@ -13,7 +13,7 @@ in
     };
   };
 
-  config = lib.mkIf config.modules.firefox.enable {
+  config = lib.mkIf config.modules.apps.gui.browsers.firefox.enable {
     home-manager.users.${variables.username} = { ... }:
     {
       programs.firefox = {
@@ -25,7 +25,7 @@ in
               packages = with extensions; [
                 keepassxc-browser
                 ublock-origin
-              ] ++ config.modules.firefox.extraExtensions;
+              ] ++ config.modules.apps.gui.browsers.firefox.extraExtensions;
             };
             settings = {
               "browser.translations.neverTranslateLanguages" = "de,en";
