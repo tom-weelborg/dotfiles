@@ -26,6 +26,21 @@
     };
     git = {
       enable = true;
+      extraSettings = {
+        core = {
+          autocrlf = "input";
+          longpaths = true;
+        };
+        credential.helper = "manager";
+        init.defaultBranch = "main";
+        merge = {
+          ff = false;
+        };
+        pull = {
+          ff = "only";
+          rebase = false;
+        };
+      };
     };
     gnome = {
       enable = true;
@@ -75,6 +90,5 @@
 
   imports = [
     ./hardware-configuration.nix
-    ../../../../modules/git/work.nix
   ];
 }
