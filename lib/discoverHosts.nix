@@ -28,7 +28,7 @@ let
                       inputs.home-manager.nixosModules.default
                       inputs.nur.modules.nixos.default
                       (import (path + "/default.nix"))
-                    ] ++ lib.attrValues (discoverModules ../modules);
+                    ] ++ lib.attrValues (discoverModules ../modules [ "modules" ]);
                     specialArgs = {
                       inherit
                         variables
