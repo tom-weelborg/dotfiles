@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   modules = {
-    apps = {
+    programs = {
       gui = {
         browsers = {
           firefox = {
