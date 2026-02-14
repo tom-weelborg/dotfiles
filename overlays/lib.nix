@@ -1,3 +1,3 @@
 final: prev: {
-  lib = prev.lib // (import ../lib);
+  lib = prev.lib // (import ../lib prev.lib);
 }

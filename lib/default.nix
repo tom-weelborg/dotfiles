@@ -1,6 +1,14 @@
-{
-  discoverHosts = import ./discoverHosts.nix;
-  discoverModules = import ./discoverModules.nix;
-  importIfExists = import ./importIfExists.nix;
-  readDirIfExists = import ./readDirIfExists.nix;
-}
+lib:
+let
+  libFiles = lib.mapAttrs'
+    (n: _: {
+      name = lib.removeSuffix ".nix" n;
+      value = import ./${n};
+    })
+    (
+      lib.filterAttrs
+        (n: _: n != "default.nix")
+        (builtins.readDir ./.)
+    );
+in
+libFiles

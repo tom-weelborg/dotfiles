@@ -15,7 +15,9 @@
 
   outputs = { self, nixpkgs, ... }@inputs:
   let
-    utils = import ./lib;
+    lib = nixpkgs.lib;
+    
+    utils = import ./lib lib;
 
     vars = import ./variables.nix;
     variables = vars // utils.importIfExists {
@@ -29,10 +31,10 @@
       utils.discoverHosts {
         inherit
           inputs
+          lib
           system
           variables
           ;
-        lib = nixpkgs.lib;
       } ./hosts [];
   };
 }
