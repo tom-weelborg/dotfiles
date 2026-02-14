@@ -25,6 +25,7 @@ let
                     modules = [
                       ../configuration.nix
                       ../overlays
+                      ../specialisations
                       inputs.home-manager.nixosModules.default
                       inputs.nur.modules.nixos.default
                       (import (path + "/default.nix"))
@@ -33,6 +34,7 @@ let
                       inherit
                         variables
                         ;
+                      overrideFunction = lib.mkDefault;
                     };
                   };
               }
