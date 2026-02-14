@@ -1,8 +1,6 @@
-{ lib, variables, ... }:
+{ lib, pkgs, variables, ... }:
 let
-  utils = import ../../lib;
-
-  vpnFiles = utils.readDirIfExists variables.vpnDir;
+  vpnFiles = pkgs.lib.readDirIfExists variables.vpnDir;
   vpnConfFiles = lib.attrNames (
     lib.filterAttrs (n: _: 
       lib.hasSuffix ".conf" n || lib.hasSuffix ".ovpn" n
