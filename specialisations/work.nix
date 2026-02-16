@@ -16,6 +16,26 @@
             ];
           };
         };
+        development = {
+          git = {
+            enable = overrideFunction true;
+            extraSettings = overrideFunction {
+              core = {
+                autocrlf = "input";
+                longpaths = true;
+              };
+              credential.helper = "manager";
+              init.defaultBranch = "main";
+              merge = {
+                ff = false;
+              };
+              pull = {
+                ff = "only";
+                rebase = false;
+              };
+            };
+          };
+        };
       };
     };
 
@@ -25,24 +45,6 @@
     };
     docker = {
       enable = overrideFunction true;
-    };
-    git = {
-      enable = overrideFunction true;
-      extraSettings = overrideFunction {
-        core = {
-          autocrlf = "input";
-          longpaths = true;
-        };
-        credential.helper = "manager";
-        init.defaultBranch = "main";
-        merge = {
-          ff = false;
-        };
-        pull = {
-          ff = "only";
-          rebase = false;
-        };
-      };
     };
     jetbrains = {
       enable = overrideFunction true;

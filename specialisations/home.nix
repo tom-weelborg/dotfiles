@@ -13,16 +13,18 @@
             enable = overrideFunction true;
           };
         };
+        development = {
+          git = {
+            enable = overrideFunction true;
+            extraSettings = overrideFunction {};
+          };
+        };
       };
     };
 
 
     docker = {
       enable = overrideFunction true;
-    };
-    git = {
-      enable = overrideFunction true;
-      extraSettings = overrideFunction {};
     };
     jetbrains = {
       enable = overrideFunction true;
