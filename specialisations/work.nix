@@ -2,6 +2,11 @@
 {
   modules = {
     programs = {
+      cli = {
+        fastfetch = {
+          enable = overrideFunction true;
+        };
+      };
       gui = {
         browsers = {
           firefox = {
@@ -19,9 +24,6 @@
       enable = overrideFunction true;
     };
     docker = {
-      enable = overrideFunction true;
-    };
-    fastfetch = {
       enable = overrideFunction true;
     };
     git = {
