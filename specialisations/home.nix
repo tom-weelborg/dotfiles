@@ -23,6 +23,9 @@
             enable = overrideFunction true;
             extraSettings = overrideFunction {};
           };
+          vscodium = {
+            enable = overrideFunction true;
+          };
         };
       };
     };
@@ -56,9 +59,6 @@
       enable = overrideFunction true;
     };
     vlc = {
-      enable = overrideFunction true;
-    };
-    vscodium = {
       enable = overrideFunction true;
     };
   };

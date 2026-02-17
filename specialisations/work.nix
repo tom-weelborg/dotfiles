@@ -40,6 +40,9 @@
               };
             };
           };
+          vscodium = {
+            enable = overrideFunction true;
+          };
         };
         microsoft = {
           teams = {
@@ -84,9 +87,6 @@
       enable = overrideFunction true;
     };
     vlc = {
-      enable = overrideFunction true;
-    };
-    vscodium = {
       enable = overrideFunction true;
     };
   };
