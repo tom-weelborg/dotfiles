@@ -44,6 +44,11 @@
             enable = overrideFunction true;
           };
         };
+        media = {
+          vlc = {
+            enable = overrideFunction true;
+          };
+        };
         microsoft = {
           teams = {
             enable = overrideFunction true;
@@ -84,9 +89,6 @@
       enable = overrideFunction true;
     };
     shotcut = {
-      enable = overrideFunction true;
-    };
-    vlc = {
       enable = overrideFunction true;
     };
   };
