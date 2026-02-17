@@ -28,6 +28,9 @@
           };
         };
         media = {
+          shotcut = {
+            enable = overrideFunction true;
+          };
           vlc = {
             enable = overrideFunction true;
           };
@@ -58,9 +61,6 @@
       enable = overrideFunction true;
     };
     pinta = {
-      enable = overrideFunction true;
-    };
-    shotcut = {
       enable = overrideFunction true;
     };
   };
