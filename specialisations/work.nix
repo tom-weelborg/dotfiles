@@ -41,6 +41,11 @@
             };
           };
         };
+        microsoft = {
+          teams = {
+            enable = overrideFunction true;
+          };
+        };
       };
     };
 
@@ -59,11 +64,6 @@
     };
     makemkv = {
       enable = overrideFunction true;
-    };
-    microsoft = {
-      teams = {
-        enable = overrideFunction true;
-      };
     };
     mumble = {
       enable = overrideFunction true;
