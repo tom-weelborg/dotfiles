@@ -28,6 +28,9 @@
           };
         };
         media = {
+          makemkv = {
+            enable = overrideFunction true;
+          };
           obs = {
             enable = overrideFunction true;
           };
@@ -52,9 +55,6 @@
       enable = overrideFunction true;
     };
     keepassxc = {
-      enable = overrideFunction true;
-    };
-    makemkv = {
       enable = overrideFunction true;
     };
     obsidian = {
