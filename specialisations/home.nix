@@ -1,6 +1,11 @@
 { overrideFunction, pkgs, ... }:
 {
   modules = {
+    hardware = {
+      razer = {
+        enable = overrideFunction true;
+      };
+    };
     programs = {
       cli = {
         fastfetch = {
