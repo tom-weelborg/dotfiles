@@ -31,6 +31,9 @@
           obs = {
             enable = overrideFunction true;
           };
+          pinta = {
+            enable = overrideFunction true;
+          };
           shotcut = {
             enable = overrideFunction true;
           };
@@ -58,9 +61,6 @@
       enable = overrideFunction true;
     };
     openvpn = {
-      enable = overrideFunction true;
-    };
-    pinta = {
       enable = overrideFunction true;
     };
   };
