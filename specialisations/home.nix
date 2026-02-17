@@ -28,6 +28,9 @@
           };
         };
         media = {
+          obs = {
+            enable = overrideFunction true;
+          };
           shotcut = {
             enable = overrideFunction true;
           };
@@ -49,9 +52,6 @@
       enable = overrideFunction true;
     };
     makemkv = {
-      enable = overrideFunction true;
-    };
-    obs = {
       enable = overrideFunction true;
     };
     obsidian = {

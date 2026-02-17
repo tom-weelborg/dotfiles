@@ -45,6 +45,9 @@
           };
         };
         media = {
+          obs = {
+            enable = overrideFunction true;
+          };
           shotcut = {
             enable = overrideFunction true;
           };
@@ -77,9 +80,6 @@
       enable = overrideFunction true;
     };
     mumble = {
-      enable = overrideFunction true;
-    };
-    obs = {
       enable = overrideFunction true;
     };
     obsidian = {
