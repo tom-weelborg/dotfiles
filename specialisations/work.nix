@@ -8,19 +8,6 @@
     };
     programs = {
       cli = {
-        fastfetch = {
-          enable = overrideFunction true;
-        };
-      };
-      gui = {
-        browsers = {
-          firefox = {
-            enable = overrideFunction true;
-            extraExtensions = overrideFunction [
-              pkgs.nur.repos.rycee.firefox-addons.requestly
-            ];
-          };
-        };
         development = {
           git = {
             enable = overrideFunction true;
@@ -40,6 +27,21 @@
               };
             };
           };
+        };
+        fastfetch = {
+          enable = overrideFunction true;
+        };
+      };
+      gui = {
+        browsers = {
+          firefox = {
+            enable = overrideFunction true;
+            extraExtensions = overrideFunction [
+              pkgs.nur.repos.rycee.firefox-addons.requestly
+            ];
+          };
+        };
+        development = {
           vscodium = {
             enable = overrideFunction true;
           };

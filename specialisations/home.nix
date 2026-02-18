@@ -8,6 +8,12 @@
     };
     programs = {
       cli = {
+        development = {
+          git = {
+            enable = overrideFunction true;
+            extraSettings = overrideFunction {};
+          };
+        };
         fastfetch = {
           enable = overrideFunction true;
         };
@@ -19,10 +25,6 @@
           };
         };
         development = {
-          git = {
-            enable = overrideFunction true;
-            extraSettings = overrideFunction {};
-          };
           vscodium = {
             enable = overrideFunction true;
           };
