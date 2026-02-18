@@ -45,6 +45,9 @@
           bruno = {
             enable = overrideFunction true;
           };
+          dbeaver = {
+            enable = overrideFunction true;
+          };
           vscodium = {
             enable = overrideFunction true;
           };
