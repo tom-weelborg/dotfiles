@@ -42,6 +42,9 @@
           };
         };
         development = {
+          bruno = {
+            enable = overrideFunction true;
+          };
           vscodium = {
             enable = overrideFunction true;
           };
