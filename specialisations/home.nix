@@ -17,6 +17,11 @@
         fastfetch = {
           enable = overrideFunction true;
         };
+        media = {
+          imagemagick = {
+            enable = overrideFunction true;
+          };
+        };
       };
       gui = {
         browsers = {
