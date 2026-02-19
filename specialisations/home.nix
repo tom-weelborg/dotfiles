@@ -34,6 +34,11 @@
             enable = overrideFunction true;
           };
         };
+        gaming = {
+          edopro = {
+            enable = overrideFunction true;
+          };
+        };
         media = {
           makemkv = {
             enable = overrideFunction true;
