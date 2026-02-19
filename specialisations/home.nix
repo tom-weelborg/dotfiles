@@ -30,6 +30,11 @@
           };
         };
         development = {
+          jetbrains = {
+            intellij = {
+              enable = overrideFunction true;
+            };
+          };
           vscodium = {
             enable = overrideFunction true;
           };
@@ -61,9 +66,6 @@
 
 
     docker = {
-      enable = overrideFunction true;
-    };
-    jetbrains = {
       enable = overrideFunction true;
     };
     keepassxc = {
