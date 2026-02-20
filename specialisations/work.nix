@@ -96,6 +96,9 @@
             enable = overrideFunction true;
           };
         };
+        obsidian = {
+          enable = overrideFunction true;
+        };
       };
     };
 
@@ -107,9 +110,6 @@
       enable = overrideFunction true;
     };
     keepassxc = {
-      enable = overrideFunction true;
-    };
-    obsidian = {
       enable = overrideFunction true;
     };
     openvpn = {
