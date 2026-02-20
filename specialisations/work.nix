@@ -53,6 +53,11 @@
             ];
           };
         };
+        communication = {
+          mumble = {
+            enable = overrideFunction true;
+          };
+        };
         development = {
           bruno = {
             enable = overrideFunction true;
@@ -102,9 +107,6 @@
       enable = overrideFunction true;
     };
     keepassxc = {
-      enable = overrideFunction true;
-    };
-    mumble = {
       enable = overrideFunction true;
     };
     obsidian = {
