@@ -74,6 +74,9 @@
             enable = overrideFunction true;
           };
         };
+        keepassxc = {
+          enable = overrideFunction true;
+        };
         media = {
           makemkv = {
             enable = overrideFunction true;
@@ -107,9 +110,6 @@
       enable = overrideFunction true;
     };
     docker = {
-      enable = overrideFunction true;
-    };
-    keepassxc = {
       enable = overrideFunction true;
     };
     openvpn = {
