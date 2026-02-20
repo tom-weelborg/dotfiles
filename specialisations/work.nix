@@ -96,6 +96,9 @@
           };
         };
         microsoft = {
+          onedrive = {
+            enable = overrideFunction true;
+          };
           teams = {
             enable = overrideFunction true;
           };

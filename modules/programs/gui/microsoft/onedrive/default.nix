@@ -1,0 +1,4 @@
+{ ... }:
+{
+  services.onedrive.enable = true;
+}
