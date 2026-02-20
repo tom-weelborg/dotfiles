@@ -72,6 +72,9 @@
           shotcut = {
             enable = overrideFunction true;
           };
+          spotify = {
+            enable = overrideFunction true;
+          };
           vlc = {
             enable = overrideFunction true;
           };
