@@ -54,6 +54,9 @@
           edopro = {
             enable = overrideFunction true;
           };
+          steam = {
+            enable = overrideFunction true;
+          };
         };
         keepassxc = {
           enable = overrideFunction true;
