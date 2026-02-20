@@ -9,7 +9,6 @@
           };
           git = {
             enable = overrideFunction true;
-            extraSettings = overrideFunction {};
           };
         };
         fastfetch = {
