@@ -1,9 +1,14 @@
 { overrideFunction, pkgs, ... }:
 {
   modules = {
-    gnome = {
-      enable = true;
+    system = {
+      desktop-environments = {
+        gnome = {
+          enable = true;
+        };
+      };
     };
+
     home = {
       enable = true;
     };
