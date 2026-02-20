@@ -1,11 +1,6 @@
 { overrideFunction, pkgs, ... }:
 {
   modules = {
-    hardware = {
-      razer = {
-        enable = overrideFunction true;
-      };
-    };
     programs = {
       cli = {
         development = {
@@ -106,6 +101,13 @@
           };
         };
         obsidian = {
+          enable = overrideFunction true;
+        };
+      };
+    };
+    system = {
+      hardware = {
+        razer = {
           enable = overrideFunction true;
         };
       };
