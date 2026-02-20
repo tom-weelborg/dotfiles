@@ -18,6 +18,9 @@
           enable = overrideFunction true;
         };
         gaming = {
+          cowsay = {
+            enable = overrideFunction true;
+          };
           sl = {
             enable = overrideFunction true;
           };
