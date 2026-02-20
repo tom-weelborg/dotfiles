@@ -7,10 +7,9 @@
           enable = true;
         };
       };
-    };
-
-    home = {
-      enable = true;
+      home-manager = {
+        enable = true;
+      };
     };
   };
 
