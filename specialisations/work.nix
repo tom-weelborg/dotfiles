@@ -9,6 +9,9 @@
     programs = {
       cli = {
         development = {
+          docker = {
+            enable = overrideFunction true;
+          };
           git = {
             enable = overrideFunction true;
             extraSettings = overrideFunction {
@@ -110,9 +113,6 @@
 
 
     displaylink = {
-      enable = overrideFunction true;
-    };
-    docker = {
       enable = overrideFunction true;
     };
   };
