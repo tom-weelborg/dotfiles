@@ -33,6 +33,9 @@
             enable = overrideFunction true;
           };
         };
+        openvpn = {
+          enable = overrideFunction true;
+        };
       };
       gui = {
         browsers = {
@@ -83,9 +86,6 @@
 
 
     docker = {
-      enable = overrideFunction true;
-    };
-    openvpn = {
       enable = overrideFunction true;
     };
   };
