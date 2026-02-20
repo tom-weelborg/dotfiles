@@ -35,6 +35,9 @@
           cowsay = {
             enable = overrideFunction true;
           };
+          fortune = {
+            enable = overrideFunction true;
+          };
           sl = {
             enable = overrideFunction true;
           };
