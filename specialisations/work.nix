@@ -37,6 +37,7 @@
           firefox = {
             enable = overrideFunction true;
             extraExtensions = overrideFunction [
+              pkgs.nur.repos.rycee.firefox-addons.aws-extend-switch-roles3
               pkgs.nur.repos.rycee.firefox-addons.requestly
             ];
           };
