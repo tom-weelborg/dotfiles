@@ -31,6 +31,11 @@
         fastfetch = {
           enable = overrideFunction true;
         };
+        gaming = {
+          sl = {
+            enable = overrideFunction true;
+          };
+        };
       };
       gui = {
         browsers = {
