@@ -24,7 +24,7 @@ let
                     inherit system;
                     modules = [
                       ../configuration.nix
-                      ../overlays
+                      (import ../overlays inputs)
                       ../specialisations
                       inputs.home-manager.nixosModules.default
                       inputs.nur.modules.nixos.default
