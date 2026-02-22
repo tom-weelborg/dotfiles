@@ -51,6 +51,9 @@
           };
           vscodium = {
             enable = overrideFunction true;
+            extensionProfiles = {
+              javascript = true;
+            };
           };
         };
         gaming = {

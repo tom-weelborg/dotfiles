@@ -2,6 +2,10 @@
   options = lib:
     {
       extensionProfiles = {
+        javascript = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+        };
         nix = lib.mkOption {
           type = lib.types.bool;
           default = true;

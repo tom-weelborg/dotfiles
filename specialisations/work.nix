@@ -76,6 +76,9 @@
           };
           vscodium = {
             enable = overrideFunction true;
+            extensionProfiles = {
+              javascript = true;
+            };
           };
         };
         keepassxc = {
