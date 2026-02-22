@@ -54,6 +54,9 @@
           };
         };
         gaming = {
+          desmume = {
+            enable = overrideFunction true;
+          };
           edopro = {
             enable = overrideFunction true;
           };
