@@ -87,6 +87,9 @@
             };
           };
         };
+        drawio = {
+          enable = overrideFunction true;
+        };
         keepassxc = {
           enable = overrideFunction true;
         };
