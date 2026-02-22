@@ -63,6 +63,9 @@
           postman = {
             enable = overrideFunction true;
           };
+          virtualbox = {
+            enable = overrideFunction true;
+          };
           vscodium = {
             enable = overrideFunction true;
             extensionProfiles = {
