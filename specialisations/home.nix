@@ -52,7 +52,7 @@
           vscodium = {
             enable = overrideFunction true;
             extensionProfiles = {
-              javascript = true;
+              javascript = overrideFunction true;
             };
           };
         };
@@ -98,7 +98,7 @@
     system = {
       desktop-environments = {
         gnome = {
-          favoriteApps = [
+          favoriteApps = overrideFunction [
             "firefox.desktop"
             "brave-browser.desktop"
             "org.gnome.Nautilus.desktop"
