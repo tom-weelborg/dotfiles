@@ -47,6 +47,9 @@
           };
         };
         communication = {
+          discord = {
+            enable = overrideFunction true;
+          };
           signal = {
             enable = overrideFunction true;
           };
@@ -129,6 +132,7 @@
             "idea.desktop"
             "codium.desktop"
             "obsidian.desktop"
+            "discord.desktop"
           ];
         };
       };
