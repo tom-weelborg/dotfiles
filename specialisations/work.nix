@@ -109,6 +109,20 @@
       };
     };
     system = {
+      desktop-environments = {
+        gnome = {
+          favoriteApps = [
+            "firefox.desktop"
+            "org.gnome.Nautilus.desktop"
+            "org.keepassxc.KeePassXC.desktop"
+            "teams-for-linux.desktop"
+            "info.mumble.Mumble.desktop"
+            "idea.desktop"
+            "codium.desktop"
+            "obsidian.desktop"
+          ];
+        };
+      };
       hardware = {
         displaylink = {
           enable = overrideFunction true;

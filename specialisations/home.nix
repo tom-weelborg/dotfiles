@@ -87,6 +87,21 @@
       };
     };
     system = {
+      desktop-environments = {
+        gnome = {
+          favoriteApps = [
+            "firefox.desktop"
+            "org.gnome.Nautilus.desktop"
+            "pinta.desktop"
+            "com.obsproject.Studio.desktop"
+            "org.shotcut.Shotcut.desktop"
+            "org.keepassxc.KeePassXC.desktop"
+            "idea.desktop"
+            "codium.desktop"
+            "obsidian.desktop"
+          ];
+        };
+      };
       hardware = {
         razer = {
           enable = overrideFunction true;
