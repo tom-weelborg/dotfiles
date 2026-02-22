@@ -43,6 +43,11 @@
             enable = overrideFunction true;
           };
         };
+        communication = {
+          signal = {
+            enable = overrideFunction true;
+          };
+        };
         development = {
           jetbrains = {
             intellij = {

@@ -61,6 +61,9 @@
           mumble = {
             enable = overrideFunction true;
           };
+          signal = {
+            enable = overrideFunction true;
+          };
         };
         development = {
           bruno = {
