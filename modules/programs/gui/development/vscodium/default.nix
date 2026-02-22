@@ -1,16 +1,25 @@
 {
   options = lib:
     {
-      extensionProfiles = {
-        javascript = lib.mkOption {
-          type = lib.types.bool;
-          default = false;
+      extensionProfiles =
+        (
+          lib.mapAttrs'
+            (key: value: {
+              name = (lib.removeSuffix ".nix" key);
+              value = lib.mkOption {
+                type = lib.types.bool;
+                default = false;
+              };
+            })
+            (builtins.readDir ./extensionProfiles)
+        )
+        //
+        {
+          nix = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
         };
-        nix = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-        };
-      };
     };
 
   module = { moduleConfig, pkgs, variables, ... }:
