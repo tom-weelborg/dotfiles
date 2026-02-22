@@ -79,6 +79,9 @@
           enable = overrideFunction true;
         };
         media = {
+          audacity = {
+            enable = overrideFunction true;
+          };
           makemkv = {
             enable = overrideFunction true;
           };
@@ -113,6 +116,7 @@
             "org.gnome.Nautilus.desktop"
             "pinta.desktop"
             "com.obsproject.Studio.desktop"
+            "audacity.desktop"
             "org.shotcut.Shotcut.desktop"
             "org.keepassxc.KeePassXC.desktop"
             "idea.desktop"
