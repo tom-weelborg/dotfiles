@@ -61,6 +61,7 @@
             enable = overrideFunction true;
             extensionProfiles = {
               javascript = overrideFunction true;
+              latex = overrideFunction true;
             };
           };
         };
