@@ -39,6 +39,9 @@
           brave = {
             enable = overrideFunction true;
           };
+          edge = {
+            enable = overrideFunction true;
+          };
           firefox = {
             enable = overrideFunction true;
           };
@@ -104,6 +107,7 @@
       desktop-environments = {
         gnome = {
           favoriteApps = overrideFunction [
+            "microsoft-edge.desktop"
             "firefox.desktop"
             "brave-browser.desktop"
             "org.gnome.Nautilus.desktop"
