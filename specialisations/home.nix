@@ -36,6 +36,9 @@
       };
       gui = {
         browsers = {
+          brave = {
+            enable = overrideFunction true;
+          };
           firefox = {
             enable = overrideFunction true;
           };
@@ -91,6 +94,7 @@
         gnome = {
           favoriteApps = [
             "firefox.desktop"
+            "brave-browser.desktop"
             "org.gnome.Nautilus.desktop"
             "pinta.desktop"
             "com.obsproject.Studio.desktop"

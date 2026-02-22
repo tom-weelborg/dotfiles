@@ -46,6 +46,9 @@
       };
       gui = {
         browsers = {
+          brave = {
+            enable = overrideFunction true;
+          };
           firefox = {
             enable = overrideFunction true;
             extraExtensions = overrideFunction [
@@ -113,6 +116,7 @@
         gnome = {
           favoriteApps = [
             "firefox.desktop"
+            "brave-browser.desktop"
             "org.gnome.Nautilus.desktop"
             "org.keepassxc.KeePassXC.desktop"
             "teams-for-linux.desktop"
