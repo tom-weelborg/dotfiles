@@ -57,6 +57,9 @@
               enable = overrideFunction true;
             };
           };
+          postman = {
+            enable = overrideFunction true;
+          };
           vscodium = {
             enable = overrideFunction true;
             extensionProfiles = {
