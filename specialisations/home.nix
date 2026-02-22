@@ -108,6 +108,9 @@
         obsidian = {
           enable = overrideFunction true;
         };
+        syncthing = {
+          enable = overrideFunction false;
+        };
       };
     };
     system = {
