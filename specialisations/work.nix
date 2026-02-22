@@ -56,6 +56,9 @@
               pkgs.nur.repos.rycee.firefox-addons.requestly
             ];
           };
+          vivaldi = {
+            enable = overrideFunction true;
+          };
         };
         communication = {
           mumble = {
@@ -122,6 +125,7 @@
         gnome = {
           favoriteApps = overrideFunction [
             "firefox.desktop"
+            "vivaldi-stable.desktop"
             "brave-browser.desktop"
             "org.gnome.Nautilus.desktop"
             "org.keepassxc.KeePassXC.desktop"
