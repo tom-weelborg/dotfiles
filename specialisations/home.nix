@@ -127,15 +127,18 @@
             "firefox.desktop"
             "brave-browser.desktop"
             "org.gnome.Nautilus.desktop"
+            "org.keepassxc.KeePassXC.desktop"
             "pinta.desktop"
             "com.obsproject.Studio.desktop"
             "audacity.desktop"
             "org.shotcut.Shotcut.desktop"
-            "org.keepassxc.KeePassXC.desktop"
+            "obsidian.desktop"
             "idea.desktop"
             "codium.desktop"
-            "obsidian.desktop"
+            "spotify.desktop"
             "discord.desktop"
+            "steam.desktop"
+            "io.github.edo9300.EDOPro.desktop"
           ];
         };
       };
