@@ -4,6 +4,9 @@
     programs = {
       cli = {
         development = {
+          direnv = {
+            enable = overrideFunction true;
+          };
           docker = {
             enable = overrideFunction true;
           };
