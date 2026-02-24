@@ -5,6 +5,7 @@ with pkgs.open-vsx;
 with pkgs.open-vsx-release;
 with pkgs.vscode-extensions;
 [
+  # octref.vetur # deprecated
   # hollowtree.vue-snippets
   # sdras.vue-vscode-snippets
   vue.volar
