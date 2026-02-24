@@ -91,6 +91,7 @@
             extensionProfiles = {
               angular = overrideFunction true;
               javascript = overrideFunction true;
+              rust = overrideFunction true;
               vue = overrideFunction true;
             };
           };

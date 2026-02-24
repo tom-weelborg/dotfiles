@@ -75,6 +75,7 @@
               angular = overrideFunction true;
               javascript = overrideFunction true;
               latex = overrideFunction true;
+              rust = overrideFunction true;
               svelte = overrideFunction true;
               vue = overrideFunction true;
             };
