@@ -72,6 +72,7 @@
           vscodium = {
             enable = overrideFunction true;
             extensionProfiles = {
+              angular = overrideFunction true;
               javascript = overrideFunction true;
               latex = overrideFunction true;
               svelte = overrideFunction true;
