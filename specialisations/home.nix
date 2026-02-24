@@ -74,6 +74,7 @@
             extensionProfiles = {
               javascript = overrideFunction true;
               latex = overrideFunction true;
+              vue = overrideFunction true;
             };
           };
         };

@@ -90,6 +90,7 @@
             enable = overrideFunction true;
             extensionProfiles = {
               javascript = overrideFunction true;
+              vue = overrideFunction true;
             };
           };
         };
