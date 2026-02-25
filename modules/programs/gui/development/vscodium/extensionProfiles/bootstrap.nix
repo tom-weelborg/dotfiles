@@ -1,0 +1,10 @@
+{ pkgs, ... }:
+with pkgs.vscode-marketplace;
+with pkgs.vscode-marketplace-release;
+with pkgs.open-vsx;
+with pkgs.open-vsx-release;
+with pkgs.vscode-extensions;
+[
+  anbuselvanrocky.bootstrap5-vscode
+  thekalinga.bootstrap4-vscode
+]

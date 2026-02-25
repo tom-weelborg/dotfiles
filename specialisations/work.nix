@@ -90,6 +90,7 @@
             enable = overrideFunction true;
             extensionProfiles = {
               angular = overrideFunction true;
+              bootstrap = overrideFunction true;
               docker = overrideFunction true;
               java = overrideFunction true;
               javascript = overrideFunction true;
