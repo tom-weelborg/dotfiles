@@ -95,6 +95,7 @@
               html = overrideFunction true;
               java = overrideFunction true;
               javascript = overrideFunction true;
+              markdown = overrideFunction true;
               rust = overrideFunction true;
               tailwind = overrideFunction true;
               vue = overrideFunction true;

@@ -79,6 +79,7 @@
               java = overrideFunction true;
               javascript = overrideFunction true;
               latex = overrideFunction true;
+              markdown = overrideFunction true;
               rust = overrideFunction true;
               slidev = overrideFunction true;
               svelte = overrideFunction true;
