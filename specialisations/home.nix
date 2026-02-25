@@ -73,6 +73,7 @@
             enable = overrideFunction true;
             extensionProfiles = {
               angular = overrideFunction true;
+              java = overrideFunction true;
               javascript = overrideFunction true;
               latex = overrideFunction true;
               rust = overrideFunction true;

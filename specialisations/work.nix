@@ -90,6 +90,7 @@
             enable = overrideFunction true;
             extensionProfiles = {
               angular = overrideFunction true;
+              java = overrideFunction true;
               javascript = overrideFunction true;
               rust = overrideFunction true;
               vue = overrideFunction true;
