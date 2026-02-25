@@ -80,6 +80,7 @@
               rust = overrideFunction true;
               slidev = overrideFunction true;
               svelte = overrideFunction true;
+              tailwind = overrideFunction true;
               vue = overrideFunction true;
             };
           };

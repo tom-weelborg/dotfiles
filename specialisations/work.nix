@@ -94,6 +94,7 @@
               java = overrideFunction true;
               javascript = overrideFunction true;
               rust = overrideFunction true;
+              tailwind = overrideFunction true;
               vue = overrideFunction true;
             };
           };
