@@ -83,6 +83,9 @@
               enable = overrideFunction true;
             };
           };
+          soapui = {
+            enable = overrideFunction true;
+          };
           virtualbox = {
             enable = overrideFunction true;
           };
