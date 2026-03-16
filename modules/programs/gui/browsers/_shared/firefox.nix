@@ -10,6 +10,7 @@ in
         packages = with extensions; [
           keepassxc-browser
           ublock-origin
+          youtube-recommended-videos
         ] ++ moduleConfig.extraExtensions;
       };
       settings = {
