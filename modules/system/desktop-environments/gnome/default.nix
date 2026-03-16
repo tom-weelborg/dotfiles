@@ -19,6 +19,9 @@
       home-manager.users.${variables.username} = { ... }:
       {
         dconf.settings = {
+          "org/gnome/desktop/wm/preferences" = {
+            "button-layout" = ":minimize,maximize,close";
+          };
           "org/gnome/shell" = {
             enabled-extensions = [
               pkgs.gnomeExtensions.dash-to-panel.extensionUuid
