@@ -51,6 +51,9 @@
         browsers = {
           brave = {
             enable = overrideFunction true;
+            extraExtensions = overrideFunction [
+              "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
+            ];
           };
           firefox = {
             enable = overrideFunction true;
@@ -61,6 +64,9 @@
           };
           vivaldi = {
             enable = overrideFunction true;
+            extraExtensions = overrideFunction [
+              "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
+            ];
           };
         };
         communication = {
