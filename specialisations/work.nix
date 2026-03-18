@@ -53,6 +53,7 @@
             enable = overrideFunction true;
             extraExtensions = overrideFunction [
               "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
+              "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
             ];
           };
           firefox = {
@@ -66,6 +67,7 @@
             enable = overrideFunction true;
             extraExtensions = overrideFunction [
               "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
+              "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
             ];
           };
         };
