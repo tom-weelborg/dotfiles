@@ -42,6 +42,7 @@
           brave = {
             enable = overrideFunction true;
             extraExtensions = overrideFunction [
+              "bhlhnicpbhignbdhedgjhgdocnmhomnp" # ColorZilla
               "mmioliijnhnoblpgimnlajmefafdfilb" # Shazam: Find song names from your browser
             ];
           };
