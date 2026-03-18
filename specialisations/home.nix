@@ -41,6 +41,9 @@
         browsers = {
           brave = {
             enable = overrideFunction true;
+            extraExtensions = overrideFunction [
+              "mmioliijnhnoblpgimnlajmefafdfilb" # Shazam: Find song names from your browser
+            ];
           };
           edge = {
             enable = overrideFunction true;
