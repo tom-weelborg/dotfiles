@@ -43,6 +43,9 @@
             enable = overrideFunction true;
           };
         };
+        rclone = {
+          enable = overrideFunction true;
+        };
         vpn = {
           openvpn = {
             enable = overrideFunction true;
