@@ -46,6 +46,11 @@
         openvpn = {
           enable = overrideFunction true;
         };
+        vpn = {
+          wireguard = {
+            enable = overrideFunction true;
+          };
+        };
       };
       gui = {
         browsers = {
