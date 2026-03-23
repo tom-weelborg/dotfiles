@@ -120,6 +120,7 @@
               markdown = overrideFunction true;
               rust = overrideFunction true;
               tailwind = overrideFunction true;
+              typescript = overrideFunction true;
               vue = overrideFunction true;
             };
           };
