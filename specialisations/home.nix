@@ -33,8 +33,10 @@
             enable = overrideFunction true;
           };
         };
-        openvpn = {
-          enable = overrideFunction true;
+        vpn = {
+          openvpn = {
+            enable = overrideFunction true;
+          };
         };
       };
       gui = {
