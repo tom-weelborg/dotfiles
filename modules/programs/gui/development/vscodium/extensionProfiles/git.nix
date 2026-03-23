@@ -11,7 +11,7 @@ with pkgs.vscode-extensions;
   # donjayamanne.git-extension-pack
   donjayamanne.githistory
   eamodio.gitlens
-  # ziyasal.vscode-open-in-github # not included here, check in github.nix
+  # ziyasal.vscode-open-in-github # not included here, check in github.nix or gitlab.nix
 
   mhutchie.git-graph
 ]

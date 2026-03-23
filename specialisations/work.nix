@@ -113,6 +113,7 @@
               docker = overrideFunction true;
               git = overrideFunction true;
               github = overrideFunction true;
+              gitlab = overrideFunction true;
               html = overrideFunction true;
               java = overrideFunction true;
               javascript = overrideFunction true;
