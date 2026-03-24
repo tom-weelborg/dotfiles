@@ -15,7 +15,7 @@ with pkgs.vscode-extensions;
   # bierner.markdown-yaml-preamble
 
   davidanson.vscode-markdownlint
-  goessner.mdmath
+  # goessner.mdmath # Removed because of note: "This extension was reported to be problematic."
   # shd101wyy.markdown-preview-enhanced
   yzhang.markdown-all-in-one
 ]
