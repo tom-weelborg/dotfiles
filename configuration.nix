@@ -17,6 +17,7 @@
     "nix-command"
     "flakes"
   ];
+  nix.settings.access-tokens = variables.githubAccessToken;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
