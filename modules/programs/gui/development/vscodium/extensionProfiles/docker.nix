@@ -6,5 +6,7 @@ with pkgs.open-vsx-release;
 with pkgs.vscode-extensions;
 [
   docker.docker
+  ms-azuretools.vscode-containers
+  ms-azuretools.vscode-docker
   ms-vscode-remote.remote-containers
 ]
