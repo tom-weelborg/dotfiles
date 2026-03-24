@@ -118,6 +118,7 @@
               java = overrideFunction true;
               javascript = overrideFunction true;
               markdown = overrideFunction true;
+              python = overrideFunction true;
               rust = overrideFunction true;
               tailwind = overrideFunction true;
               typescript = overrideFunction true;
