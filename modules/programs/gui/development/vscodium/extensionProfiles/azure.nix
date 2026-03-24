@@ -6,7 +6,7 @@ with pkgs.open-vsx-release;
 with pkgs.vscode-extensions;
 [
   # ms-azuretools.azure-dev
-  # ms-azuretools.vscode-azure-github-copilot
+  # ms-azuretools.vscode-azure-github-copilot # not included here, check in copilot.nix
   # ms-azuretools.vscode-azureappservice
   # ms-azuretools.vscode-azurecontainerapps
   # ms-azuretools.vscode-azurefunctions
@@ -28,12 +28,12 @@ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     version = "0.10.0";
     sha256 = "76CCsBUtLPmuLm3VBltRseiOg8z1iEPTNJNPENWe7Qw=";
   }
-  {
-    name = "vscode-azure-github-copilot";
-    publisher = "ms-azuretools";
-    version = "1.0.178";
-    sha256 = "dL3WMN8yJa4Sxuj/xH27Tx6F1jSy/6ngeZDmHYbgkGg=";
-  }
+  # {
+  #   name = "vscode-azure-github-copilot";
+  #   publisher = "ms-azuretools";
+  #   version = "1.0.178";
+  #   sha256 = "dL3WMN8yJa4Sxuj/xH27Tx6F1jSy/6ngeZDmHYbgkGg=";
+  # }
   {
     name = "vscode-azureappservice";
     publisher = "ms-azuretools";
