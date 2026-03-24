@@ -68,7 +68,7 @@
             enable = overrideFunction true;
           };
           virtualbox = {
-            enable = overrideFunction true;
+            enable = overrideFunction false;
           };
           vscodium = {
             enable = overrideFunction true;
