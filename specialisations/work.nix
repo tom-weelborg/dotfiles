@@ -131,6 +131,9 @@
         keepassxc = {
           enable = overrideFunction true;
         };
+        libreoffice = {
+          enable = overrideFunction true;
+        };
         media = {
           makemkv = {
             enable = overrideFunction true;
