@@ -92,6 +92,7 @@
               tailwind = overrideFunction true;
               typescript = overrideFunction true;
               vue = overrideFunction true;
+              xml = overrideFunction true;
             };
           };
         };
