@@ -84,6 +84,7 @@
               javascript = overrideFunction true;
               latex = overrideFunction true;
               markdown = overrideFunction true;
+              php = overrideFunction true;
               python = overrideFunction true;
               rust = overrideFunction true;
               slidev = overrideFunction true;
