@@ -1,4 +1,6 @@
 {
+    "diffEditor.ignoreTrimWhitespace": false,
+
     "editor.stickyScroll.enabled": false,
 
     "explorer.autoReveal": false,
