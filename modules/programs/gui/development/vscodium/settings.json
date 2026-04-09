@@ -6,6 +6,8 @@
     "explorer.autoReveal": false,
     "explorer.compactFolders": false,
 
+    "files.insertFinalNewline": true,
+
     "window.openFoldersInNewWindow": "on",
 
     "workbench.editor.enablePreview": false,
