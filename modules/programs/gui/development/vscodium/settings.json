@@ -14,4 +14,8 @@
     "workbench.editor.empty.hint": "hidden",
     "workbench.editor.wrapTabs": true,
     "workbench.tree.enableStickyScroll": false,
+
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
 }
