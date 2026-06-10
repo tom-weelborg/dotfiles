@@ -8,7 +8,7 @@ final: prev: {
         addonId = "extension@requestly.in";
 
         url = "https://app.requestly.io/firefox/builds/requestly-latest.xpi";
-        sha256 = "sha256-7kZxGBvOSPKR2Tw2w/vKKQ9XF5e4JqmtamnMkxAeqBw=";
+        sha256 = "sha256-dlu7NAX0bAhQtwcGh//0EgluKrD8X747OcaUt0bQdj4=";
 
         meta = with prev.lib; {
           homepage = "https://requestly.com/";
