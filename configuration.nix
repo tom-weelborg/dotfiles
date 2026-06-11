@@ -34,9 +34,6 @@
     ];
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
