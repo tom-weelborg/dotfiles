@@ -188,6 +188,16 @@
           enable = overrideFunction true;
         };
       };
+      xdg = {
+        mime = {
+          enable = overrideFunction true;
+          browsers = overrideFunction [
+            "firefox.desktop"
+            "brave-browser.desktop"
+            "vivaldi-stable.desktop"
+          ];
+        };
+      };
     };
   };
 }
