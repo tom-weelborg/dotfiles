@@ -1,9 +1,9 @@
-{ program, ... }:
+{ configPath ? null, program, ... }:
 let
   firefox = import ./base.nix {
     extraExtensionsTypeFunction = { lib }: lib.types.package;
     inherit program;
-    programConfig = { moduleConfig, pkgs, variables, ... }:
+    programConfig = { lib, moduleConfig, pkgs, variables, xdg, ... }:
       let
         extensions = pkgs.nur.repos.rycee.firefox-addons;
       in
@@ -23,6 +23,8 @@ let
             };
           };
         };
+      } // lib.optionalAttrs (configPath != null) {
+        configPath = configPath xdg;
       };
   };
 in

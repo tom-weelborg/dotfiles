@@ -8,16 +8,18 @@
       };
     };
 
-  module = { moduleConfig, pkgs, variables, ... }:
+  module = { lib, moduleConfig, pkgs, variables, ... }:
     {
-      home-manager.users.${variables.username} = { ... }:
+      home-manager.users.${variables.username} = { config, ... }:
       {
         programs.${program} = programConfig {
           inherit
+            lib
             moduleConfig
             pkgs
             variables
             ;
+          xdg = config.xdg;
         };
       };
     };
