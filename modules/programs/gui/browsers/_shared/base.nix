@@ -1,9 +1,13 @@
-{ extraExtensionsTypeFunction, program, programConfig, ... }:
+{ defaultExtensionsFunction, extensionsTypeFunction, program, programConfig, ... }:
 {
-  options = { lib, ... }:
+  options = { lib, pkgs, ... }:
     {
+      defaultExtensions = lib.mkOption {
+        type = lib.types.listOf (extensionsTypeFunction { inherit lib; });
+        default = defaultExtensionsFunction { inherit pkgs; };
+      };
       extraExtensions = lib.mkOption {
-        type = lib.types.listOf (extraExtensionsTypeFunction { inherit lib; });
+        type = lib.types.listOf (extensionsTypeFunction { inherit lib; });
         default = [];
       };
     };
