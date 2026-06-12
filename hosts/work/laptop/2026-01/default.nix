@@ -13,11 +13,6 @@
     };
   };
 
-  swapDevices = [{
-    device = "/var/lib/swapfile";
-    size = 16*1024; # 16 GiB
-  }];
-
   imports = [
     ./hardware-configuration.nix
     ../../../../specialisations/work.nix
