@@ -1,5 +1,5 @@
 {
-  options = lib:
+  options = { lib, ... }:
     {
       extraSettings = lib.mkOption {
         type = lib.types.attrs;

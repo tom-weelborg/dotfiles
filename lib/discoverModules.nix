@@ -29,7 +29,12 @@ let
 
                   moduleOptions =
                     if (builtins.typeOf importedModule) == "set" then
-                      importedModule.options lib
+                      importedModule.options {
+                        inherit
+                          lib
+                          pkgs
+                          ;
+                      }
                     else
                       {}
                     ;

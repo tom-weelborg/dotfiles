@@ -1,5 +1,5 @@
 {
-  options = lib:
+  options = { lib, ... }:
     {
       vmoptions = lib.mkOption {
         type = lib.types.str;

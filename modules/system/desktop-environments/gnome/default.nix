@@ -1,5 +1,5 @@
 {
-  options = lib:
+  options = { lib, ... }:
     {
       favoriteApps = lib.mkOption {
         type = lib.types.listOf lib.types.str;

@@ -1,5 +1,5 @@
 {
-  options = lib:
+  options = { lib, ... }:
     {
       extensionProfiles =
         (

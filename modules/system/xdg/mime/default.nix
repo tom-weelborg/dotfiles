@@ -1,5 +1,5 @@
 {
-  options = lib:
+  options = { lib, ... }:
     {
       browsers = lib.mkOption {
         type = lib.types.listOf lib.types.str;

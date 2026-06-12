@@ -1,6 +1,6 @@
 { extraExtensionsTypeFunction, program, programConfig, ... }:
 {
-  options = lib:
+  options = { lib, ... }:
     {
       extraExtensions = lib.mkOption {
         type = lib.types.listOf (extraExtensionsTypeFunction { inherit lib; });

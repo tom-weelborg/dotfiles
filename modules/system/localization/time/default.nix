@@ -1,5 +1,5 @@
 {
-  options = lib:
+  options = { lib, ... }:
     {
       enable = lib.mkOption {
         type = lib.types.bool;
