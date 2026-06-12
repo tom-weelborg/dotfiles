@@ -2,7 +2,7 @@
 let
   firefox = import ./base.nix {
     defaultExtensionsFunction = { pkgs, ... }:
-      with pkgs.nur.repos.rycee.firefox-addons; [
+      with pkgs.firefox-addons; [
         keepassxc-browser
         ublock-origin
         youtube-recommended-videos

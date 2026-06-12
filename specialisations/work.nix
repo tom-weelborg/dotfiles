@@ -66,10 +66,10 @@
           };
           firefox = {
             enable = overrideFunction true;
-            extraExtensions = overrideFunction [
-              pkgs.nur.repos.rycee.firefox-addons.aws-extend-switch-roles3
-              pkgs.nur.repos.rycee.firefox-addons.requestly
-            ];
+            extraExtensions = overrideFunction (with pkgs.firefox-addons; [
+              aws-extend-switch-roles3
+              requestly
+            ]);
           };
           vivaldi = {
             enable = overrideFunction true;
