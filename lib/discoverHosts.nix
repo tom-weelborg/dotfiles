@@ -27,6 +27,7 @@ let
                       (import ../overlays inputs)
                       ../specialisations
                       inputs.home-manager.nixosModules.default
+                      inputs.disko.nixosModules.disko
                       (import (path + "/default.nix"))
                     ] ++ lib.attrValues (discoverModules ../modules [ "modules" ]);
                     specialArgs = {
