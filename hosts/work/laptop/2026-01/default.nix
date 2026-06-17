@@ -1,4 +1,4 @@
-{ overrideFunction, pkgs, ... }:
+{ overrideFunction, pkgs, variables, ... }:
 {
   modules = {
     system = {
@@ -9,6 +9,21 @@
       };
       home-manager = {
         enable = true;
+      };
+      users = {
+        users = {
+          ${variables.username} = {
+            isNormalUser = true;
+            displayname = variables.displayname;
+            extraGroups = [
+              "cdrom"
+              "plugdev"
+              "networkmanager"
+              "video"
+              "wheel"
+            ];
+          };
+        };
       };
     };
   };
