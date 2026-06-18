@@ -184,6 +184,9 @@
         };
       };
       hardware = {
+        displaylink = {
+          enable = overrideFunction true;
+        };
         razer = {
           enable = overrideFunction true;
         };
