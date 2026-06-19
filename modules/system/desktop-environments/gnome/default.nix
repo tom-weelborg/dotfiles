@@ -36,6 +36,9 @@
             ];
             favorite-apps = moduleConfig.favoriteApps;
           };
+          "org/gnome/shell/extensions/arcmenu" = {
+            multi-monitor = true;
+          };
         };
       };
 
