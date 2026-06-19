@@ -13,6 +13,7 @@
       services.desktopManager.gnome.enable = true;
 
       environment.systemPackages = with pkgs.gnomeExtensions; [
+        arcmenu
         dash-to-panel
       ];
 
@@ -29,12 +30,30 @@
             show-hidden = true;
           };
           "org/gnome/shell" = {
-            enabled-extensions = [
-              pkgs.gnomeExtensions.dash-to-panel.extensionUuid
+            enabled-extensions = with pkgs.gnomeExtensions; [
+              arcmenu.extensionUuid
+              dash-to-panel.extensionUuid
             ];
             favorite-apps = moduleConfig.favoriteApps;
           };
         };
       };
+
+      nixpkgs.overlays = [
+        (final: prev: {
+          gnomeExtensions = prev.gnomeExtensions // {
+            arcmenu = prev.gnomeExtensions.arcmenu.overrideAttrs (old: rec {
+              version = "69.2";
+
+              src = prev.fetchFromGitLab {
+                owner = "arcmenu";
+                repo = "ArcMenu";
+                rev = "v${version}";
+                hash = "sha256-BdvFeoXwGxFlBH1JqcSDAKMzN+wBEmZdsz+gXWxQF6Y=";
+              };
+            });
+          };
+        })
+      ];
     };
 }
