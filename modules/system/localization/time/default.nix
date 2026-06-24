@@ -1,19 +1,18 @@
 {
-  options = { lib, ... }:
+  systemModule = { config, lib, ... }:
+    let
+      cfg = config.modules.system.localization.time;
+    in
     {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
+      options.modules.system.localization.time = {
+        timeZone = lib.mkOption {
+          type = lib.types.str;
+          default = "Europe/Berlin";
+        };
       };
 
-      timeZone = lib.mkOption {
-        type = lib.types.str;
-        default = "Europe/Berlin";
+      config = {
+        time.timeZone = cfg.timeZone;
       };
-    };
-
-  module = { moduleConfig, ... }:
-    {
-      time.timeZone = moduleConfig.timeZone;
     };
 }

@@ -1,24 +1,30 @@
 {
-  options = { lib, ... }:
+  systemModule = { config, lib, ... }:
+    let
+      cfg = config.modules.system.desktop-environments.gnome;
+    in
     {
-      favoriteApps = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [];
+      options.modules.system.desktop-environments.gnome = {
+        enable = lib.mkEnableOption "gnome";
+      };
+
+      config = lib.mkIf cfg.enable {
+        services.displayManager.gdm.enable = true;
+        services.desktopManager.gnome.enable = true;
       };
     };
 
-  module = { moduleConfig, pkgs, variables, ... }:
+  userModule = { favoriteApps ? [] }:
+    { username }:
+    { pkgs, ... }:
     {
-      services.displayManager.gdm.enable = true;
-      services.desktopManager.gnome.enable = true;
-
-      environment.systemPackages = with pkgs.gnomeExtensions; [
-        arcmenu
-        dash-to-panel
-      ];
-
-      home-manager.users.${variables.username} = { ... }:
+      home-manager.users.${username} = { ... }:
       {
+        home.packages = with pkgs.gnomeExtensions; [
+          arcmenu
+          dash-to-panel
+        ];
+
         dconf.settings = {
           "org/gnome/desktop/interface" = {
             color-scheme = "prefer-dark";
@@ -34,7 +40,7 @@
               arcmenu.extensionUuid
               dash-to-panel.extensionUuid
             ];
-            favorite-apps = moduleConfig.favoriteApps;
+            favorite-apps = favoriteApps;
           };
           "org/gnome/shell/extensions/arcmenu" = {
             multi-monitor = true;

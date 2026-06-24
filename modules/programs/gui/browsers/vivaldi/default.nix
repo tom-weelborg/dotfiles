@@ -1,6 +1,8 @@
 let
   vivaldi = import ../_shared/chromium.nix {
-    program = "vivaldi";
+    browserName = "vivaldi";
+    programName = "vivaldi";
+    programPackageName = "vivaldi";
   };
 in
   vivaldi

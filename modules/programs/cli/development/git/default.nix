@@ -1,15 +1,47 @@
 {
-  options = { lib, ... }:
+  systemModule = { config, lib, pkgs, ... }:
+    let
+      cfg = config.modules.programs.cli.development.git;
+    in
     {
-      extraSettings = lib.mkOption {
-        type = lib.types.attrs;
-        default = {};
+      options.modules.programs.cli.development.git = {
+        enable = lib.mkEnableOption "git";
+        name = lib.mkOption {
+          type = lib.types.str;
+        };
+        email = lib.mkOption {
+          type = lib.types.str;
+        };
+        extraSettings = lib.mkOption {
+          type = lib.types.attrs;
+          default = {};
+        };
+      };
+
+      config = lib.mkIf cfg.enable {
+        programs.git = {
+          enable = true;
+          config = lib.recursiveUpdate
+            {
+              init.defaultBranch = "main";
+              user = {
+                inherit
+                  (cfg)
+                  name
+                  email
+                  ;
+              };
+            }
+            cfg.extraSettings;
+        };
       };
     };
 
-  module = { lib, moduleConfig, variables, ... }:
+  userModule = { name, email, extraSettings ? {} }:
+    { username }:
+    { lib, ... }:
     {
-      home-manager.users.${variables.username} = { ... }:
+      home-manager.users.${username} = { ... }:
       {
         programs.git = {
           enable = true;
@@ -17,11 +49,13 @@
             {
               init.defaultBranch = "main";
               user = {
-                name = variables.git.name;
-                email = variables.git.email;
+                inherit
+                  name
+                  email
+                  ;
               };
             }
-            moduleConfig.extraSettings;
+            extraSettings;
         };
       };
     };

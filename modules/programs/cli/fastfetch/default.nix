@@ -1,9 +1,29 @@
-{ variables, ... }:
 {
-  home-manager.users.${variables.username} = { ... }:
-  {
-    programs.fastfetch = {
-      enable = true;
+  systemModule = { config, lib, pkgs, ... }:
+    let
+      cfg = config.modules.programs.cli.fastfetch;
+    in
+    {
+      options.modules.programs.cli.fastfetch = {
+        enable = lib.mkEnableOption "fastfetch";
+      };
+
+      config = lib.mkIf cfg.enable {
+        environment.systemPackages = [
+          pkgs.fastfetch
+        ];
+      };
     };
-  };
+
+  userModule = { }:
+    { username }:
+    { ... }:
+    {
+      home-manager.users.${username} = { ... }:
+      {
+        programs.fastfetch = {
+          enable = true;
+        };
+      };
+    };
 }

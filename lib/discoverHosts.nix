@@ -4,6 +4,21 @@ let
     builtins.pathExists (path + "/default.nix");
 
   discoverModules = import ./discoverModules.nix lib;
+  discoveredModules = discoverModules ../modules;
+  systemModules = map
+    (v: v.systemModule)
+    (builtins.filter
+      (v: builtins.hasAttr "systemModule" v)
+      (lib.attrValues discoveredModules) 
+    );
+  userModules = builtins.mapAttrs
+    (_: v: v.userModule)
+    (lib.filterAttrs
+      (_: v: builtins.hasAttr "userModule" v)
+      discoveredModules 
+    );
+
+  readDirIfExists = import ./readDirIfExists.nix;
 
   discover = basePath: prefix:
     let
@@ -29,9 +44,11 @@ let
                       inputs.home-manager.nixosModules.default
                       inputs.disko.nixosModules.disko
                       (import (path + "/default.nix"))
-                    ] ++ lib.attrValues (discoverModules ../modules [ "modules" ]);
+                    ] ++ systemModules;
                     specialArgs = {
                       inherit
+                        readDirIfExists
+                        userModules
                         variables
                         ;
                       overrideFunction = lib.mkDefault;

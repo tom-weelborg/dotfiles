@@ -10,9 +10,6 @@
           docker = {
             enable = overrideFunction true;
           };
-          git = {
-            enable = overrideFunction true;
-          };
         };
         fastfetch = {
           enable = overrideFunction true;
@@ -36,17 +33,7 @@
       };
       gui = {
         browsers = {
-          brave = {
-            enable = overrideFunction true;
-            extraExtensions = overrideFunction [
-              "bhlhnicpbhignbdhedgjhgdocnmhomnp" # ColorZilla
-              "mmioliijnhnoblpgimnlajmefafdfilb" # Shazam: Find song names from your browser
-            ];
-          };
           edge = {
-            enable = overrideFunction true;
-          };
-          firefox = {
             enable = overrideFunction true;
           };
         };
@@ -59,11 +46,6 @@
           };
         };
         development = {
-          jetbrains = {
-            intellij = {
-              enable = overrideFunction true;
-            };
-          };
           postman = {
             enable = overrideFunction true;
           };
@@ -142,28 +124,6 @@
       };
     };
     system = {
-      desktop-environments = {
-        gnome = {
-          favoriteApps = overrideFunction [
-            "microsoft-edge.desktop"
-            "firefox.desktop"
-            "brave-browser.desktop"
-            "org.gnome.Nautilus.desktop"
-            "org.keepassxc.KeePassXC.desktop"
-            "pinta.desktop"
-            "com.obsproject.Studio.desktop"
-            "audacity.desktop"
-            "org.shotcut.Shotcut.desktop"
-            "obsidian.desktop"
-            "idea.desktop"
-            "codium.desktop"
-            "spotify.desktop"
-            "discord.desktop"
-            "steam.desktop"
-            "io.github.edo9300.EDOPro.desktop"
-          ];
-        };
-      };
       hardware = {
         razer = {
           enable = overrideFunction true;

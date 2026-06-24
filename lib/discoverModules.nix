@@ -3,7 +3,7 @@ let
   isModuleDir = path:
     builtins.pathExists (path + "/default.nix");
 
-  discover = basePath: prefix:
+  discover = basePath:
     let
       entries = builtins.readDir basePath;
       dirs = lib.filterAttrs (_: t: t == "directory") entries;
@@ -12,49 +12,13 @@ let
         (name: _:
           let
             path = basePath + "/${name}";
-            newPrefix = prefix ++ [ name ];
           in
             if isModuleDir path then
               {
-                "${name}" = { config, pkgs, ... }@inputs:
-                let
-                  importedModule = import path;
-
-                  moduleFunction =
-                    if (builtins.typeOf importedModule) == "set" then
-                      importedModule.module
-                    else
-                      importedModule
-                    ;
-
-                  moduleOptions =
-                    if (builtins.typeOf importedModule) == "set" then
-                      importedModule.options {
-                        inherit
-                          lib
-                          pkgs
-                          ;
-                      }
-                    else
-                      {}
-                    ;
-
-                  options = lib.setAttrByPath newPrefix ({
-                    enable = lib.mkEnableOption name;
-                  } // moduleOptions);
-
-                  moduleConfig = lib.attrByPath newPrefix {} config;
-                in
-                {
-                  inherit options;
-
-                  config = lib.mkIf moduleConfig.enable (moduleFunction (inputs // {
-                    inherit moduleConfig;
-                  }));
-                };
+                "${name}" = import path;
               }
             else
-              discover path newPrefix
+              discover path
         )
         dirs;
 in

@@ -1,6 +1,25 @@
-{ variables, ... }:
 {
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ variables.username ];
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  systemModule = { config, lib, ... }:
+    let
+      cfg = config.modules.programs.gui.development.virtualbox;
+    in
+    {
+      options.modules.programs.gui.development.virtualbox = {
+        enable = lib.mkEnableOption "virtualbox";
+      };
+
+      config = lib.mkIf cfg.enable {
+        virtualisation.virtualbox.host = {
+          enable = true;
+          enableExtensionPack = true;
+        };
+      };
+    };
+
+  userModule = { }:
+    { username }:
+    { lib, ... }:
+    {
+      users.extraGroups.vboxusers.members = lib.mkAfter [ username ];
+    };
 }

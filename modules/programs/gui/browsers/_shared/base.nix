@@ -1,28 +1,50 @@
-{ defaultExtensionsFunction, extensionsTypeFunction, program, programConfig, ... }:
 {
-  options = { lib, pkgs, ... }:
+  browserName,
+  defaultExtensionsFunction,
+  extensionsTypeFunction,
+  programConfig,
+  programName,
+  programPackageName
+}:
+{
+  systemModule = { config, lib, pkgs, ... }:
+    let
+      cfg = config.modules.programs.gui.browsers.${browserName};
+    in
     {
-      defaultExtensions = lib.mkOption {
-        type = lib.types.listOf (extensionsTypeFunction { inherit lib; });
-        default = defaultExtensionsFunction { inherit pkgs; };
+      options.modules.programs.gui.browsers.${browserName} = {
+        enable = lib.mkEnableOption browserName;
       };
-      extraExtensions = lib.mkOption {
-        type = lib.types.listOf (extensionsTypeFunction { inherit lib; });
-        default = [];
+
+      config = lib.mkIf cfg.enable {
+        environment.systemPackages = [
+          pkgs.${programPackageName}
+        ];
       };
     };
 
-  module = { lib, moduleConfig, pkgs, variables, ... }:
+  userModule = {
+      defaultExtensions ? null,
+      extraExtensions ? []
+    }:
+    { username }:
+    { lib, pkgs, ... }:
+    let
+      de =
+        if defaultExtensions == null then
+          defaultExtensionsFunction { inherit pkgs; }
+        else
+          defaultExtensions
+        ;
+    in
     {
-      home-manager.users.${variables.username} = { config, ... }:
+      home-manager.users.${username} = { config, ... }:
       {
-        programs.${program} = programConfig {
-          inherit
-            lib
-            moduleConfig
-            pkgs
-            variables
-            ;
+        programs.${programName} = programConfig {
+          inherit lib;
+          moduleConfig = {
+            extensions = de ++ extraExtensions;
+          };
           xdg = config.xdg;
         };
       };

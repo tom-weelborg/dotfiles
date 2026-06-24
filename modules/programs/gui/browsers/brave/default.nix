@@ -1,6 +1,8 @@
 let
   brave = import ../_shared/chromium.nix {
-    program = "brave";
+    browserName = "brave";
+    programName = "brave";
+    programPackageName = "brave";
   };
 in
   brave

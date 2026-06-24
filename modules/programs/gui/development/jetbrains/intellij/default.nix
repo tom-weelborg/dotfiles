@@ -1,19 +1,29 @@
 {
-  options = { lib, ... }:
+  systemModule = { config, lib, pkgs, ... }:
+    let
+      cfg = config.modules.programs.gui.development.jetbrains.intellij;
+    in
     {
-      vmoptions = lib.mkOption {
-        type = lib.types.str;
-        default = "-Xmx4096m";
+      options.modules.programs.gui.development.jetbrains.intellij = {
+        enable = lib.mkEnableOption "intellij";
+      };
+
+      config = lib.mkIf cfg.enable {
+        environment.systemPackages = [
+          pkgs.jetbrains.idea
+        ];
       };
     };
 
-  module = { moduleConfig, pkgs, variables, ... }:
+  userModule = { vmoptions ? "-Xmx4096m" }:
+    { username }:
+    { pkgs, ... }:
     {
-      environment.systemPackages = with pkgs.jetbrains; [
-        idea
+      users.users.${username}.packages = pkgs.lib.mkAfter [
+        pkgs.jetbrains.idea
       ];
 
-      home-manager.users.${variables.username} = { lib, ... }:
+      home-manager.users.${username} = { lib, ... }:
         {
           home.activation.intellijVmOptions =
             lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -22,7 +32,7 @@
               if [ -d "$jetbrains_dir" ]; then
                 for dir in "$jetbrains_dir"/IntelliJIdea*; do
                   if [ -d "$dir" ]; then
-                    echo "${moduleConfig.vmoptions}" > "$dir/idea64.vmoptions"
+                    echo "${vmoptions}" > "$dir/idea64.vmoptions"
                   fi
                 done
               fi

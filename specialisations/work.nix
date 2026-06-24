@@ -10,24 +10,6 @@
           docker = {
             enable = overrideFunction true;
           };
-          git = {
-            enable = overrideFunction true;
-            extraSettings = overrideFunction {
-              core = {
-                autocrlf = "input";
-                longpaths = true;
-              };
-              credential.helper = "manager";
-              init.defaultBranch = "main";
-              merge = {
-                ff = false;
-              };
-              pull = {
-                ff = "only";
-                rebase = false;
-              };
-            };
-          };
         };
         fastfetch = {
           enable = overrideFunction true;
@@ -43,9 +25,6 @@
             enable = overrideFunction true;
           };
         };
-        rclone = {
-          enable = overrideFunction true;
-        };
         vpn = {
           openvpn = {
             enable = overrideFunction true;
@@ -56,29 +35,6 @@
         };
       };
       gui = {
-        browsers = {
-          brave = {
-            enable = overrideFunction true;
-            extraExtensions = overrideFunction [
-              "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
-              "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
-            ];
-          };
-          firefox = {
-            enable = overrideFunction true;
-            extraExtensions = overrideFunction (with pkgs.firefox-addons; [
-              aws-extend-switch-roles3
-              requestly
-            ]);
-          };
-          vivaldi = {
-            enable = overrideFunction true;
-            extraExtensions = overrideFunction [
-              "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
-              "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
-            ];
-          };
-        };
         communication = {
           mumble = {
             enable = overrideFunction true;
@@ -94,37 +50,8 @@
           dbeaver = {
             enable = overrideFunction true;
           };
-          jetbrains = {
-            intellij = {
-              enable = overrideFunction true;
-            };
-          };
-          soapui = {
-            enable = overrideFunction true;
-          };
           virtualbox = {
             enable = overrideFunction false;
-          };
-          vscodium = {
-            enable = overrideFunction true;
-            extensionProfiles = {
-              angular = overrideFunction true;
-              bootstrap = overrideFunction true;
-              docker = overrideFunction true;
-              git = overrideFunction true;
-              github = overrideFunction true;
-              gitlab = overrideFunction true;
-              html = overrideFunction true;
-              java = overrideFunction true;
-              javascript = overrideFunction true;
-              markdown = overrideFunction true;
-              python = overrideFunction true;
-              rust = overrideFunction true;
-              tailwind = overrideFunction true;
-              typescript = overrideFunction true;
-              vue = overrideFunction true;
-              xml = overrideFunction true;
-            };
           };
         };
         drawio = {
@@ -167,22 +94,6 @@
       };
     };
     system = {
-      desktop-environments = {
-        gnome = {
-          favoriteApps = overrideFunction [
-            "firefox.desktop"
-            "vivaldi-stable.desktop"
-            "brave-browser.desktop"
-            "org.gnome.Nautilus.desktop"
-            "org.keepassxc.KeePassXC.desktop"
-            "teams-for-linux.desktop"
-            "info.mumble.Mumble.desktop"
-            "idea.desktop"
-            "codium.desktop"
-            "obsidian.desktop"
-          ];
-        };
-      };
       hardware = {
         displaylink = {
           enable = overrideFunction true;

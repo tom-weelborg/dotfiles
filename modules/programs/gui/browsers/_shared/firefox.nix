@@ -1,6 +1,11 @@
-{ configPath ? null, program, ... }:
+{ browserName, configPath ? null, programName, programPackageName, ... }:
 let
   firefox = import ./base.nix {
+    inherit
+      browserName
+      programName
+      programPackageName
+      ;
     defaultExtensionsFunction = { pkgs, ... }:
       with pkgs.firefox-addons; [
         keepassxc-browser
@@ -8,14 +13,13 @@ let
         youtube-recommended-videos
       ];
     extensionsTypeFunction = { lib }: lib.types.package;
-    inherit program;
-    programConfig = { lib, moduleConfig, pkgs, variables, xdg, ... }:
+    programConfig = { lib, moduleConfig, xdg, ... }:
       {
         enable = true;
         profiles = {
           default = {
             extensions = {
-              packages = moduleConfig.defaultExtensions ++ moduleConfig.extraExtensions;
+              packages = moduleConfig.extensions;
             };
             settings = {
               "browser.translations.neverTranslateLanguages" = "de,en";

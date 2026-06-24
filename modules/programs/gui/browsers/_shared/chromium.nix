@@ -1,6 +1,11 @@
-{ program, ... }:
+{ browserName, programName, programPackageName, ... }:
 let
   chromium = import ./base.nix {
+    inherit
+      browserName
+      programName
+      programPackageName
+      ;
     defaultExtensionsFunction = { ... }:
       [
         "oboonakemofpalcgghocfoadofidjkkk" # KeePassXC-Browser
@@ -8,13 +13,12 @@ let
         "khncfooichmfjbepaaaebmommgaepoid" # Unhook - Remove YouTube Recommended & Shorts
       ];
     extensionsTypeFunction = { lib }: lib.types.str;
-    inherit program;
-    programConfig = { moduleConfig, pkgs, variables, ... }:
+    programConfig = { moduleConfig, ... }:
       {
         enable = true;
         extensions = map
           (extension: { id = extension; })
-          (moduleConfig.defaultExtensions ++ moduleConfig.extraExtensions);
+          moduleConfig.extensions;
       };
   };
 in
