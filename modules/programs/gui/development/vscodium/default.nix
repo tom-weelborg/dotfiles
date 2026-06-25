@@ -48,26 +48,55 @@ in
       };
     };
 
-  userModule = { extensionProfiles ? {} }:
+  userModule = {
+      extensionProfiles ? {},
+      userSettings ? {
+        "diffEditor.ignoreTrimWhitespace" = false;
+
+        "editor.rulers" = [
+          80
+        ];
+        "editor.stickyScroll.enabled" = false;
+
+        "explorer.autoReveal" = false;
+        "explorer.compactFolders" = false;
+
+        "files.insertFinalNewline" = true;
+
+        "window.openFoldersInNewWindow" = "on";
+
+        "workbench.editor.empty.hint" = "hidden";
+        "workbench.editor.enablePreview" = false;
+        "workbench.editor.wrapTabs" = true;
+        "workbench.tree.enableStickyScroll" = false;
+
+        "[json]" = {
+          "editor.defaultFormatter" = "vscode.json-language-features";
+        };
+
+        "[jsonc]" = {
+          "editor.defaultFormatter" = "vscode.json-language-features";
+        };
+      }
+    }:
     { username }:
     { lib, pkgs, ... }:
     {
-      users.users.${username}.packages = lib.mkAfter [
-        (pkgs.vscode-with-extensions.override {
-          vscode = pkgs.vscodium;
-          vscodeExtensions = getExtensions {
-            inherit
-              extensionProfiles
-              pkgs
-              ;
-          };
-        })
-      ];
-
       home-manager.users.${username} = { config, ... }: {
-        xdg.configFile."VSCodium/User/settings.json" = {
-          source = config.lib.file.mkOutOfStoreSymlink (./settings.json);
-          force = true;
+        programs.vscodium = {
+          enable = true;
+
+          profiles = {
+            default = {
+              extensions = getExtensions {
+                inherit
+                  extensionProfiles
+                  pkgs
+                  ;
+              };
+              inherit userSettings;
+            };
+          };
         };
       };
     };
