@@ -1,4 +1,4 @@
-{ inputs, lib, system, variables }:
+{ inputs, lib, variables }:
 let
   isHostDir = path:
     builtins.pathExists (path + "/default.nix");
@@ -33,17 +33,20 @@ let
             hostName = lib.concatStringsSep "-" newPrefix;
           in
             if isHostDir path then
+              let
+                host = import path;
+              in
               {
                 ${hostName} =
                   lib.nixosSystem {
-                    inherit system;
+                    system = host.system;
                     modules = [
                       ../configuration.nix
                       (import ../overlays inputs)
                       ../specialisations
                       inputs.home-manager.nixosModules.default
                       inputs.disko.nixosModules.disko
-                      (import (path + "/default.nix"))
+                      host.config
                     ] ++ systemModules;
                     specialArgs = {
                       inherit

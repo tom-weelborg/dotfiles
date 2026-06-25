@@ -31,8 +31,6 @@
     variables = vars // utils.importIfExists {
       path = vars.privateVariablesPath;
     };
-
-    system = "x86_64-linux";
   in
   {
     nixosConfigurations =
@@ -40,7 +38,6 @@
         inherit
           inputs
           lib
-          system
           variables
           ;
       } ./hosts [];
