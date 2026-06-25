@@ -16,15 +16,15 @@
 
   userModule = { favoriteApps ? [] }:
     { username }:
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     {
+      users.users.${username}.packages = lib.mkAfter (with pkgs.gnomeExtensions; [
+        arcmenu
+        dash-to-panel
+      ]);
+
       home-manager.users.${username} = { ... }:
       {
-        home.packages = with pkgs.gnomeExtensions; [
-          arcmenu
-          dash-to-panel
-        ];
-
         dconf.settings = {
           "org/gnome/desktop/interface" = {
             color-scheme = "prefer-dark";
