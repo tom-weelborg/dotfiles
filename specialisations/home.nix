@@ -52,32 +52,6 @@
           virtualbox = {
             enable = overrideFunction false;
           };
-          vscodium = {
-            enable = overrideFunction true;
-            extensionProfiles = {
-              angular = overrideFunction true;
-              bootstrap = overrideFunction true;
-              docker = overrideFunction true;
-              git = overrideFunction true;
-              github = overrideFunction true;
-              gitlab = overrideFunction true;
-              html = overrideFunction true;
-              java = overrideFunction true;
-              javascript = overrideFunction true;
-              latex = overrideFunction true;
-              markdown = overrideFunction true;
-              nix = overrideFunction true;
-              php = overrideFunction true;
-              python = overrideFunction true;
-              rust = overrideFunction true;
-              slidev = overrideFunction true;
-              svelte = overrideFunction true;
-              tailwind = overrideFunction true;
-              typescript = overrideFunction true;
-              vue = overrideFunction true;
-              xml = overrideFunction true;
-            };
-          };
         };
         gaming = {
           desmume = {

@@ -24,6 +24,31 @@
     (userModules.firefox {})
     (userModules.intellij {})
     (userModules.virtualbox {})
+    (userModules.vscodium {
+      extensionProfiles = {
+        angular = true;
+        bootstrap = true;
+        docker = true;
+        git = true;
+        github = true;
+        gitlab = true;
+        html = true;
+        java = true;
+        javascript = true;
+        latex = true;
+        markdown = true;
+        nix = true;
+        php = true;
+        python = true;
+        rust = true;
+        slidev = true;
+        svelte = true;
+        tailwind = true;
+        typescript = true;
+        vue = true;
+        xml = true;
+      };
+    })
     (userModules.gnome {
       favoriteApps = [
         "microsoft-edge.desktop"
