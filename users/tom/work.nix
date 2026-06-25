@@ -11,6 +11,7 @@
   ];
   modules = [
     (userModules.age {})
+    (userModules.sops {})
     (userModules.docker {})
     (userModules.git {
       name = variables.git.name;
