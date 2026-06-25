@@ -32,14 +32,7 @@ in
                 };
               })
               (builtins.readDir ./extensionProfiles)
-          )
-          //
-          {
-            nix = lib.mkOption {
-              type = lib.types.bool;
-              default = true;
-            };
-          };
+          );
       };
 
       config = lib.mkIf cfg.enable {

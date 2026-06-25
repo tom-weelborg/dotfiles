@@ -71,6 +71,7 @@
                 java = true;
                 javascript = true;
                 markdown = true;
+                nix = true;
                 python = true;
                 rust = true;
                 tailwind = true;

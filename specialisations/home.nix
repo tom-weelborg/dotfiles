@@ -66,6 +66,7 @@
               javascript = overrideFunction true;
               latex = overrideFunction true;
               markdown = overrideFunction true;
+              nix = overrideFunction true;
               php = overrideFunction true;
               python = overrideFunction true;
               rust = overrideFunction true;
