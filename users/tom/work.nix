@@ -1,4 +1,4 @@
-{ pkgs, userModules, variables, ... }:
+{ config, pkgs, userModules, variables, ... }:
 {
   isNormalUser = true;
   displayname = variables.displayname;
@@ -16,7 +16,7 @@
     (userModules.docker {})
     (userModules.git {
       name = variables.git.name;
-      email = variables.git.email;
+      email = null;
       extraSettings = {
         core = {
           autocrlf = "input";
@@ -30,6 +30,11 @@
         pull = {
           ff = "only";
           rebase = false;
+        };
+      };
+      secretOptions = {
+        user = {
+          email = config.sops.secrets.git-email.path;
         };
       };
     })
@@ -96,6 +101,12 @@
     })
     (userModules.razer {})
     (userModules.home-manager {})
-    (userModules.sops-config {})
+    (userModules.sops-config {
+      secrets = {
+        git-email = {
+          sopsFile = ./secrets.yaml;
+        };
+      };
+    })
   ];
 }
