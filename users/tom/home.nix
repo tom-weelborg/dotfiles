@@ -10,6 +10,7 @@
     "wheel"
   ];
   modules = [
+    (userModules.age {})
     (userModules.docker {})
     (userModules.git {
       name = variables.git.name;
