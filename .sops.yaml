@@ -1,0 +1,7 @@
+keys:
+  - &users:
+    - &tom_work age1nkyh4wfs5mphsm8vn7sch24zpp7qgyvr8gv9urxj66t25qu7xalspyjuhs
+creation_rules:
+  - key_groups:
+    - age:
+      - *tom_work

@@ -96,5 +96,6 @@
     })
     (userModules.razer {})
     (userModules.home-manager {})
+    (userModules.sops-config {})
   ];
 }
