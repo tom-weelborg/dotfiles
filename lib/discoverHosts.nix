@@ -46,6 +46,7 @@ let
                       ../specialisations
                       inputs.home-manager.nixosModules.default
                       inputs.disko.nixosModules.disko
+                      inputs.sops-nix.nixosModules.sops
                       host.config
                     ] ++ systemModules;
                     specialArgs = {

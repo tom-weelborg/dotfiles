@@ -1,4 +1,6 @@
 {
+  fileSystems."/home".neededForBoot = true;
+  
   disko.devices.disk.nixos = {
     type = "disk";
     device = "/dev/nvme0n1";
