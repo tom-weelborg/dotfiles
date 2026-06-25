@@ -1,7 +1,7 @@
 { overrideFunction, pkgs, userModules, variables, ... }@inputs:
 let
   users = {
-    ${variables.username} = (import ../../../../users/tom/work.nix inputs);
+    ${variables.username} = (import ../../../../users/tom/work inputs);
   };
 in
 {
