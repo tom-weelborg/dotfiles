@@ -93,6 +93,10 @@
                 "codium.desktop"
                 "obsidian.desktop"
               ];
+              gnomeExtensions = with pkgs.gnomeExtensions; [
+                arcmenu
+                dash-to-panel
+              ];
             })
             (userModules.razer {})
             (userModules.home-manager {})

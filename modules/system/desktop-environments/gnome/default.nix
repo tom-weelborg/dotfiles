@@ -14,14 +14,11 @@
       };
     };
 
-  userModule = { favoriteApps ? [] }:
+  userModule = { favoriteApps ? [], gnomeExtensions ? [] }:
     { username }:
     { lib, pkgs, ... }:
     {
-      users.users.${username}.packages = lib.mkAfter (with pkgs.gnomeExtensions; [
-        arcmenu
-        dash-to-panel
-      ]);
+      users.users.${username}.packages = lib.mkAfter gnomeExtensions;
 
       home-manager.users.${username} = { ... }:
       {
@@ -36,10 +33,10 @@
             show-hidden = true;
           };
           "org/gnome/shell" = {
-            enabled-extensions = with pkgs.gnomeExtensions; [
-              arcmenu.extensionUuid
-              dash-to-panel.extensionUuid
-            ];
+            enabled-extensions = map
+              (e: e.extensionUuid)
+              gnomeExtensions
+              ;
             favorite-apps = favoriteApps;
           };
           "org/gnome/shell/extensions/arcmenu" = {
