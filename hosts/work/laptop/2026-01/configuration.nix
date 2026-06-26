@@ -19,6 +19,11 @@ in
       home-manager = {
         enable = true;
       };
+      kernel = {
+        modules = [
+          "sg"
+        ];
+      };
       nix = {
         access-tokens-path = config.sops.secrets.access-tokens.path;
       };
