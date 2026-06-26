@@ -1,11 +1,27 @@
 {
+  systemModule = { config, lib, ... }:
+    let
+      cfg = config.modules.system.sops;
+    in
+    {
+      options.modules.system.sops = {
+        keyFile = lib.mkOption {
+          type = lib.types.str;
+        };
+      };
+
+      config = {
+        sops = {
+          age.keyFile = cfg.keyFile;
+        };
+      };
+    };
+
   userModule = { secrets ? {} }:
     { username }:
     { ... }:
     {
       sops = {
-        age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
-
         secrets = builtins.mapAttrs
           (_: value:
             {

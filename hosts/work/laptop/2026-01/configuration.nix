@@ -22,6 +22,9 @@ in
       nix = {
         access-tokens-path = config.sops.secrets.access-tokens.path;
       };
+      sops = {
+        keyFile = "/home/${variables.username}/.config/sops/age/keys.txt";
+      };
     };
   };
 
