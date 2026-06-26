@@ -31,10 +31,7 @@
     
     utils = import ./lib lib;
 
-    vars = import ./variables.nix;
-    variables = vars // utils.importIfExists {
-      path = vars.privateVariablesPath;
-    };
+    variables = import ./variables.nix;
   in
   {
     nixosConfigurations =
