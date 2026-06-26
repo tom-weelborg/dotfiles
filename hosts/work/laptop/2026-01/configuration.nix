@@ -1,10 +1,14 @@
-{ overrideFunction, pkgs, userModules, variables, ... }@inputs:
+{ config, overrideFunction, pkgs, userModules, variables, ... }@inputs:
 let
   users = {
     ${variables.username} = (import ../../../../users/tom/work inputs);
   };
 in
 {
+  sops.secrets.access-tokens = {
+    sopsFile = ../../../../secrets.yaml;
+  };
+
   modules = {
     system = {
       desktop-environments = {
@@ -14,6 +18,9 @@ in
       };
       home-manager = {
         enable = true;
+      };
+      nix = {
+        access-tokens-path = config.sops.secrets.access-tokens.path;
       };
     };
   };
