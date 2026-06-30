@@ -1,5 +1,5 @@
 {
-  systemModule = { config, lib, readDirIfExists, variables, ... }:
+  systemModule = { config, lib, pkgs, readDirIfExists, variables, ... }:
     let
       cfg = config.modules.programs.cli.vpn.openvpn;
 
@@ -16,6 +16,10 @@
       };
 
       config = lib.mkIf cfg.enable {
+        networking.networkmanager.plugins = lib.mkAfter [
+          pkgs.networkmanager-openvpn
+        ];
+
         services.openvpn.servers =
           lib.listToAttrs (
             map

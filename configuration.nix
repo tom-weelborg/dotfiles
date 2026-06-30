@@ -15,9 +15,6 @@
   # Enable networking
   networking.networkmanager = {
     enable = true;
-    plugins = [
-      pkgs.networkmanager-openvpn
-    ];
   };
 
   # Enable the X11 windowing system.
