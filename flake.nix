@@ -30,8 +30,6 @@
     lib = nixpkgs.lib;
     
     utils = import ./lib lib;
-
-    variables = import ./variables.nix;
   in
   {
     nixosConfigurations =
@@ -39,7 +37,6 @@
         inherit
           inputs
           lib
-          variables
           ;
       } ./hosts [];
   };

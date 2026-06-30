@@ -1,7 +1,7 @@
-{ pkgs, userModules, variables, ... }:
+{ pkgs, userModules, ... }:
 {
   isNormalUser = true;
-  displayname = variables.displayname;
+  displayname = "Tom";
   extraGroups = [
     "cdrom"
     "plugdev"
@@ -15,8 +15,8 @@
     (userModules.ssh-to-age {})
     (userModules.docker {})
     (userModules.git {
-      name = variables.git.name;
-      email = variables.git.email;
+      name = "Tom Weelborg";
+      email = "135610355+tom-weelborg@users.noreply.github.com";
     })
     (userModules.brave {
       extraExtensions = [

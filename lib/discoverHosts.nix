@@ -1,4 +1,4 @@
-{ inputs, lib, variables }:
+{ inputs, lib }:
 let
   isHostDir = path:
     builtins.pathExists (path + "/default.nix");
@@ -53,7 +53,6 @@ let
                       inherit
                         readDirIfExists
                         userModules
-                        variables
                         ;
                       overrideFunction = lib.mkDefault;
                     };
