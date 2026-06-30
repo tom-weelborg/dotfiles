@@ -41,7 +41,6 @@ let
                   lib.nixosSystem {
                     system = host.system;
                     modules = [
-                      ../configuration.nix
                       (import ../overlays inputs)
                       ../specialisations
                       inputs.home-manager.nixosModules.default
