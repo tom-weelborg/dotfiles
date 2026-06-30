@@ -10,6 +10,15 @@ in
   };
 
   modules = {
+    programs = {
+      cli = {
+        vpn = {
+          openvpn = {
+            vpnDir = "/home/${variables.username}/vpn";
+          };
+        };
+      };
+    };
     system = {
       desktop-environments = {
         gnome = {

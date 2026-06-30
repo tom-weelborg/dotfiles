@@ -1,18 +1,14 @@
 {
-  systemModule = { config, lib, pkgs, readDirIfExists, variables, ... }:
+  systemModule = { config, lib, pkgs, readDirIfExists, ... }:
     let
       cfg = config.modules.programs.cli.vpn.openvpn;
-
-      vpnFiles = readDirIfExists variables.vpnDir;
-      vpnConfFiles = lib.attrNames (
-        lib.filterAttrs (n: _: 
-          lib.hasSuffix ".conf" n || lib.hasSuffix ".ovpn" n
-        ) vpnFiles
-      );
     in
     {
       options.modules.programs.cli.vpn.openvpn = {
         enable = lib.mkEnableOption "openvpn";
+        vpnDir = lib.mkOption {
+          type = lib.types.str;
+        };
       };
 
       config = lib.mkIf cfg.enable {
@@ -21,6 +17,14 @@
         ];
 
         services.openvpn.servers =
+          let
+            vpnFiles = readDirIfExists cfg.vpnDir;
+            vpnConfFiles = lib.attrNames (
+              lib.filterAttrs (n: _: 
+                lib.hasSuffix ".conf" n || lib.hasSuffix ".ovpn" n
+              ) vpnFiles
+            );
+          in
           lib.listToAttrs (
             map
               (filename: 
@@ -35,7 +39,7 @@
                 {
                   inherit name;
                   value = {
-                    config = ''config ${variables.vpnDir}/${filename}'';
+                    config = ''config ${cfg.vpnDir}/${filename}'';
                     autoStart = false;
                   };
                 }
