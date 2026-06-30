@@ -6,11 +6,36 @@
     {
       options.modules.system.desktop-environments.gnome = {
         enable = lib.mkEnableOption "gnome";
+        xserver = {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+
+          xkb = {
+            layout = lib.mkOption {
+              type = lib.types.str;
+              default = "de";
+            };
+            variant = lib.mkOption {
+              type = lib.types.str;
+              default = "";
+            };
+          };
+        };
       };
 
       config = lib.mkIf cfg.enable {
         services.displayManager.gdm.enable = true;
         services.desktopManager.gnome.enable = true;
+
+        services.xserver = {
+          enable = cfg.xserver.enable;
+          xkb = {
+            layout = cfg.xserver.xkb.layout;
+            variant = cfg.xserver.xkb.variant;
+          };
+        };
       };
     };
 
