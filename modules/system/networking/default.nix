@@ -5,6 +5,11 @@
     in
     {
       options.modules.system.networking = {
+        hostId = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+        };
+
         hostName = lib.mkOption {
           type = lib.types.str;
           default = "nixos";
@@ -19,6 +24,8 @@
       };
 
       config = {
+        networking.hostId = cfg.hostId;
+
         networking.hostName = cfg.hostName;
 
         networking.networkmanager = {
