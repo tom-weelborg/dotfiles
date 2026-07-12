@@ -8,11 +8,23 @@
         keyFile = lib.mkOption {
           type = lib.types.str;
         };
+        sshKeyPaths = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          default = [];
+        };
+        generateKey = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+        };
       };
 
       config = {
         sops = {
-          age.keyFile = cfg.keyFile;
+          age = {
+            keyFile = cfg.keyFile;
+            sshKeyPaths = cfg.sshKeyPaths;
+            generateKey = cfg.generateKey;
+          };
         };
       };
     };
