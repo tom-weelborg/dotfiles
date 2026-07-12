@@ -1,7 +1,10 @@
 keys:
+  - &hosts:
+    - &home_nas_2026_07 age10xfc3x9emwq4kqnhj6c368pgmn52aqs7cysd0tlal60um3lwd4es0dsdf2
   - &users:
     - &tom_work age1nkyh4wfs5mphsm8vn7sch24zpp7qgyvr8gv9urxj66t25qu7xalspyjuhs
 creation_rules:
   - key_groups:
     - age:
+      - *home_nas_2026_07
       - *tom_work

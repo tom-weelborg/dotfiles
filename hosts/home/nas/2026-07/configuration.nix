@@ -1,5 +1,9 @@
-{ pkgs, ... }@inputs:
+{ config, pkgs, ... }@inputs:
 {
+  sops.secrets.access-tokens = {
+    sopsFile = ../../../../secrets.yaml;
+  };
+
   modules = {
     programs = {
       cli = {
@@ -18,6 +22,16 @@
       };
       networking = {
         hostId = "a435d329";
+      };
+      nix = {
+        access-tokens-path = config.sops.secrets.access-tokens.path;
+      };
+      sops = {
+        keyFile = "/var/lib/sops-nix/key.txt";
+        sshKeyPaths = [
+          "/root/.ssh/github"
+        ];
+        generateKey = true;
       };
     };
   };
