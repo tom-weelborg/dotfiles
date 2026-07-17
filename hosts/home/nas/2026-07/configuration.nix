@@ -1,8 +1,15 @@
 { config, pkgs, ... }@inputs:
+let
+  authorizedSshKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPVKaWEUtl0aXRSDalYuPlJroe+KqQM1BCaUXhpxp/1j nas-login"
+  ];
+in
 {
   sops.secrets.access-tokens = {
     sopsFile = ../../../../secrets.yaml;
   };
+
+  users.users.root.openssh.authorizedKeys.keys = authorizedSshKeys;
 
   modules = {
     programs = {
