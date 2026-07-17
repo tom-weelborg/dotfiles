@@ -18,6 +18,9 @@
           server = {
             enable = true;
             openFirewall = true;
+            settings = {
+              PermitRootLogin = "prohibit-password";
+            };
           };
         };
       };
