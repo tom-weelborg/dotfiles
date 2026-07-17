@@ -18,23 +18,28 @@
           type = lib.types.bool;
           default = true;
         };
-        settings = {
-          AllowUsers = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [];
+        settings = lib.mkOption {
+          type = lib.types.submodule {
+            options = {
+              AllowUsers = lib.mkOption {
+                type = lib.types.listOf lib.types.str;
+                default = [];
+              };
+              KbdInteractiveAuthentication = lib.mkOption {
+                type = lib.types.bool;
+                default = false;
+              };
+              PasswordAuthentication = lib.mkOption {
+                type = lib.types.bool;
+                default = false;
+              };
+              PermitRootLogin = lib.mkOption {
+                type = lib.types.str;
+                default = "no";
+              };
+            };
           };
-          KbdInteractiveAuthentication = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
-          PasswordAuthentication = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
-          PermitRootLogin = lib.mkOption {
-            type = lib.types.str;
-            default = "no";
-          };
+          default = {};
         };
       };
 
