@@ -6,5 +6,6 @@
 
     (import ./lib.nix)
     (import ./requestly-firefox-addon.nix)
+    (import ./soapui.nix)
   ];
 }
