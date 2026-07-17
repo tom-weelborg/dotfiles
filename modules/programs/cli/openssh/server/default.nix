@@ -22,8 +22,8 @@
           type = lib.types.submodule {
             options = {
               AllowUsers = lib.mkOption {
-                type = lib.types.listOf lib.types.str;
-                default = [];
+                type = lib.types.nullOr (lib.types.listOf lib.types.str);
+                default = null;
               };
               KbdInteractiveAuthentication = lib.mkOption {
                 type = lib.types.bool;
