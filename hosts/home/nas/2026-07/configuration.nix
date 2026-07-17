@@ -14,6 +14,12 @@
             email = "135610355+tom-weelborg@users.noreply.github.com";
           };
         };
+        openssh = {
+          server = {
+            enable = true;
+            openFirewall = true;
+          };
+        };
       };
     };
     system = {
