@@ -5,6 +5,83 @@ let
   ];
 in
 {
+  systemd = {
+    network = {
+      enable = true;
+
+      networks = {
+        "lan" = {
+          matchConfig = {
+            Name = "enp4s0";
+          };
+
+          address = [
+            "192.168.178.94/24"
+          ];
+
+          routes = [
+            { Gateway = "192.168.178.1"; }
+          ];
+
+          dns = [
+            "192.168.178.1"
+          ];
+        };
+      };
+    };
+  };
+
+
+  boot.initrd = {
+    availableKernelModules = [
+      "igc"
+    ];
+
+    systemd = {
+      enable = true;
+
+      network = {
+        enable = true;
+
+        networks = {
+          "lan" = {
+            matchConfig = {
+              Name = "enp4s0";
+            };
+
+            address = [
+              "192.168.178.94/24"
+            ];
+
+            routes = [
+              { Gateway = "192.168.178.1"; }
+            ];
+          };
+        };
+      };
+    };
+
+    network = {
+      enable = true;
+
+      ssh = {
+        enable = true;
+
+        authorizedKeys = authorizedSshKeys;
+
+        hostKeys = [
+          /boot/initrd-ssh-host-key
+        ];
+
+        port = 2222;
+
+        extraConfig = ''
+          ForceCommand /bin/systemctl default
+        '';
+      };
+    };
+  };
+
   sops.secrets.access-tokens = {
     sopsFile = ../../../../secrets.yaml;
   };
