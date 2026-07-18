@@ -107,6 +107,9 @@ in
             };
           };
         };
+        ssh = {
+          startAgent = true;
+        };
       };
     };
     system = {
