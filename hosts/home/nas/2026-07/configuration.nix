@@ -96,6 +96,12 @@ in
   users.users.root.openssh.authorizedKeys.keys = authorizedSshKeys;
 
   modules = {
+    jellyfin = {
+      server = {
+        enable = true;
+        openFirewall = true;
+      };
+    };
     programs = {
       cli = {
         development = {
