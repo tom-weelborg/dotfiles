@@ -2,6 +2,7 @@
 let
   authorizedSshKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPVKaWEUtl0aXRSDalYuPlJroe+KqQM1BCaUXhpxp/1j nas-login"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK8y2v3JYqacZn6nySkaksP1YYIG+4zk3NuwaK2+faJs nas-login"
   ];
 in
 {
