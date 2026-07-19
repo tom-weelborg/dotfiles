@@ -30,6 +30,12 @@ in
         };
       };
     };
+
+    services = {
+      zfs-mount = {
+        enable = false;
+      };
+    };
   };
 
 
