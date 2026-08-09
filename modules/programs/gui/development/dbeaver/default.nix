@@ -15,12 +15,15 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { lib, pkgs, ... }:
-    {
-      users.users.${username}.packages = lib.mkAfter [
-        pkgs.dbeaver-bin
-      ];
-    };
+  userModule = {
+    programs.gui.development.dbeaver =
+      { }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.dbeaver-bin
+        ];
+      };
+  };
 }

@@ -15,12 +15,15 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { lib, pkgs, ... }:
-    {
-      users.users.${username}.packages = lib.mkAfter [
-        pkgs.pinta
-      ];
-    };
+  userModule = {
+    programs.gui.media.pinta =
+      { }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.pinta
+        ];
+      };
+  };
 }

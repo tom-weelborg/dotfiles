@@ -15,12 +15,15 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { lib, pkgs, ... }:
-    {
-      users.users.${username}.packages = lib.mkAfter [
-        pkgs.vlc
-      ];
-    };
+  userModule = {
+    programs.gui.media.vlc =
+      { }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.vlc
+        ];
+      };
+  };
 }

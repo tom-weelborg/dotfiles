@@ -15,12 +15,15 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { lib, pkgs, ... }:
-    {
-      users.users.${username}.packages = lib.mkAfter [
-        pkgs.wireguard-tools
-      ];
-    };
+  userModule = {
+    programs.cli.vpn.wireguard =
+      { }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.wireguard-tools
+        ];
+      };
+  };
 }

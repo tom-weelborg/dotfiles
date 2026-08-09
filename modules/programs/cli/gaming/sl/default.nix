@@ -15,12 +15,15 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { lib, pkgs, ... }:
-    {
-      users.users.${username}.packages = lib.mkAfter [
-        pkgs.sl
-      ];
-    };
+  userModule = {
+    programs.cli.gaming.sl =
+      { }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.sl
+        ];
+      };
+  };
 }

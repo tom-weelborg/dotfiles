@@ -13,13 +13,16 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { ... }:
-    {
-      home-manager.users.${username} = { ... }:
+  userModule = {
+    programs.cli.development.direnv =
+      { }:
+      { username }:
+      { ... }:
       {
-        programs.direnv.enable = true;
+        home-manager.users.${username} = { ... }:
+        {
+          programs.direnv.enable = true;
+        };
       };
-    };
+  };
 }

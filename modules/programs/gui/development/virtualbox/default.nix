@@ -16,10 +16,13 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { lib, ... }:
-    {
-      users.extraGroups.vboxusers.members = lib.mkAfter [ username ];
-    };
+  userModule = {
+    programs.gui.development.virtualbox =
+      { }:
+      { username }:
+      { lib, ... }:
+      {
+        users.extraGroups.vboxusers.members = lib.mkAfter [ username ];
+      };
+  };
 }

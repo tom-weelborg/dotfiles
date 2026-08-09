@@ -24,29 +24,32 @@
     };
 
   userModule = {
-      defaultExtensions ? null,
-      extraExtensions ? []
-    }:
-    { username }:
-    { lib, pkgs, ... }:
-    let
-      de =
-        if defaultExtensions == null then
-          defaultExtensionsFunction { inherit pkgs; }
-        else
-          defaultExtensions
-        ;
-    in
-    {
-      home-manager.users.${username} = { config, ... }:
+    programs.gui.browsers.${browserName} =
       {
-        programs.${programName} = programConfig {
-          inherit lib;
-          moduleConfig = {
-            extensions = de ++ extraExtensions;
+        defaultExtensions ? null,
+        extraExtensions ? []
+      }:
+      { username }:
+      { lib, pkgs, ... }:
+      let
+        de =
+          if defaultExtensions == null then
+            defaultExtensionsFunction { inherit pkgs; }
+          else
+            defaultExtensions
+          ;
+      in
+      {
+        home-manager.users.${username} = { config, ... }:
+        {
+          programs.${programName} = programConfig {
+            inherit lib;
+            moduleConfig = {
+              extensions = de ++ extraExtensions;
+            };
+            xdg = config.xdg;
           };
-          xdg = config.xdg;
         };
       };
-    };
+  };
 }

@@ -9,13 +9,17 @@ let
     (v: v.systemModule)
     (builtins.filter
       (v: builtins.hasAttr "systemModule" v)
-      (lib.attrValues discoveredModules) 
-    );
-  userModules = builtins.mapAttrs
-    (_: v: v.userModule)
-    (lib.filterAttrs
-      (_: v: builtins.hasAttr "userModule" v)
       discoveredModules 
+    );
+  userModules = builtins.foldl'
+    (lib.recursiveUpdate)
+    {}
+    (map
+      (v: v.userModule)
+      (builtins.filter
+        (v: builtins.hasAttr "userModule" v)
+        discoveredModules 
+      )
     );
 
   readDirIfExists = import ./readDirIfExists.nix;

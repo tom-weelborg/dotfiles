@@ -15,15 +15,18 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { ... }:
-    {
-      home-manager.users.${username} = { ... }:
+  userModule = {
+    programs.cli.rclone =
+      { }:
+      { username }:
+      { ... }:
       {
-        programs.rclone = {
-          enable = true;
+        home-manager.users.${username} = { ... }:
+        {
+          programs.rclone = {
+            enable = true;
+          };
         };
       };
-    };
+  };
 }

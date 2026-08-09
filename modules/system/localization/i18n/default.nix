@@ -89,24 +89,27 @@
     };
 
   userModule = {
-      address ? null,
-      base ? null,
-      collate ? null,
-      ctype ? null,
-      measurement ? null,
-      messages ? null,
-      monetary ? null,
-      name ? null,
-      numeric ? null,
-      paper ? null,
-      telephone ? null,
-      time ? null
-    }@inputs:
-    { username }:
-    { ... }:
-    {
-      home-manager.users.${username} = {
-        home.language = inputs;
+    system.localization.i18n =
+      {
+        address ? null,
+        base ? null,
+        collate ? null,
+        ctype ? null,
+        measurement ? null,
+        messages ? null,
+        monetary ? null,
+        name ? null,
+        numeric ? null,
+        paper ? null,
+        telephone ? null,
+        time ? null
+      }@inputs:
+      { username }:
+      { ... }:
+      {
+        home-manager.users.${username} = {
+          home.language = inputs;
+        };
       };
-    };
+  };
 }

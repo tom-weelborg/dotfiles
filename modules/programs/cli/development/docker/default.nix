@@ -13,10 +13,13 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { lib, ... }:
-    {
-      users.users.${username}.extraGroups = lib.mkAfter [ "docker" ];
-    };
+  userModule = {
+    programs.cli.development.docker =
+      { }:
+      { username }:
+      { lib, ... }:
+      {
+        users.users.${username}.extraGroups = lib.mkAfter [ "docker" ];
+      };
+  };
 }

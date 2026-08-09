@@ -8,18 +8,21 @@ let
       entries = builtins.readDir basePath;
       dirs = lib.filterAttrs (_: t: t == "directory") entries;
     in
-      lib.concatMapAttrs
-        (name: _:
-          let
-            path = basePath + "/${name}";
-          in
-            if isModuleDir path then
-              {
-                "${name}" = import path;
-              }
-            else
-              discover path
+      lib.concatLists
+        (map
+          (name:
+            let
+              path = basePath + "/${name}";
+            in
+              if isModuleDir path then
+                [
+                  (import path)
+                ]
+              else
+                discover path
+          )
+          (builtins.attrNames dirs)
         )
-        dirs;
+      ;
 in
 discover

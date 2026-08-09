@@ -15,15 +15,18 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { ... }:
-    {
-      home-manager.users.${username} = { ... }:
+  userModule = {
+    programs.cli.fastfetch =
+      { }:
+      { username }:
+      { ... }:
       {
-        programs.fastfetch = {
-          enable = true;
+        home-manager.users.${username} = { ... }:
+        {
+          programs.fastfetch = {
+            enable = true;
+          };
         };
       };
-    };
+  };
 }

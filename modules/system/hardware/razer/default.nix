@@ -19,12 +19,15 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { lib, ... }:
-    {
-      hardware.openrazer = {
-        users = lib.mkAfter [ username ];
+  userModule = {
+    system.hardware.razer =
+      { }:
+      { username }:
+      { lib, ... }:
+      {
+        hardware.openrazer = {
+          users = lib.mkAfter [ username ];
+        };
       };
-    };
+  };
 }

@@ -10,11 +10,11 @@
     "wheel"
   ];
   modules = [
-    (userModules.age {})
-    (userModules.sops {})
-    (userModules.ssh-to-age {})
-    (userModules.docker {})
-    (userModules.git {
+    (userModules.programs.cli.cryptography.age {})
+    (userModules.programs.cli.cryptography.sops {})
+    (userModules.programs.cli.cryptography.ssh-to-age {})
+    (userModules.programs.cli.development.docker {})
+    (userModules.programs.cli.development.git {
       name = "Tom Weelborg";
       email = null;
       extraSettings = {
@@ -38,29 +38,29 @@
         };
       };
     })
-    (userModules.rclone {})
-    (userModules.brave {
+    (userModules.programs.cli.rclone {})
+    (userModules.programs.gui.browsers.brave {
       extraExtensions = [
         "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
         "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
       ];
     })
-    (userModules.firefox {
+    (userModules.programs.gui.browsers.firefox {
       extraExtensions = with pkgs.firefox-addons; [
         aws-extend-switch-roles3
         requestly
       ];
     })
-    (userModules.vivaldi {
+    (userModules.programs.gui.browsers.vivaldi {
       extraExtensions = [
         "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
         "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
       ];
     })
-    (userModules.intellij {})
-    (userModules.soapui {})
-    (userModules.virtualbox {})
-    (userModules.vscodium {
+    (userModules.programs.gui.development.jetbrains.intellij {})
+    (userModules.programs.gui.development.soapui {})
+    (userModules.programs.gui.development.virtualbox {})
+    (userModules.programs.gui.development.vscodium {
       extensionProfiles = {
         angular = true;
         bootstrap = true;
@@ -81,7 +81,7 @@
         xml = true;
       };
     })
-    (userModules.gnome {
+    (userModules.system.desktop-environments.gnome {
       favoriteApps = [
         "firefox.desktop"
         "vivaldi-stable.desktop"
@@ -99,9 +99,9 @@
         dash-to-panel
       ];
     })
-    (userModules.razer {})
-    (userModules.home-manager {})
-    (userModules.sops-config {
+    (userModules.system.hardware.razer {})
+    (userModules.system.home-manager {})
+    (userModules.system.sops-config {
       secrets = {
         git-email = {
           sopsFile = ./secrets.yaml;

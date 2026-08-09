@@ -50,27 +50,30 @@
     };
 
   userModule = {
-      browsers ? [],
-      text-html ? [],
-      x-scheme-handler-about ? [],
-      x-scheme-handler-http ? [],
-      x-scheme-handler-https ? [],
-      x-scheme-handler-unknown ? []
-    }:
-    { username }:
-    { ... }:
-    {
-      home-manager.users.${username} = {
-        xdg.mimeApps = {
-          enable = true;
-          defaultApplications = {
-            "text/html" = browsers ++ text-html;
-            "x-scheme-handler/about" = browsers ++ x-scheme-handler-about;
-            "x-scheme-handler/http" = browsers ++ x-scheme-handler-http;
-            "x-scheme-handler/https" = browsers ++ x-scheme-handler-https;
-            "x-scheme-handler/unknown" = browsers ++ x-scheme-handler-unknown;
+    system.xdg.mime =
+      {
+        browsers ? [],
+        text-html ? [],
+        x-scheme-handler-about ? [],
+        x-scheme-handler-http ? [],
+        x-scheme-handler-https ? [],
+        x-scheme-handler-unknown ? []
+      }:
+      { username }:
+      { ... }:
+      {
+        home-manager.users.${username} = {
+          xdg.mimeApps = {
+            enable = true;
+            defaultApplications = {
+              "text/html" = browsers ++ text-html;
+              "x-scheme-handler/about" = browsers ++ x-scheme-handler-about;
+              "x-scheme-handler/http" = browsers ++ x-scheme-handler-http;
+              "x-scheme-handler/https" = browsers ++ x-scheme-handler-https;
+              "x-scheme-handler/unknown" = browsers ++ x-scheme-handler-unknown;
+            };
           };
         };
       };
-    };
+  };
 }

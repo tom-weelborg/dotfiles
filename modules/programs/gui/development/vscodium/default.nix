@@ -49,55 +49,58 @@ in
     };
 
   userModule = {
-      extensionProfiles ? {},
-      userSettings ? {
-        "diffEditor.ignoreTrimWhitespace" = false;
+    programs.gui.development.vscodium =
+      {
+        extensionProfiles ? {},
+        userSettings ? {
+          "diffEditor.ignoreTrimWhitespace" = false;
 
-        "editor.rulers" = [
-          80
-        ];
-        "editor.stickyScroll.enabled" = false;
+          "editor.rulers" = [
+            80
+          ];
+          "editor.stickyScroll.enabled" = false;
 
-        "explorer.autoReveal" = false;
-        "explorer.compactFolders" = false;
+          "explorer.autoReveal" = false;
+          "explorer.compactFolders" = false;
 
-        "files.insertFinalNewline" = true;
+          "files.insertFinalNewline" = true;
 
-        "window.openFoldersInNewWindow" = "on";
+          "window.openFoldersInNewWindow" = "on";
 
-        "workbench.editor.empty.hint" = "hidden";
-        "workbench.editor.enablePreview" = false;
-        "workbench.editor.wrapTabs" = true;
-        "workbench.tree.enableStickyScroll" = false;
+          "workbench.editor.empty.hint" = "hidden";
+          "workbench.editor.enablePreview" = false;
+          "workbench.editor.wrapTabs" = true;
+          "workbench.tree.enableStickyScroll" = false;
 
-        "[json]" = {
-          "editor.defaultFormatter" = "vscode.json-language-features";
-        };
+          "[json]" = {
+            "editor.defaultFormatter" = "vscode.json-language-features";
+          };
 
-        "[jsonc]" = {
-          "editor.defaultFormatter" = "vscode.json-language-features";
-        };
-      }
-    }:
-    { username }:
-    { lib, pkgs, ... }:
-    {
-      home-manager.users.${username} = { config, ... }: {
-        programs.vscodium = {
-          enable = true;
+          "[jsonc]" = {
+            "editor.defaultFormatter" = "vscode.json-language-features";
+          };
+        }
+      }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        home-manager.users.${username} = { config, ... }: {
+          programs.vscodium = {
+            enable = true;
 
-          profiles = {
-            default = {
-              extensions = getExtensions {
-                inherit
-                  extensionProfiles
-                  pkgs
-                  ;
+            profiles = {
+              default = {
+                extensions = getExtensions {
+                  inherit
+                    extensionProfiles
+                    pkgs
+                    ;
+                };
+                inherit userSettings;
               };
-              inherit userSettings;
             };
           };
         };
       };
-    };
+  };
 }

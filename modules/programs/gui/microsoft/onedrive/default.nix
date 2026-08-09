@@ -13,13 +13,16 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { ... }:
-    {
-      home-manager.users.${username} = { ... }:
+  userModule = {
+    programs.gui.microsoft.onedrive =
+      { }:
+      { username }:
+      { ... }:
       {
-        programs.onedrive.enable = true;
+        home-manager.users.${username} = { ... }:
+        {
+          programs.onedrive.enable = true;
+        };
       };
-    };
+  };
 }

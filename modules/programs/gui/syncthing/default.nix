@@ -16,13 +16,16 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { ... }:
-    {
-      home-manager.users.${username} = { ... }:
+  userModule = {
+    programs.gui.syncthing =
+      { }:
+      { username }:
+      { ... }:
       {
-        services.syncthing.enable = true;
+        home-manager.users.${username} = { ... }:
+        {
+          services.syncthing.enable = true;
+        };
       };
-    };
+  };
 }

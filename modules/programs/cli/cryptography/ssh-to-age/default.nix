@@ -15,12 +15,15 @@
       };
     };
 
-  userModule = { }:
-    { username }:
-    { lib, pkgs, ... }:
-    {
-      users.users.${username}.packages = lib.mkAfter [
-        pkgs.ssh-to-age
-      ];
-    };
+  userModule = {
+    programs.cli.cryptography.ssh-to-age =
+      { }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.ssh-to-age
+        ];
+      };
+  };
 }

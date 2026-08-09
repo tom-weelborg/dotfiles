@@ -29,21 +29,24 @@
       };
     };
 
-  userModule = { secrets ? {} }:
-    { username }:
-    { ... }:
-    {
-      sops = {
-        secrets = builtins.mapAttrs
-          (_: value:
-            {
-              owner = username;
-            }
-            //
-            value
-          )
-          secrets
-          ;
+  userModule = {
+    system.sops-config =
+      { secrets ? {} }:
+      { username }:
+      { ... }:
+      {
+        sops = {
+          secrets = builtins.mapAttrs
+            (_: value:
+              {
+                owner = username;
+              }
+              //
+              value
+            )
+            secrets
+            ;
+        };
       };
-    };
+  };
 }
