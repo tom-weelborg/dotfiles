@@ -52,6 +52,7 @@
           dconf.settings = {
             "org/gnome/desktop/interface" = {
               color-scheme = "prefer-dark";
+              show-battery-percentage = true;
             };
             "org/gnome/desktop/wm/preferences" = {
               "button-layout" = ":minimize,maximize,close";
