@@ -60,9 +60,6 @@
             "org/gnome/settings-daemon/plugins/power" = {
               sleep-inactive-ac-type = "nothing";
             };
-            "org/gtk/gtk4/settings/file-chooser" = {
-              show-hidden = true;
-            };
             "org/gnome/shell" = {
               enabled-extensions = map
                 (e: e.extensionUuid)
@@ -72,6 +69,9 @@
             };
             "org/gnome/shell/extensions/arcmenu" = {
               multi-monitor = true;
+            };
+            "org/gtk/gtk4/settings/file-chooser" = {
+              show-hidden = true;
             };
           };
         };
