@@ -9,6 +9,10 @@
       };
 
       config = lib.mkIf cfg.enable {
+        boot.kernelModules = lib.mkAfter [
+          "sg"
+        ];
+
         environment.systemPackages = [
           pkgs.makemkv
         ];
@@ -21,6 +25,10 @@
       { username }:
       { lib, pkgs, ... }:
       {
+        boot.kernelModules = lib.mkAfter [
+          "sg"
+        ];
+
         users.users.${username}.packages = lib.mkAfter [
           pkgs.makemkv
         ];
