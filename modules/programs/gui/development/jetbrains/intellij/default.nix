@@ -17,7 +17,12 @@
 
   userModule = {
     programs.gui.development.jetbrains.intellij =
-      { vmoptions ? "-Xmx4096m" }:
+      {
+        vmoptions ? ''
+          -Dawt.toolkit.name=XToolkit
+          -Xmx4096m
+        ''
+      }:
       { username }:
       { pkgs, ... }:
       {
