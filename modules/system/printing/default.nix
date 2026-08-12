@@ -5,10 +5,7 @@
     in
     {
       options.modules.system.printing = {
-        enable = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-        };
+        enable = lib.mkEnableOption "printing";
       };
 
       config = {
