@@ -29,9 +29,17 @@
           "sg"
         ];
 
-        users.users.${username}.packages = lib.mkAfter [
-          pkgs.makemkv
-        ];
+        users.users.${username} = {
+          packages = lib.mkAfter [
+            pkgs.makemkv
+          ];
+
+          extraGroups = lib.mkAfter [
+            "cdrom"
+            "plugdev"
+            "video"
+          ];
+        };
       };
   };
 
