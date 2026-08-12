@@ -71,9 +71,6 @@
           audacity = {
             enable = overrideFunction true;
           };
-          makemkv = {
-            enable = overrideFunction true;
-          };
           obs = {
             enable = overrideFunction true;
           };

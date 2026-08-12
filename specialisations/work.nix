@@ -64,9 +64,6 @@
           enable = overrideFunction true;
         };
         media = {
-          makemkv = {
-            enable = overrideFunction true;
-          };
           obs = {
             enable = overrideFunction true;
           };

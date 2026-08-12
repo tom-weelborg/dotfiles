@@ -3,10 +3,7 @@
   isNormalUser = true;
   displayname = "Tom";
   extraGroups = [
-    "cdrom"
-    "plugdev"
     "networkmanager"
-    "video"
     "wheel"
   ];
   homeManagerModules = [
@@ -102,6 +99,7 @@
     (userModules.programs.cli.cryptography.ssh-to-age {})
     (userModules.programs.cli.development.docker {})
     (userModules.programs.gui.development.virtualbox {})
+    (userModules.programs.gui.media.makemkv {})
     (userModules.system.hardware.razer {})
     (userModules.system.sops-config {
       secrets = {
