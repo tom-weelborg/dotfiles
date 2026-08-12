@@ -44,6 +44,7 @@
         xml = true;
       };
     })
+    (homeManagerModules.programs.gui.media.obs {})
     (homeManagerModules.system.desktop-environments.gnome {
       favoriteApps = [
         "microsoft-edge.desktop"

@@ -71,9 +71,6 @@
           audacity = {
             enable = overrideFunction true;
           };
-          obs = {
-            enable = overrideFunction true;
-          };
           pinta = {
             enable = overrideFunction true;
           };

@@ -73,6 +73,7 @@
         xml = true;
       };
     })
+    (homeManagerModules.programs.gui.media.obs {})
     (homeManagerModules.system.desktop-environments.gnome {
       favoriteApps = [
         "firefox.desktop"

@@ -64,9 +64,6 @@
           enable = overrideFunction true;
         };
         media = {
-          obs = {
-            enable = overrideFunction true;
-          };
           pinta = {
             enable = overrideFunction true;
           };
