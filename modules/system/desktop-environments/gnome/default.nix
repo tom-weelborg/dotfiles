@@ -57,6 +57,9 @@
             "org/gnome/desktop/wm/preferences" = {
               "button-layout" = ":minimize,maximize,close";
             };
+            "org/gnome/nautilus/preferences" = {
+              default-folder-viewer = "list-view";
+            };
             "org/gnome/settings-daemon/plugins/power" = {
               sleep-inactive-ac-type = "nothing";
             };
