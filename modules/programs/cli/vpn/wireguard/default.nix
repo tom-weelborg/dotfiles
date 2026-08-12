@@ -26,4 +26,16 @@
         ];
       };
   };
+
+  homeManagerModule = {
+    programs.cli.vpn.wireguard =
+      { }:
+      { username }:
+      { pkgs, ... }:
+      {
+        home.packages = [
+          pkgs.wireguard-tools
+        ];
+      };
+  };
 }

@@ -25,12 +25,24 @@
 
   userModule = {
     programs.gui.browsers.${browserName} =
+      { }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.${programPackageName}
+        ];
+      };
+  };
+
+  homeManagerModule = {
+    programs.gui.browsers.${browserName} =
       {
         defaultExtensions ? null,
         extraExtensions ? []
       }:
       { username }:
-      { lib, pkgs, ... }:
+      { config, lib, pkgs, ... }:
       let
         de =
           if defaultExtensions == null then
@@ -40,15 +52,12 @@
           ;
       in
       {
-        home-manager.users.${username} = { config, ... }:
-        {
-          programs.${programName} = programConfig {
-            inherit lib;
-            moduleConfig = {
-              extensions = de ++ extraExtensions;
-            };
-            xdg = config.xdg;
+        programs.${programName} = programConfig {
+          inherit lib;
+          moduleConfig = {
+            extensions = de ++ extraExtensions;
           };
+          xdg = config.xdg;
         };
       };
   };

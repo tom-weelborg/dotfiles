@@ -19,13 +19,22 @@
     programs.cli.rclone =
       { }:
       { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.rclone
+        ];
+      };
+  };
+
+  homeManagerModule = {
+    programs.cli.rclone =
+      { }:
+      { username }:
       { ... }:
       {
-        home-manager.users.${username} = { ... }:
-        {
-          programs.rclone = {
-            enable = true;
-          };
+        programs.rclone = {
+          enable = true;
         };
       };
   };

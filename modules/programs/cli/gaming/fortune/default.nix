@@ -26,4 +26,16 @@
         ];
       };
   };
+
+  homeManagerModule = {
+    programs.cli.gaming.fortune =
+      { }:
+      { username }:
+      { pkgs, ... }:
+      {
+        home.packages = [
+          pkgs.fortune
+        ];
+      };
+  };
 }

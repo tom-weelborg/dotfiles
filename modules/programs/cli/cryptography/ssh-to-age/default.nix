@@ -26,4 +26,16 @@
         ];
       };
   };
+
+  homeManagerModule = {
+    programs.cli.cryptography.ssh-to-age =
+      { }:
+      { username }:
+      { pkgs, ... }:
+      {
+        home.packages = [
+          pkgs.ssh-to-age
+        ];
+      };
+  };
 }

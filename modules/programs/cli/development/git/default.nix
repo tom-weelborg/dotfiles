@@ -39,6 +39,18 @@
 
   userModule = {
     programs.cli.development.git =
+      { }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.git
+        ];
+      };
+  };
+
+  homeManagerModule = {
+    programs.cli.development.git =
       { name, email, extraSettings ? {}, secretOptions ? {} }:
       { username }:
       { lib, ... }:
@@ -114,39 +126,36 @@
           );
       in
       {
-        home-manager.users.${username} = { lib, ... }:
-        {
-          programs.git = {
-            enable = true;
-            settings = (
-              (lib.recursiveUpdate
-                {
-                  init.defaultBranch = "main";
-                  user = lib.mkMerge [
-                    (lib.mkIf (name != null) { inherit name; })
-                    (lib.mkIf (email != null) { inherit email; })
-                  ];
-                }
-                extraSettings
-              )
-              //
+        programs.git = {
+          enable = true;
+          settings = (
+            (lib.recursiveUpdate
               {
-                include = {
-                  path = "~/${secretOptionsPath}";
-                };
+                init.defaultBranch = "main";
+                user = lib.mkMerge [
+                  (lib.mkIf (name != null) { inherit name; })
+                  (lib.mkIf (email != null) { inherit email; })
+                ];
               }
-            );
-          };
-
-          home.activation.gitSecretOverrides =
-            lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-              target="$HOME/${secretOptionsPath}"
-
-              mkdir -p "$(dirname "$target")"
-
-              echo "${printSections secretOptions}" > $target
-            '';
+              extraSettings
+            )
+            //
+            {
+              include = {
+                path = "~/${secretOptionsPath}";
+              };
+            }
+          );
         };
+
+        home.activation.gitSecretOverrides =
+          lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+            target="$HOME/${secretOptionsPath}"
+
+            mkdir -p "$(dirname "$target")"
+
+            echo "${printSections secretOptions}" > $target
+          '';
       };
   };
 }

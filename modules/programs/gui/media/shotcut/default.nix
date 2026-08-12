@@ -26,4 +26,16 @@
         ];
       };
   };
+
+  homeManagerModule = {
+    programs.gui.media.shotcut =
+      { }:
+      { username }:
+      { pkgs, ... }:
+      {
+        home.packages = [
+          pkgs.shotcut
+        ];
+      };
+  };
 }

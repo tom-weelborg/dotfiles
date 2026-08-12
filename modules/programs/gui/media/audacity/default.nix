@@ -26,4 +26,16 @@
         ];
       };
   };
+
+  homeManagerModule = {
+    programs.gui.media.audacity =
+      { }:
+      { username }:
+      { pkgs, ... }:
+      {
+        home.packages = [
+          pkgs.audacity
+        ];
+      };
+  };
 }

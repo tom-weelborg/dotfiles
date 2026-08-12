@@ -19,13 +19,22 @@
     programs.cli.fastfetch =
       { }:
       { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.fastfetch
+        ];
+      };
+  };
+
+  homeManagerModule = {
+    programs.cli.fastfetch =
+      { }:
+      { username }:
       { ... }:
       {
-        home-manager.users.${username} = { ... }:
-        {
-          programs.fastfetch = {
-            enable = true;
-          };
+        programs.fastfetch = {
+          enable = true;
         };
       };
   };

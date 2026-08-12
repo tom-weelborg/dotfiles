@@ -26,4 +26,22 @@
         ];
       };
   };
+
+  homeManagerModule = {
+    programs.gui.microsoft.teams =
+      { }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        home.packages =
+          (lib.optionals pkgs.stdenv.isDarwin [
+            pkgs.teams
+          ])
+          ++
+          (lib.optionals pkgs.stdenv.isLinux [
+            pkgs.teams-for-linux
+          ])
+          ;
+      };
+  };
 }

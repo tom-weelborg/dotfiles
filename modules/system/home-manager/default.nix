@@ -13,16 +13,13 @@
       };
     };
 
-  userModule = {
+  homeManagerModule = {
     system.home-manager =
       { stateVersion ? "25.11" }:
       { username }:
       { ... }:
       {
-        home-manager.users.${username} = { ... }:
-          {
-            home.stateVersion = stateVersion;
-          };
+        home.stateVersion = stateVersion;
       };
   };
 }

@@ -20,11 +20,22 @@
     programs.gui.syncthing =
       { }:
       { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.syncthing
+        ];
+      };
+  };
+
+  homeManagerModule = {
+    programs.gui.syncthing =
+      { }:
+      { username }:
       { ... }:
       {
-        home-manager.users.${username} = { ... }:
-        {
-          services.syncthing.enable = true;
+        services.syncthing = {
+          enable = true;
         };
       };
   };

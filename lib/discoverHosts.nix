@@ -21,6 +21,16 @@ let
         discoveredModules 
       )
     );
+  homeManagerModules = builtins.foldl'
+    (lib.recursiveUpdate)
+    {}
+    (map
+      (v: v.homeManagerModule)
+      (builtins.filter
+        (v: builtins.hasAttr "homeManagerModule" v)
+        discoveredModules 
+      )
+    );
 
   readDirIfExists = import ./readDirIfExists.nix;
 
@@ -56,6 +66,7 @@ let
                       inherit
                         readDirIfExists
                         userModules
+                        homeManagerModules
                         ;
                       overrideFunction = lib.mkDefault;
                     };

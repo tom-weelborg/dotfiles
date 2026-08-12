@@ -51,6 +51,28 @@ in
   userModule = {
     programs.gui.development.vscodium =
       {
+        extensionProfiles ? {}
+      }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          (pkgs.vscode-with-extensions.override {
+            vscode = pkgs.vscodium;
+            vscodeExtensions = getExtensions {
+              inherit
+                extensionProfiles
+                pkgs
+                ;
+            };
+          })
+        ];
+      };
+  };
+
+  homeManagerModule = {
+    programs.gui.development.vscodium =
+      {
         extensionProfiles ? {},
         userSettings ? {
           "diffEditor.ignoreTrimWhitespace" = false;
@@ -82,22 +104,20 @@ in
         }
       }:
       { username }:
-      { lib, pkgs, ... }:
+      { config, lib, pkgs, ... }:
       {
-        home-manager.users.${username} = { config, ... }: {
-          programs.vscodium = {
-            enable = true;
+        programs.vscodium = {
+          enable = true;
 
-            profiles = {
-              default = {
-                extensions = getExtensions {
-                  inherit
-                    extensionProfiles
-                    pkgs
-                    ;
-                };
-                inherit userSettings;
+          profiles = {
+            default = {
+              extensions = getExtensions {
+                inherit
+                  extensionProfiles
+                  pkgs
+                  ;
               };
+              inherit userSettings;
             };
           };
         };

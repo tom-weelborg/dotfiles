@@ -88,7 +88,7 @@
       };
     };
 
-  userModule = {
+  homeManagerModule = {
     system.localization.i18n =
       {
         address ? null,
@@ -107,9 +107,7 @@
       { username }:
       { ... }:
       {
-        home-manager.users.${username} = {
-          home.language = inputs;
-        };
+        home.language = inputs;
       };
   };
 }

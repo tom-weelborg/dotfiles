@@ -1,4 +1,4 @@
-{ config, pkgs, userModules, ... }:
+{ config, homeManagerModules, pkgs, userModules, ... }:
 {
   isNormalUser = true;
   displayname = "Tom";
@@ -9,12 +9,8 @@
     "video"
     "wheel"
   ];
-  modules = [
-    (userModules.programs.cli.cryptography.age {})
-    (userModules.programs.cli.cryptography.sops {})
-    (userModules.programs.cli.cryptography.ssh-to-age {})
-    (userModules.programs.cli.development.docker {})
-    (userModules.programs.cli.development.git {
+  homeManagerModules = [
+    (homeManagerModules.programs.cli.development.git {
       name = "Tom Weelborg";
       email = null;
       extraSettings = {
@@ -38,29 +34,28 @@
         };
       };
     })
-    (userModules.programs.cli.rclone {})
-    (userModules.programs.gui.browsers.brave {
+    (homeManagerModules.programs.cli.rclone {})
+    (homeManagerModules.programs.gui.browsers.brave {
       extraExtensions = [
         "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
         "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
       ];
     })
-    (userModules.programs.gui.browsers.firefox {
+    (homeManagerModules.programs.gui.browsers.firefox {
       extraExtensions = with pkgs.firefox-addons; [
         aws-extend-switch-roles3
         requestly
       ];
     })
-    (userModules.programs.gui.browsers.vivaldi {
+    (homeManagerModules.programs.gui.browsers.vivaldi {
       extraExtensions = [
         "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
         "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
       ];
     })
-    (userModules.programs.gui.development.jetbrains.intellij {})
-    (userModules.programs.gui.development.soapui {})
-    (userModules.programs.gui.development.virtualbox {})
-    (userModules.programs.gui.development.vscodium {
+    (homeManagerModules.programs.gui.development.jetbrains.intellij {})
+    (homeManagerModules.programs.gui.development.soapui {})
+    (homeManagerModules.programs.gui.development.vscodium {
       extensionProfiles = {
         angular = true;
         bootstrap = true;
@@ -81,7 +76,7 @@
         xml = true;
       };
     })
-    (userModules.system.desktop-environments.gnome {
+    (homeManagerModules.system.desktop-environments.gnome {
       favoriteApps = [
         "firefox.desktop"
         "vivaldi-stable.desktop"
@@ -99,8 +94,15 @@
         dash-to-panel
       ];
     })
+    (homeManagerModules.system.home-manager {})
+  ];
+  userModules = [
+    (userModules.programs.cli.cryptography.age {})
+    (userModules.programs.cli.cryptography.sops {})
+    (userModules.programs.cli.cryptography.ssh-to-age {})
+    (userModules.programs.cli.development.docker {})
+    (userModules.programs.gui.development.virtualbox {})
     (userModules.system.hardware.razer {})
-    (userModules.system.home-manager {})
     (userModules.system.sops-config {
       secrets = {
         git-email = {

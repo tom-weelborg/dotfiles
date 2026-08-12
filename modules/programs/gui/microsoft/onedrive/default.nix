@@ -17,11 +17,22 @@
     programs.gui.microsoft.onedrive =
       { }:
       { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.onedrive
+        ];
+      };
+  };
+
+  homeManagerModule = {
+    programs.gui.microsoft.onedrive =
+      { }:
+      { username }:
       { ... }:
       {
-        home-manager.users.${username} = { ... }:
-        {
-          programs.onedrive.enable = true;
+        programs.onedrive = {
+          enable = true;
         };
       };
   };

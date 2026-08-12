@@ -39,62 +39,42 @@
       };
     };
 
-  userModule = {
+  homeManagerModule = {
     system.desktop-environments.gnome =
       { favoriteApps ? [], gnomeExtensions ? [] }:
       { username }:
-      { lib, pkgs, ... }:
+      { ... }:
       {
-        users.users.${username}.packages = lib.mkAfter gnomeExtensions;
+        home.packages = gnomeExtensions;
 
-        home-manager.users.${username} = { ... }:
-        {
-          dconf.settings = {
-            "org/gnome/desktop/interface" = {
-              color-scheme = "prefer-dark";
-              show-battery-percentage = true;
-            };
-            "org/gnome/desktop/wm/preferences" = {
-              "button-layout" = ":minimize,maximize,close";
-            };
-            "org/gnome/nautilus/preferences" = {
-              default-folder-viewer = "list-view";
-            };
-            "org/gnome/settings-daemon/plugins/power" = {
-              sleep-inactive-ac-type = "nothing";
-            };
-            "org/gnome/shell" = {
-              enabled-extensions = map
-                (e: e.extensionUuid)
-                gnomeExtensions
-                ;
-              favorite-apps = favoriteApps;
-            };
-            "org/gnome/shell/extensions/arcmenu" = {
-              multi-monitor = true;
-            };
-            "org/gtk/gtk4/settings/file-chooser" = {
-              show-hidden = true;
-            };
+        dconf.settings = {
+          "org/gnome/desktop/interface" = {
+            color-scheme = "prefer-dark";
+            show-battery-percentage = true;
+          };
+          "org/gnome/desktop/wm/preferences" = {
+            "button-layout" = ":minimize,maximize,close";
+          };
+          "org/gnome/nautilus/preferences" = {
+            default-folder-viewer = "list-view";
+          };
+          "org/gnome/settings-daemon/plugins/power" = {
+            sleep-inactive-ac-type = "nothing";
+          };
+          "org/gnome/shell" = {
+            enabled-extensions = map
+              (e: e.extensionUuid)
+              gnomeExtensions
+              ;
+            favorite-apps = favoriteApps;
+          };
+          "org/gnome/shell/extensions/arcmenu" = {
+            multi-monitor = true;
+          };
+          "org/gtk/gtk4/settings/file-chooser" = {
+            show-hidden = true;
           };
         };
-
-        nixpkgs.overlays = [
-          (final: prev: {
-            gnomeExtensions = prev.gnomeExtensions // {
-              arcmenu = prev.gnomeExtensions.arcmenu.overrideAttrs (old: rec {
-                version = "69.2";
-
-                src = prev.fetchFromGitLab {
-                  owner = "arcmenu";
-                  repo = "ArcMenu";
-                  rev = "v${version}";
-                  hash = "sha256-BdvFeoXwGxFlBH1JqcSDAKMzN+wBEmZdsz+gXWxQF6Y=";
-                };
-              });
-            };
-          })
-        ];
       };
   };
 }

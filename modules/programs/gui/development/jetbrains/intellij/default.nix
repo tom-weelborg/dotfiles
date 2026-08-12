@@ -17,6 +17,18 @@
 
   userModule = {
     programs.gui.development.jetbrains.intellij =
+      { }:
+      { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.jetbrains.idea
+        ];
+      };
+  };
+
+  homeManagerModule = {
+    programs.gui.development.jetbrains.intellij =
       {
         vmoptions ? ''
           -Dawt.toolkit.name=XToolkit
@@ -24,27 +36,24 @@
         ''
       }:
       { username }:
-      { pkgs, ... }:
+      { lib, pkgs, ... }:
       {
-        users.users.${username}.packages = pkgs.lib.mkAfter [
-          pkgs.jetbrains.idea
-        ];
+          home.packages = [
+            pkgs.jetbrains.idea
+          ];
 
-        home-manager.users.${username} = { lib, ... }:
-          {
-            home.activation.intellijVmOptions =
-              lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-                jetbrains_dir="$HOME/.config/JetBrains"
+          home.activation.intellijVmOptions =
+            lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+              jetbrains_dir="$HOME/.config/JetBrains"
 
-                if [ -d "$jetbrains_dir" ]; then
-                  for dir in "$jetbrains_dir"/IntelliJIdea*; do
-                    if [ -d "$dir" ]; then
-                      echo "${vmoptions}" > "$dir/idea64.vmoptions"
-                    fi
-                  done
-                fi
-              '';
-          };
+              if [ -d "$jetbrains_dir" ]; then
+                for dir in "$jetbrains_dir"/IntelliJIdea*; do
+                  if [ -d "$dir" ]; then
+                    echo "${vmoptions}" > "$dir/idea64.vmoptions"
+                  fi
+                done
+              fi
+            '';
       };
   };
 }

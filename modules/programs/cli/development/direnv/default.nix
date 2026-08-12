@@ -17,11 +17,22 @@
     programs.cli.development.direnv =
       { }:
       { username }:
+      { lib, pkgs, ... }:
+      {
+        users.users.${username}.packages = lib.mkAfter [
+          pkgs.direnv
+        ];
+      };
+  };
+
+  homeManagerModule = {
+    programs.cli.development.direnv =
+      { }:
+      { username }:
       { ... }:
       {
-        home-manager.users.${username} = { ... }:
-        {
-          programs.direnv.enable = true;
+        programs.direnv = {
+          enable = true;
         };
       };
   };

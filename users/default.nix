@@ -11,7 +11,24 @@ let
                 inherit username;
               }
             )
-            user.modules
+            user.userModules
+        )
+        users
+    );
+
+  generatedHomeManagerModules =
+    lib.concatLists (
+      lib.mapAttrsToList
+        (username: user:
+          map
+            (module:
+              {
+                home-manager.users.${username} = module {
+                  inherit username;
+                };
+              }
+            )
+            user.homeManagerModules
         )
         users
     );
@@ -27,7 +44,7 @@ let
 
 in
 {
-  imports = generatedUserModules;
+  imports = generatedUserModules ++ generatedHomeManagerModules;
 
   users.users = userAccounts;
 }
