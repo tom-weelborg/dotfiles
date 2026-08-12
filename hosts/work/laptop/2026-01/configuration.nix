@@ -33,6 +33,9 @@ in
       nix = {
         access-tokens-path = config.sops.secrets.access-tokens.path;
       };
+      printing = {
+        enable = true;
+      };
       sops = {
         keyFile = "/home/${username}/.config/sops/age/keys.txt";
       };
