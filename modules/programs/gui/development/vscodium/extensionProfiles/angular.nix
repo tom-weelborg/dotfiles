@@ -10,7 +10,6 @@ with pkgs.vscode-extensions;
   # johnpapa.angular2
   # mikael.angular-beastcode
   # obenjiro.arrr
-  segerdekort.angular-cli
 ]
 ++
 pkgs.vscode-utils.extensionsFromVscodeMarketplace [
