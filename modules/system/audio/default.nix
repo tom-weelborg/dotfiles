@@ -46,10 +46,10 @@
       };
 
       config = {
-        services.pipewire = {
-          enable = cfg.pipewire.enable;
-          alsa = {
-            enable = cfg.pipewire.alsa.enable;
+        services.pipewire = lib.mkIf cfg.pipewire.enable {
+          enable = true;
+          alsa = lib.mkIf cfg.pipewire.alsa.enable {
+            enable = true;
             support32Bit = cfg.pipewire.alsa.support32Bit;
           };
           pulse.enable = cfg.pipewire.pulse.enable;
