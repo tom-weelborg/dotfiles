@@ -6,10 +6,7 @@
     {
       options.modules.system.audio = {
         pipewire = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
+          enable = lib.mkEnableOption "PipeWire";
 
           alsa = {
             enable = lib.mkOption {
@@ -31,17 +28,11 @@
         };
 
         pulseaudio = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
+          enable = lib.mkEnableOption "PulseAudio";
         };
 
         rtkit = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
+          enable = lib.mkEnableOption "RealtimeKit";
         };
       };
 
