@@ -22,6 +22,14 @@ in
       };
     };
     system = {
+      audio = {
+        pipewire = {
+          enable = true;
+        };
+        rtkit = {
+          enable = true;
+        };
+      };
       desktop-environments = {
         gnome = {
           enable = true;
