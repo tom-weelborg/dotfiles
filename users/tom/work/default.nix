@@ -99,6 +99,7 @@
     (userModules.programs.cli.cryptography.sops {})
     (userModules.programs.cli.cryptography.ssh-to-age {})
     (userModules.programs.cli.development.docker {})
+    (userModules.programs.gui.development.jaspersoft-studio {})
     (userModules.programs.gui.development.virtualbox {})
     (userModules.programs.gui.media.makemkv {})
     (userModules.system.hardware.razer {})
