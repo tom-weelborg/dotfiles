@@ -98,6 +98,7 @@
     (userModules.programs.cli.cryptography.age {})
     (userModules.programs.cli.cryptography.sops {})
     (userModules.programs.cli.cryptography.ssh-to-age {})
+    (userModules.programs.cli.development.claude-code {})
     (userModules.programs.cli.development.docker {})
     (userModules.programs.gui.development.jaspersoft-studio {})
     (userModules.programs.gui.development.virtualbox {})
