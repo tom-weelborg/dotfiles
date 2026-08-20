@@ -14,6 +14,11 @@ in
   modules = {
     programs = {
       cli = {
+        shells = {
+          bash = {
+            enable = true;
+          };
+        };
         vpn = {
           openvpn = {
             vpnDir = "/home/${username}/vpn";
