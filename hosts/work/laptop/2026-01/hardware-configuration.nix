@@ -16,8 +16,18 @@
 
   boot.supportedFilesystems = [ "nfs" ];
 
-  fileSystems."/mnt/nas-data" = {
-    device = "192.168.178.94:/";
+  fileSystems."/mnt/nas-data/documents" = {
+    device = "192.168.178.94:/export/documents";
+    fsType = "nfs";
+    options = [
+      "nfsvers=4.2"
+      "noauto"
+      "x-systemd.automount"
+    ];
+  };
+
+  fileSystems."/mnt/nas-data/jellyfin" = {
+    device = "192.168.178.94:/export/jellyfin";
     fsType = "nfs";
     options = [
       "nfsvers=4.2"
