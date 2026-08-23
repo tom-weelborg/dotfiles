@@ -5,13 +5,14 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK8y2v3JYqacZn6nySkaksP1YYIG+4zk3NuwaK2+faJs nas-login"
   ];
 
+  jellyfinUid = 993;
   jellyfinGid = 1000;
 in
 {
   services.nfs.server = {
     enable = true;
     exports = ''
-      /export 192.168.178.0/24(rw,fsid=0,no_subtree_check,all_squash,anonuid=993,anongid=${toString jellyfinGid})
+      /export 192.168.178.0/24(rw,fsid=0,no_subtree_check,all_squash,anonuid=${toString jellyfinUid},anongid=${toString jellyfinGid})
     '';
     lockdPort = 4001;
     mountdPort = 4002;
