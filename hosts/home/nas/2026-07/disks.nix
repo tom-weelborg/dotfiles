@@ -54,6 +54,8 @@ in
       hdd2 = createZfsPartition "/dev/disk/by-id/ata-ST8000VN002-2ZM188_WPV3BTAP";
 
       hdd3 = createZfsPartition "/dev/disk/by-id/ata-ST8000VN002-2ZM188_WPV3BT76";
+
+      hdd4 = createZfsPartition "/dev/disk/by-id/ata-ST8000VN002-2ZM188_WPV3P60W";
     };
 
     zpool = {
