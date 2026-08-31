@@ -14,3 +14,4 @@ This is a list of useful resources on Nix, NixOS and Home Manager that I consult
 - [NixOS Wiki](https://wiki.nixos.org/wiki/NixOS_Wiki) for NixOS configuration and explanations
 - [MyNixOS](https://mynixos.com/) for NixOS options
 - [Home Manager - Option Search](https://home-manager-options.extranix.com/) for Home Manager options
+- [Nixpkgs Tracker](https://nixpkgs-tracker.ocfox.me/) to see where certain features or fixes are available
