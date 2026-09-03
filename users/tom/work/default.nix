@@ -103,6 +103,7 @@
     (userModules.programs.gui.development.jaspersoft-studio {})
     (userModules.programs.gui.development.virtualbox {})
     (userModules.programs.gui.media.makemkv {})
+    (userModules.programs.gui.media.xreader {})
     (userModules.system.hardware.razer {})
     (userModules.system.sops-config {
       secrets = {
