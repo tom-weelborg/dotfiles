@@ -12,6 +12,15 @@ let
   jellyfinGid = 1000;
 in
 {
+  services.caddy = {
+    enable = true;
+    virtualHosts = {
+      "media.weelb.org".extraConfig = ''
+        reverse_proxy 127.0.0.1:8096
+      '';
+    };
+  };
+
   services.nfs.server = {
     enable = true;
     exports = ''
@@ -24,6 +33,9 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [
+    80
+    443
+
     111
     2049
     4000
