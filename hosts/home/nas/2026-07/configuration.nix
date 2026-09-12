@@ -15,6 +15,12 @@ in
   services.caddy = {
     enable = true;
     virtualHosts = {
+      "weelb.org".extraConfig = ''
+        rewrite * /weelb.org{uri}
+        reverse_proxy https://tom-weelborg.github.io {
+          header_up Host tom-weelborg.github.io
+        }
+      '';
       "media.weelb.org".extraConfig = ''
         reverse_proxy 127.0.0.1:8096
       '';
