@@ -26,14 +26,8 @@
         tokenPath ? null,
         settingsDefault ? {
           "app_DefaultSelectionString" = builtins.concatStringsSep "," [
-            "-sel:all"
-            "+sel:(favlang|nolang)"
-            "-sel:mvcvideo"
-            "=100:all"
-            "-10:favlang"
-            "+sel:video"
-            "+sel:audio"
-            "+sel:attachment"
+            "+sel:all"
+            "-sel:angle"
           ];
           "app_DestinationDir" = "";
           "app_ExpertMode" = "1";
