@@ -31,6 +31,8 @@
             "-sel:mvcvideo"
             "=100:all"
             "-10:favlang"
+            "+sel:video"
+            "+sel:audio"
             "+sel:attachment"
           ];
           "app_DestinationDir" = "";
