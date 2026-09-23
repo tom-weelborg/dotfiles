@@ -66,7 +66,7 @@ in
       networks = {
         "lan" = {
           matchConfig = {
-            Name = "enp4s0";
+            Name = "enp5s0";
           };
 
           address = [
@@ -106,7 +106,7 @@ in
         networks = {
           "lan" = {
             matchConfig = {
-              Name = "enp4s0";
+              Name = "enp5s0";
             };
 
             address = [
