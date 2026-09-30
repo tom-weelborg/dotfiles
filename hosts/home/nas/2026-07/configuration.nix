@@ -171,6 +171,9 @@ in
             email = "135610355+tom-weelborg@users.noreply.github.com";
           };
         };
+        fastfetch = {
+          enable = true;
+        };
         openssh = {
           server = {
             enable = true;
