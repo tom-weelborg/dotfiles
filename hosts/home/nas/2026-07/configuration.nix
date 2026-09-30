@@ -30,8 +30,8 @@ in
   services.nfs.server = {
     enable = true;
     exports = ''
-      /export/users/tom   192.168.178.0/24(rw,no_subtree_check,all_squash,anonuid=${toString userUid},anongid=${toString userGid})
       /export/jellyfin    192.168.178.0/24(rw,no_subtree_check,all_squash,anonuid=${toString jellyfinUid},anongid=${toString jellyfinGid})
+      /export/users/tom   192.168.178.0/24(rw,no_subtree_check,all_squash,anonuid=${toString userUid},anongid=${toString userGid})
     '';
     lockdPort = 4001;
     mountdPort = 4002;
