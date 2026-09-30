@@ -17,7 +17,7 @@
   boot.supportedFilesystems = [ "nfs" ];
 
   fileSystems."/mnt/nas-data/documents" = {
-    device = "192.168.178.94:/export/documents";
+    device = "192.168.178.94:/export/users/tom";
     fsType = "nfs";
     options = [
       "nfsvers=4.2"
