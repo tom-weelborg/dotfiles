@@ -48,6 +48,9 @@ in
     4000
     4001
     4002
+
+    25565
+    25566
   ];
 
   networking.firewall.allowedUDPPorts = [
