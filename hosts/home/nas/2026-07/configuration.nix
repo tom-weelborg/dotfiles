@@ -158,6 +158,9 @@ in
     programs = {
       cli = {
         development = {
+          docker = {
+            enable = true;
+          };
           git = {
             enable = true;
             name = "Tom Weelborg";
