@@ -96,7 +96,7 @@ in
 
           swap = {
             type = "zfs_volume";
-            size = "16G";
+            size = "64G";
             content = {
               type = "swap";
             };
