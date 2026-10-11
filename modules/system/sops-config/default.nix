@@ -1,10 +1,12 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.system.sops;
-    in
-    {
-      options.modules.system.sops = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "system"
+      "sops-config"
+    ];
+    systemModule = {
+      options = {
         keyFile = lib.mkOption {
           type = lib.types.str;
         };
@@ -17,36 +19,41 @@
           default = false;
         };
       };
-
-      config = {
-        sops = {
-          age = {
-            keyFile = cfg.keyFile;
-            sshKeyPaths = cfg.sshKeyPaths;
-            generateKey = cfg.generateKey;
+      mkConfig = { cfg }:
+        {
+          sops = {
+            age = {
+              keyFile = cfg.keyFile;
+              sshKeyPaths = cfg.sshKeyPaths;
+              generateKey = cfg.generateKey;
+            };
           };
         };
-      };
     };
-
-  userModule = {
-    system.sops-config =
-      { secrets ? {} }:
-      { username }:
-      { ... }:
-      {
-        sops = {
-          secrets = builtins.mapAttrs
-            (_: value:
-              {
-                owner = username;
-              }
-              //
-              value
-            )
-            secrets
-            ;
+    userModule = {
+      options = {
+        enable = lib.mkEnableOption "sops-config";
+        secrets = lib.mkOption {
+          type = lib.types.attrs;
+          default = {};
         };
       };
-  };
-}
+      mkConfig = { cfg, username }:
+        lib.mkIf cfg.enable
+        {
+          sops = {
+            secrets = builtins.mapAttrs
+              (_: value:
+                {
+                  owner = username;
+                }
+                //
+                value
+              )
+              cfg.secrets
+              ;
+          };
+        };
+    };
+  }
+  args

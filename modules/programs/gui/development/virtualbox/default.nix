@@ -1,28 +1,39 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.programs.gui.development.virtualbox;
-    in
-    {
-      options.modules.programs.gui.development.virtualbox = {
-        enable = lib.mkEnableOption "virtualbox";
+{ lib, mkModule, ... }@args:
+let
+  enableOptionDescription = "virtualbox";
+in
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "gui"
+      "development"
+      "virtualbox"
+    ];
+    systemModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-
-      config = lib.mkIf cfg.enable {
-        virtualisation.virtualbox.host = {
-          enable = true;
-          enableExtensionPack = true;
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          virtualisation.virtualbox.host = {
+            enable = true;
+            enableExtensionPack = true;
+          };
         };
-      };
     };
-
-  userModule = {
-    programs.gui.development.virtualbox =
-      { }:
-      { username }:
-      { lib, ... }:
-      {
-        users.extraGroups.vboxusers.members = lib.mkAfter [ username ];
+    userModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-  };
-}
+      mkConfig = { cfg, username }:
+        lib.mkIf cfg.enable
+        {
+          users.extraGroups.vboxusers.members = lib.mkAfter [
+            username
+          ];
+        };
+    };
+  }
+  args

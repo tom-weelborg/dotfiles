@@ -1,25 +1,36 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.system.home-manager;
-    in
-    {
-      options.modules.system.home-manager = {
-        enable = lib.mkEnableOption "home-manager";
+{ lib, mkModule, ... }@args:
+let
+  enableOptionDescription = "home-manager";
+in
+mkModule
+  {
+    modulePath = [
+      "system"
+      "home-manager"
+    ];
+    systemModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-
-      config = lib.mkIf cfg.enable {
-        home-manager.useGlobalPkgs = true;
-      };
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          home-manager.useGlobalPkgs = true;
+        };
     };
-
-  homeManagerModule = {
-    system.home-manager =
-      { stateVersion ? "25.11" }:
-      { username }:
-      { ... }:
-      {
-        home.stateVersion = stateVersion;
+    homeManagerModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
+        stateVersion = lib.mkOption {
+          type = lib.types.str;
+          default = "25.11";
+        };
       };
-  };
-}
+      mkConfig = { cfg, username }: { ... }@homeManagerArgs:
+        lib.mkIf cfg.enable
+        {
+          home.stateVersion = cfg.stateVersion;
+        };
+    };
+  }
+  args

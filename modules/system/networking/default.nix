@@ -1,10 +1,12 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.system.networking;
-    in
-    {
-      options.modules.system.networking = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "system"
+      "networking"
+    ];
+    systemModule = {
+      options = {
         hostId = lib.mkOption {
           type = lib.types.nullOr lib.types.str;
           default = null;
@@ -22,15 +24,16 @@
           };
         };
       };
+      mkConfig = { cfg }:
+        {
+          networking.hostId = cfg.hostId;
 
-      config = {
-        networking.hostId = cfg.hostId;
+          networking.hostName = cfg.hostName;
 
-        networking.hostName = cfg.hostName;
-
-        networking.networkmanager = {
-          enable = cfg.networkmanager.enable;
+          networking.networkmanager = {
+            enable = cfg.networkmanager.enable;
+          };
         };
-      };
     };
-}
+  }
+  args

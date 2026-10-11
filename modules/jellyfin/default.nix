@@ -1,22 +1,26 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.jellyfin.server;
-    in
-    {
-      options.modules.jellyfin.server = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "jellyfin"
+      "server"
+    ];
+    systemModule = {
+      options = {
         enable = lib.mkEnableOption "jellyfin-server";
         openFirewall = lib.mkOption {
           type = lib.types.bool;
           default = false;
         };
       };
-
-      config = {
-        services.jellyfin = {
-          enable = cfg.enable;
-          openFirewall = cfg.openFirewall;
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          services.jellyfin = {
+            enable = true;
+            openFirewall = cfg.openFirewall;
+          };
         };
-      };
     };
-}
+  }
+  args

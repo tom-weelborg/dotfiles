@@ -1,41 +1,12 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.programs.gui.keepassxc;
-    in
-    {
-      options.modules.programs.gui.keepassxc = {
-        enable = lib.mkEnableOption "keepassxc";
-      };
-
-      config = lib.mkIf cfg.enable {
-        environment.systemPackages = [
-          pkgs.keepassxc
-        ];
-      };
-    };
-
-  userModule = {
-    programs.gui.keepassxc =
-      { }:
-      { username }:
-      { lib, pkgs, ... }:
-      {
-        users.users.${username}.packages = lib.mkAfter [
-          pkgs.keepassxc
-        ];
-      };
-  };
-
-  homeManagerModule = {
-    programs.gui.keepassxc =
-      { }:
-      { username }:
-      { pkgs, ... }:
-      {
-        home.packages = [
-          pkgs.keepassxc
-        ];
-      };
-  };
-}
+{ mkStandardModule, pkgs, ... }@args:
+mkStandardModule
+  {
+    modulePath = [
+      "programs"
+      "gui"
+      "keepassxc"
+    ];
+    enableOptionDescription = "keepassxc";
+    packageName = "keepassxc";
+  }
+  args

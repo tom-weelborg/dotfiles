@@ -1,10 +1,12 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.system.nix;
-    in
-    {
-      options.modules.system.nix = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "system"
+      "nix"
+    ];
+    systemModule = {
+      options = {
         access-tokens-path = lib.mkOption {
           type = lib.types.nullOr lib.types.str;
           default = null;
@@ -17,18 +19,19 @@
           ];
         };
       };
-
-      config = lib.mkMerge [
-        {
-          nix.settings = {
-            experimental-features = cfg.experimental-features;
-          };
-        }
-        (lib.mkIf (cfg.access-tokens-path != null) {
-          nix.extraOptions = ''
-            !include ${cfg.access-tokens-path}
-          '';
-        })
-      ];
+      mkConfig = { cfg }:
+        lib.mkMerge [
+          {
+            nix.settings = {
+              experimental-features = cfg.experimental-features;
+            };
+          }
+          (lib.mkIf (cfg.access-tokens-path != null) {
+            nix.extraOptions = ''
+              !include ${cfg.access-tokens-path}
+            '';
+          })
+        ];
     };
-}
+  }
+  args

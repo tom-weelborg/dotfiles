@@ -1,10 +1,13 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.system.localization.i18n;
-    in
-    {
-      options.modules.system.localization.i18n = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "system"
+      "localization"
+      "i18n"
+    ];
+    systemModule = {
+      options = {
         defaultLocale = lib.mkOption {
           type = lib.types.str;
           default = "en_US.UTF-8";
@@ -77,37 +80,86 @@
           };
         };
       };
+      mkConfig = { cfg }:
+        {
+          i18n.defaultLocale = cfg.defaultLocale;
 
-      config = {
-        i18n.defaultLocale = cfg.defaultLocale;
-
-        i18n.extraLocaleSettings = lib.filterAttrs
-          (_: v: v != null)
-          cfg.extraLocaleSettings
-          ;
-      };
+          i18n.extraLocaleSettings = lib.filterAttrs
+            (_: v: v != null)
+            cfg.extraLocaleSettings
+            ;
+        };
     };
+    homeManagerModule = {
+      options = {
+        enable = lib.mkEnableOption "i18n";
+        language = {
+          address = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
 
-  homeManagerModule = {
-    system.localization.i18n =
-      {
-        address ? null,
-        base ? null,
-        collate ? null,
-        ctype ? null,
-        measurement ? null,
-        messages ? null,
-        monetary ? null,
-        name ? null,
-        numeric ? null,
-        paper ? null,
-        telephone ? null,
-        time ? null
-      }@inputs:
-      { username }:
-      { ... }:
-      {
-        home.language = inputs;
+          base = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          collate = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          ctype = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          measurement = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          messages = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          monetary = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          name = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          numeric = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          paper = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          telephone = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          time = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+        };
       };
-  };
-}
+      mkConfig = { cfg, username }: { ... }@homeManagerArgs:
+        lib.mkIf cfg.enable
+        {
+          home.language = cfg.language;
+        };
+    };
+  }
+  args

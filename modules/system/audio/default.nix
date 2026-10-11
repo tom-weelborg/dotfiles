@@ -1,10 +1,12 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.system.audio;
-    in
-    {
-      options.modules.system.audio = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "system"
+      "audio"
+    ];
+    systemModule = {
+      options = {
         pipewire = {
           enable = lib.mkEnableOption "PipeWire";
 
@@ -35,20 +37,21 @@
           enable = lib.mkEnableOption "RealtimeKit";
         };
       };
-
-      config = {
-        services.pipewire = lib.mkIf cfg.pipewire.enable {
-          enable = true;
-          alsa = lib.mkIf cfg.pipewire.alsa.enable {
+      mkConfig = { cfg }:
+        {
+          services.pipewire = lib.mkIf cfg.pipewire.enable {
             enable = true;
-            support32Bit = cfg.pipewire.alsa.support32Bit;
+            alsa = lib.mkIf cfg.pipewire.alsa.enable {
+              enable = true;
+              support32Bit = cfg.pipewire.alsa.support32Bit;
+            };
+            pulse.enable = cfg.pipewire.pulse.enable;
           };
-          pulse.enable = cfg.pipewire.pulse.enable;
+
+          services.pulseaudio.enable = cfg.pulseaudio.enable;
+
+          security.rtkit.enable = cfg.rtkit.enable;
         };
-
-        services.pulseaudio.enable = cfg.pulseaudio.enable;
-
-        security.rtkit.enable = cfg.rtkit.enable;
-      };
     };
-}
+  }
+  args

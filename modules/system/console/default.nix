@@ -1,18 +1,21 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.system.console;
-    in
-    {
-      options.modules.system.console = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "system"
+      "console"
+    ];
+    systemModule = {
+      options = {
         keyMap = lib.mkOption {
           type = lib.types.str;
           default = "de";
         };
       };
-
-      config = {
-        console.keyMap = cfg.keyMap;
-      };
+      mkConfig = { cfg }:
+        {
+          console.keyMap = cfg.keyMap;
+        };
     };
-}
+  }
+  args

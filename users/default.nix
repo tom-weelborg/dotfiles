@@ -1,50 +1,43 @@
-users:
-{ lib, ... }:
-let
-  generatedUserModules =
-    lib.concatLists (
-      lib.mapAttrsToList
-        (username: user:
-          map
-            (module:
-              module {
-                inherit username;
-              }
-            )
-            user.userModules
-        )
-        users
-    );
-
-  generatedHomeManagerModules =
-    lib.concatLists (
-      lib.mapAttrsToList
-        (username: user:
-          map
-            (module:
-              {
-                home-manager.users.${username} = module {
-                  inherit username;
-                };
-              }
-            )
-            user.homeManagerModules
-        )
-        users
-    );
-
-  userAccounts =
-    lib.mapAttrs
-      (_: user: {
-        isNormalUser = user.isNormalUser;
-        description = user.displayname;
-        extraGroups = user.extraGroups;
-      })
-      users;
-
-in
+{ config, lib, pkgs, users, usersWithProfiles, ... }@args:
 {
-  imports = generatedUserModules ++ generatedHomeManagerModules;
+  options.userConfig = builtins.listToAttrs (
+    builtins.map
+      (username: {
+        name = username;
+        value = lib.mkOption {
+          type = lib.types.nullOr (lib.types.enum usersWithProfiles.${username});
+          default = null;
+        };
+      })
+      users
+  );
 
-  users.users = userAccounts;
+  config = lib.mkMerge (
+    builtins.concatLists (
+      builtins.attrValues (
+        builtins.mapAttrs
+          (username: profiles:
+            map
+              (profileName:
+                lib.mkIf (config.userConfig.${username} == profileName) (
+                  let
+                    profileConfig = import (./. + "/${username}/${profileName}");
+                  in
+                  {
+                    users.users.${username} = {
+                      isNormalUser = profileConfig.options.isNormalUser;
+                      description = profileConfig.options.displayname;
+                      extraGroups = profileConfig.options.extraGroups;
+                    };
+                  }
+                  //
+                  profileConfig.configFunction username args
+                )
+              )
+              profiles
+          )
+          usersWithProfiles
+      )
+    )
+  );
 }

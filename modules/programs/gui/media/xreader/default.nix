@@ -1,41 +1,50 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.programs.gui.media.xreader;
-    in
-    {
-      options.modules.programs.gui.media.xreader = {
-        enable = lib.mkEnableOption "xreader";
+{ lib, mkModule, pkgs, ... }@args:
+let
+  enableOptionDescription = "xreader";
+in
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "gui"
+      "media"
+      "xreader"
+    ];
+    systemModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-
-      config = lib.mkIf cfg.enable {
-        environment.systemPackages = [
-          pkgs.xreader
-        ];
-      };
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          environment.systemPackages = [
+            pkgs.xreader
+          ];
+        };
     };
-
-  userModule = {
-    programs.gui.media.xreader =
-      { }:
-      { username }:
-      { lib, pkgs, ... }:
-      {
-        users.users.${username}.packages = lib.mkAfter [
-          pkgs.xreader
-        ];
+    userModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-  };
-
-  homeManagerModule = {
-    programs.gui.media.xreader =
-      { }:
-      { username }:
-      { lib, pkgs, ... }:
-      {
-        home.packages = (lib.optionals pkgs.stdenv.isLinux [
-          pkgs.xreader
-        ]);
+      mkConfig = { cfg, username }:
+        lib.mkIf cfg.enable
+        {
+          users.users.${username}.packages = lib.mkAfter [
+            pkgs.xreader
+          ];
+        };
+    };
+    homeManagerModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-  };
-}
+      mkConfig = { cfg, username }: { pkgs, ... }@homeManagerArgs:
+        lib.mkIf cfg.enable
+        {
+          home.packages = (lib.optionals pkgs.stdenv.isLinux [
+            pkgs.xreader
+          ]);
+        };
+    };
+  }
+  args

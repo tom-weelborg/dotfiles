@@ -1,33 +1,43 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.system.hardware.razer;
-    in
-    {
-      options.modules.system.hardware.razer = {
-        enable = lib.mkEnableOption "razer";
+{ lib, mkModule, pkgs, ... }@args:
+let
+  enableOptionDescription = "razer";
+in
+mkModule
+  {
+    modulePath = [
+      "system"
+      "hardware"
+      "razer"
+    ];
+    systemModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          hardware.openrazer = {
+            enable = true;
+          };
 
-      config = lib.mkIf cfg.enable {
-        hardware.openrazer = {
-          enable = true;
+          environment.systemPackages = with pkgs; [
+            polychromatic
+          ];
         };
-
-        environment.systemPackages = with pkgs; [
-          polychromatic
-        ];
-      };
     };
-
-  userModule = {
-    system.hardware.razer =
-      { }:
-      { username }:
-      { lib, ... }:
-      {
-        hardware.openrazer = {
-          users = lib.mkAfter [ username ];
-        };
+    userModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-  };
-}
+      mkConfig = { cfg, username }:
+        lib.mkIf cfg.enable
+        {
+          hardware.openrazer = {
+            users = lib.mkAfter [
+              username
+            ];
+          };
+        };
+    };
+  }
+  args

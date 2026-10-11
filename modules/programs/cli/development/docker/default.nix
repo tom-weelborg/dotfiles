@@ -1,25 +1,38 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.programs.cli.development.docker;
-    in
-    {
-      options.modules.programs.cli.development.docker = {
-        enable = lib.mkEnableOption "docker";
+{ lib, mkModule, ... }@args:
+let
+  enableOptionDescription = "docker";
+in
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "cli"
+      "development"
+      "docker"
+    ];
+    systemModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-
-      config = lib.mkIf cfg.enable {
-        virtualisation.docker.enable = true;
-      };
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          virtualisation.docker = {
+            enable = true;
+          };
+        };
     };
-
-  userModule = {
-    programs.cli.development.docker =
-      { }:
-      { username }:
-      { lib, ... }:
-      {
-        users.users.${username}.extraGroups = lib.mkAfter [ "docker" ];
+    userModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-  };
-}
+      mkConfig = { cfg, username }:
+        lib.mkIf cfg.enable
+        {
+          users.users.${username}.extraGroups = lib.mkAfter [
+            "docker"
+          ];
+        };
+    };
+  }
+  args

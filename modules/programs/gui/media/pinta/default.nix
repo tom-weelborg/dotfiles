@@ -1,41 +1,13 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.programs.gui.media.pinta;
-    in
-    {
-      options.modules.programs.gui.media.pinta = {
-        enable = lib.mkEnableOption "pinta";
-      };
-
-      config = lib.mkIf cfg.enable {
-        environment.systemPackages = [
-          pkgs.pinta
-        ];
-      };
-    };
-
-  userModule = {
-    programs.gui.media.pinta =
-      { }:
-      { username }:
-      { lib, pkgs, ... }:
-      {
-        users.users.${username}.packages = lib.mkAfter [
-          pkgs.pinta
-        ];
-      };
-  };
-
-  homeManagerModule = {
-    programs.gui.media.pinta =
-      { }:
-      { username }:
-      { pkgs, ... }:
-      {
-        home.packages = [
-          pkgs.pinta
-        ];
-      };
-  };
-}
+{ mkStandardModule, pkgs, ... }@args:
+mkStandardModule
+  {
+    modulePath = [
+      "programs"
+      "gui"
+      "media"
+      "pinta"
+    ];
+    enableOptionDescription = "pinta";
+    packageName = "pinta";
+  }
+  args

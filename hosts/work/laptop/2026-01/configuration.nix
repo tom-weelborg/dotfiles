@@ -1,14 +1,14 @@
 { config, overrideFunction, pkgs, userModules, ... }@inputs:
 let
   username = "tom";
-
-  users = {
-    ${username} = (import ../../../../users/tom/work inputs);
-  };
 in
 {
   sops.secrets.access-tokens = {
     sopsFile = ../../../../secrets.yaml;
+  };
+
+  userConfig = {
+    ${username} = "work";
   };
 
   modules = {
@@ -16,41 +16,57 @@ in
       cli = {
         shells = {
           bash = {
-            enable = true;
+            systemModule = {
+              enable = true;
+            };
           };
         };
         vpn = {
           openvpn = {
-            vpnDir = "/home/${username}/vpn";
+            systemModule = {
+              vpnDir = "/home/${username}/vpn";
+            };
           };
         };
       };
     };
     system = {
       audio = {
-        pipewire = {
-          enable = true;
-        };
-        rtkit = {
-          enable = true;
+        systemModule = {
+          pipewire = {
+            enable = true;
+          };
+          rtkit = {
+            enable = true;
+          };
         };
       };
       desktop-environments = {
         gnome = {
-          enable = true;
+          systemModule = {
+            enable = true;
+          };
         };
       };
       home-manager = {
-        enable = true;
+        systemModule = {
+          enable = true;
+        };
       };
       nix = {
-        access-tokens-path = config.sops.secrets.access-tokens.path;
+        systemModule = {
+          access-tokens-path = config.sops.secrets.access-tokens.path;
+        };
       };
       printing = {
-        enable = true;
+        systemModule = {
+          enable = true;
+        };
       };
-      sops = {
-        keyFile = "/home/${username}/.config/sops/age/keys.txt";
+      sops-config = {
+        systemModule = {
+          keyFile = "/home/${username}/.config/sops/age/keys.txt";
+        };
       };
     };
   };
@@ -58,6 +74,5 @@ in
   imports = [
     ./hardware-configuration.nix
     ../../../../specialisations/work.nix
-    (import ../../../../users users)
   ];
 }

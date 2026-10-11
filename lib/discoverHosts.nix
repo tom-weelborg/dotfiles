@@ -5,34 +5,16 @@ let
 
   discoverModules = import ./discoverModules.nix lib;
   discoveredModules = discoverModules ../modules;
-  systemModules = map
-    (v: v.systemModule)
-    (builtins.filter
-      (v: builtins.hasAttr "systemModule" v)
-      discoveredModules 
-    );
-  userModules = builtins.foldl'
-    (lib.recursiveUpdate)
-    {}
-    (map
-      (v: v.userModule)
-      (builtins.filter
-        (v: builtins.hasAttr "userModule" v)
-        discoveredModules 
-      )
-    );
-  homeManagerModules = builtins.foldl'
-    (lib.recursiveUpdate)
-    {}
-    (map
-      (v: v.homeManagerModule)
-      (builtins.filter
-        (v: builtins.hasAttr "homeManagerModule" v)
-        discoveredModules 
-      )
-    );
 
   readDirIfExists = import ./readDirIfExists.nix;
+
+  usersWithProfiles = import ../users/usersWithProfiles.nix lib;
+
+  users = builtins.attrNames usersWithProfiles;
+
+  mkModule = import ./mkModule.nix { inherit lib users; };
+
+  mkStandardModule = import ./mkStandardModule.nix { inherit lib users; };
 
   discover = basePath: prefix:
     let
@@ -57,16 +39,19 @@ let
                     modules = [
                       (import ../overlays inputs)
                       ../specialisations
+                      ../users
                       inputs.home-manager.nixosModules.default
                       inputs.disko.nixosModules.disko
                       inputs.sops-nix.nixosModules.sops
                       host.config
-                    ] ++ systemModules;
+                    ] ++ discoveredModules;
                     specialArgs = {
                       inherit
                         readDirIfExists
-                        userModules
-                        homeManagerModules
+                        mkModule
+                        mkStandardModule
+                        users
+                        usersWithProfiles
                         ;
                       overrideFunction = lib.mkDefault;
                     };

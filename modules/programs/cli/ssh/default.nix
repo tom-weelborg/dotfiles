@@ -1,15 +1,21 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.programs.cli.ssh;
-    in
-    {
-      options.modules.programs.cli.ssh = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "cli"
+      "ssh"
+    ];
+    systemModule = {
+      options = {
         startAgent = lib.mkEnableOption "ssh-agent";
       };
-
-      config = {
-        programs.ssh.startAgent = cfg.startAgent;
-      };
+      mkConfig = { cfg }:
+        {
+          programs.ssh = {
+            startAgent = cfg.startAgent;
+          };
+        };
     };
-}
+  }
+  args

@@ -155,58 +155,80 @@ in
   modules = {
     jellyfin = {
       server = {
-        enable = true;
-        openFirewall = true;
+        systemModule = {
+          enable = true;
+          openFirewall = true;
+        };
       };
     };
     programs = {
       cli = {
         development = {
           docker = {
-            enable = true;
+            systemModule = {
+              enable = true;
+            };
           };
           git = {
-            enable = true;
-            name = "Tom Weelborg";
-            email = "135610355+tom-weelborg@users.noreply.github.com";
+            systemModule = {
+              enable = true;
+              name = "Tom Weelborg";
+              email = "135610355+tom-weelborg@users.noreply.github.com";
+            };
           };
         };
         fastfetch = {
-          enable = true;
+          systemModule = {
+            enable = true;
+          };
         };
         openssh = {
           server = {
-            enable = true;
-            openFirewall = true;
-            settings = {
-              PermitRootLogin = "prohibit-password";
+            systemModule = {
+              enable = true;
+              openFirewall = true;
+              settings = {
+                PermitRootLogin = "prohibit-password";
+              };
             };
           };
         };
         ssh = {
-          startAgent = true;
+          systemModule = {
+            startAgent = true;
+          };
         };
       };
     };
     system = {
       kernel = {
-        packages = pkgs.linuxPackages;
+        systemModule = {
+          packages = pkgs.linuxPackages;
+        };
       };
       networking = {
-        hostId = "a435d329";
+        systemModule = {
+          hostId = "a435d329";
+        };
       };
       nix = {
-        access-tokens-path = config.sops.secrets.access-tokens.path;
+        systemModule = {
+          access-tokens-path = config.sops.secrets.access-tokens.path;
+        };
       };
-      sops = {
-        keyFile = "/var/lib/sops-nix/key.txt";
-        sshKeyPaths = [
-          "/root/.ssh/github"
-        ];
-        generateKey = true;
+      sops-config = {
+        systemModule = {
+          keyFile = "/var/lib/sops-nix/key.txt";
+          sshKeyPaths = [
+            "/root/.ssh/github"
+          ];
+          generateKey = true;
+        };
       };
       system = {
-        stateVersion = "26.05";
+        systemModule = {
+          stateVersion = "26.05";
+        };
       };
     };
   };

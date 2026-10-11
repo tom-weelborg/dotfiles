@@ -1,39 +1,50 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.programs.cli.development.direnv;
-    in
-    {
-      options.modules.programs.cli.development.direnv = {
-        enable = lib.mkEnableOption "direnv";
+{ lib, mkModule, pkgs, ... }@args:
+let
+  enableOptionDescription = "direnv";
+in
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "cli"
+      "development"
+      "direnv"
+    ];
+    systemModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-
-      config = lib.mkIf cfg.enable {
-        programs.direnv.enable = true;
-      };
-    };
-
-  userModule = {
-    programs.cli.development.direnv =
-      { }:
-      { username }:
-      { lib, pkgs, ... }:
-      {
-        users.users.${username}.packages = lib.mkAfter [
-          pkgs.direnv
-        ];
-      };
-  };
-
-  homeManagerModule = {
-    programs.cli.development.direnv =
-      { }:
-      { username }:
-      { ... }:
-      {
-        programs.direnv = {
-          enable = true;
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          programs.direnv = {
+            enable = true;
+          };
         };
+    };
+    userModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-  };
-}
+      mkConfig = { cfg, username }:
+        lib.mkIf cfg.enable
+        {
+          users.users.${username}.packages = lib.mkAfter [
+            pkgs.direnv
+          ];
+        };
+    };
+    homeManagerModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
+      };
+      mkConfig = { cfg, username }: { ... }@homeManagerArgs:
+        lib.mkIf cfg.enable
+        {
+          programs.direnv = {
+            enable = true;
+          };
+        };
+    };
+  }
+  args

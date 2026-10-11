@@ -1,42 +1,50 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.programs.gui.syncthing;
-    in
-    {
-      options.modules.programs.gui.syncthing = {
-        enable = lib.mkEnableOption "syncthing";
+{ lib, mkModule, pkgs, ... }@args:
+let
+  enableOptionDescription = "syncthing";
+in
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "gui"
+      "syncthing"
+    ];
+    systemModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-
-      config = lib.mkIf cfg.enable {
-        services.syncthing = {
-          enable = true;
-          openDefaultPorts = true;
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          services.syncthing = {
+            enable = true;
+            openDefaultPorts = true;
+          };
         };
-      };
     };
-
-  userModule = {
-    programs.gui.syncthing =
-      { }:
-      { username }:
-      { lib, pkgs, ... }:
-      {
-        users.users.${username}.packages = lib.mkAfter [
-          pkgs.syncthing
-        ];
+    userModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-  };
-
-  homeManagerModule = {
-    programs.gui.syncthing =
-      { }:
-      { username }:
-      { ... }:
-      {
-        services.syncthing = {
-          enable = true;
+      mkConfig = { cfg, username }:
+        lib.mkIf cfg.enable
+        {
+          users.users.${username}.packages = lib.mkAfter [
+            pkgs.syncthing
+          ];
         };
+    };
+    homeManagerModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-  };
-}
+      mkConfig = { cfg, username }: { ... }@homeManagerArgs:
+        lib.mkIf cfg.enable
+        {
+          services.syncthing = {
+            enable = true;
+          };
+        };
+    };
+  }
+  args

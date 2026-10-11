@@ -1,122 +1,272 @@
-{ config, homeManagerModules, pkgs, userModules, ... }:
 {
-  isNormalUser = true;
-  displayname = "Tom";
-  extraGroups = [
-    "networkmanager"
-    "wheel"
-  ];
-  homeManagerModules = [
-    (homeManagerModules.programs.cli.development.git {
-      name = "Tom Weelborg";
-      email = null;
-      extraSettings = {
-        core = {
-          autocrlf = "input";
-          longpaths = true;
+  options = {
+    isNormalUser = true;
+    displayname = "Tom";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+  };
+
+  configFunction = username: { config, lib, pkgs, ... }: {
+    modules = {
+      programs = {
+        cli = {
+          cryptography = {
+            age = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+            sops = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+            ssh-to-age = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+          };
+          development = {
+            claude-code = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+            docker = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+            git = {
+              homeManagerModule = {
+                ${username} = {
+                  enable = true;
+                  name = "Tom Weelborg";
+                  email = null;
+                  extraSettings = {
+                    core = {
+                      autocrlf = "input";
+                      longpaths = true;
+                    };
+                    credential.helper = "manager";
+                    init.defaultBranch = "main";
+                    merge = {
+                      ff = false;
+                    };
+                    pull = {
+                      ff = "only";
+                      rebase = false;
+                    };
+                  };
+                  secretOptions = {
+                    user = {
+                      email = config.sops.secrets.git-email.path;
+                    };
+                  };
+                };
+              };
+            };
+          };
+          rclone = {
+            homeManagerModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
         };
-        credential.helper = "manager";
-        init.defaultBranch = "main";
-        merge = {
-          ff = false;
-        };
-        pull = {
-          ff = "only";
-          rebase = false;
+        gui = {
+          browsers = {
+            brave = {
+              homeManagerModule = {
+                ${username} = {
+                  enable = true;
+                  extraExtensions = [
+                    "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
+                    "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
+                  ];
+                };
+              };
+            };
+            firefox = {
+              homeManagerModule = {
+                ${username} = {
+                  enable = true;
+                  extraExtensions = with pkgs.firefox-addons; [
+                    aws-extend-switch-roles3
+                    requestly
+                  ];
+                };
+              };
+            };
+            vivaldi = {
+              homeManagerModule = {
+                ${username} = {
+                  enable = true;
+                  extraExtensions = [
+                    "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
+                    "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
+                  ];
+                };
+              };
+            };
+          };
+          development = {
+            jaspersoft-studio = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+            jetbrains = {
+              intellij = {
+                homeManagerModule = {
+                  ${username} = {
+                    enable = true;
+                  };
+                };
+              };
+            };
+            virtualbox = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+            soapui = {
+              homeManagerModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+            vscodium = {
+              homeManagerModule = {
+                ${username} = {
+                  enable = true;
+                  extensionProfiles = {
+                    angular = true;
+                    bootstrap = true;
+                    docker = true;
+                    git = true;
+                    github = true;
+                    gitlab = true;
+                    html = true;
+                    java = true;
+                    javascript = true;
+                    markdown = true;
+                    nix = true;
+                    python = true;
+                    rust = true;
+                    tailwind = true;
+                    typescript = true;
+                    vue = true;
+                    xml = true;
+                  };
+                };
+              };
+            };
+          };
+          media = {
+            makemkv = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                  package = pkgs.makemkv-2026-08;
+                  tokenPath = config.sops.secrets.makemkv-token.path;
+                };
+              };
+            };
+            obs = {
+              homeManagerModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+            xreader = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+          };
         };
       };
-      secretOptions = {
-        user = {
-          email = config.sops.secrets.git-email.path;
+      system = {
+        desktop-environments = {
+          gnome = {
+            homeManagerModule = {
+              ${username} = {
+                enable = true;
+                favoriteApps = [
+                  "firefox.desktop"
+                  "vivaldi-stable.desktop"
+                  "brave-browser.desktop"
+                  "org.gnome.Nautilus.desktop"
+                  "org.keepassxc.KeePassXC.desktop"
+                  "teams-for-linux.desktop"
+                  "info.mumble.Mumble.desktop"
+                  "idea.desktop"
+                  "codium.desktop"
+                  "obsidian.desktop"
+                ];
+                gnomeExtensions = with pkgs.gnomeExtensions; [
+                  arcmenu
+                  dash-to-panel
+                ];
+              };
+            };
+          };
+        };
+        hardware = {
+          razer = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+        };
+        home-manager = {
+          homeManagerModule = {
+            ${username} = {
+              enable = true;
+            };
+          };
+        };
+        sops-config = {
+          userModule = {
+            ${username} = {
+              enable = true;
+              secrets = {
+                git-email = {
+                  sopsFile = ./secrets.yaml;
+                };
+                makemkv-token = {
+                  sopsFile = ../secrets.yaml;
+                };
+              };
+            };
+          };
         };
       };
-    })
-    (homeManagerModules.programs.cli.rclone {})
-    (homeManagerModules.programs.gui.browsers.brave {
-      extraExtensions = [
-        "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
-        "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
-      ];
-    })
-    (homeManagerModules.programs.gui.browsers.firefox {
-      extraExtensions = with pkgs.firefox-addons; [
-        aws-extend-switch-roles3
-        requestly
-      ];
-    })
-    (homeManagerModules.programs.gui.browsers.vivaldi {
-      extraExtensions = [
-        "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
-        "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
-      ];
-    })
-    (homeManagerModules.programs.gui.development.jetbrains.intellij {})
-    (homeManagerModules.programs.gui.development.soapui {})
-    (homeManagerModules.programs.gui.development.vscodium {
-      extensionProfiles = {
-        angular = true;
-        bootstrap = true;
-        docker = true;
-        git = true;
-        github = true;
-        gitlab = true;
-        html = true;
-        java = true;
-        javascript = true;
-        markdown = true;
-        nix = true;
-        python = true;
-        rust = true;
-        tailwind = true;
-        typescript = true;
-        vue = true;
-        xml = true;
-      };
-    })
-    (homeManagerModules.programs.gui.media.obs {})
-    (homeManagerModules.system.desktop-environments.gnome {
-      favoriteApps = [
-        "firefox.desktop"
-        "vivaldi-stable.desktop"
-        "brave-browser.desktop"
-        "org.gnome.Nautilus.desktop"
-        "org.keepassxc.KeePassXC.desktop"
-        "teams-for-linux.desktop"
-        "info.mumble.Mumble.desktop"
-        "idea.desktop"
-        "codium.desktop"
-        "obsidian.desktop"
-      ];
-      gnomeExtensions = with pkgs.gnomeExtensions; [
-        arcmenu
-        dash-to-panel
-      ];
-    })
-    (homeManagerModules.system.home-manager {})
-  ];
-  userModules = [
-    (userModules.programs.cli.cryptography.age {})
-    (userModules.programs.cli.cryptography.sops {})
-    (userModules.programs.cli.cryptography.ssh-to-age {})
-    (userModules.programs.cli.development.claude-code {})
-    (userModules.programs.cli.development.docker {})
-    (userModules.programs.gui.development.jaspersoft-studio {})
-    (userModules.programs.gui.development.virtualbox {})
-    (userModules.programs.gui.media.makemkv {
-      package = pkgs.makemkv-2026-08;
-      tokenPath = config.sops.secrets.makemkv-token.path;
-    })
-    (userModules.programs.gui.media.xreader {})
-    (userModules.system.hardware.razer {})
-    (userModules.system.sops-config {
-      secrets = {
-        git-email = {
-          sopsFile = ./secrets.yaml;
-        };
-        makemkv-token = {
-          sopsFile = ../secrets.yaml;
-        };
-      };
-    })
-  ];
+    };
+  };
 }

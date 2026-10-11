@@ -1,17 +1,20 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.system.bootloader;
-    in
-    {
-      options.modules.system.bootloader = {
+{ mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "system"
+      "bootloader"
+    ];
+    systemModule = {
+      options = {
       };
-
-      config = {
-        boot.loader = {
-          systemd-boot.enable = true;
-          efi.canTouchEfiVariables = true;
+      mkConfig = { cfg }:
+        {
+          boot.loader = {
+            systemd-boot.enable = true;
+            efi.canTouchEfiVariables = true;
+          };
         };
-      };
     };
-}
+  }
+  args

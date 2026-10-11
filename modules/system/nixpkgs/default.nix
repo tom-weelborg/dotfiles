@@ -1,18 +1,21 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.system.nixpkgs;
-    in
-    {
-      options.modules.system.nixpkgs = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "system"
+      "nixpkgs"
+    ];
+    systemModule = {
+      options = {
         allowUnfree = lib.mkOption {
           type = lib.types.bool;
           default = true;
         };
       };
-
-      config = {
-        nixpkgs.config.allowUnfree = cfg.allowUnfree;
-      };
+      mkConfig = { cfg }:
+        {
+          nixpkgs.config.allowUnfree = cfg.allowUnfree;
+        };
     };
-}
+  }
+  args

@@ -1,10 +1,14 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.programs.cli.openssh.server;
-    in
-    {
-      options.modules.programs.cli.openssh.server = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "cli"
+      "openssh"
+      "server"
+    ];
+    systemModule = {
+      options = {
         enable = lib.mkEnableOption "openssh-server";
         openFirewall = lib.mkOption {
           type = lib.types.bool;
@@ -42,20 +46,22 @@
           default = {};
         };
       };
-
-      config = lib.mkIf cfg.enable {
-        services.openssh = {
-          enable = true;
-          openFirewall = cfg.openFirewall;
-          authorizedKeysFiles = cfg.authorizedKeysFiles;
-          authorizedKeysInHomedir = cfg.authorizedKeysInHomedir;
-          settings = {
-            AllowUsers = cfg.settings.AllowUsers;
-            KbdInteractiveAuthentication = cfg.settings.KbdInteractiveAuthentication;
-            PasswordAuthentication = cfg.settings.PasswordAuthentication;
-            PermitRootLogin = cfg.settings.PermitRootLogin;
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          services.openssh = {
+            enable = true;
+            openFirewall = cfg.openFirewall;
+            authorizedKeysFiles = cfg.authorizedKeysFiles;
+            authorizedKeysInHomedir = cfg.authorizedKeysInHomedir;
+            settings = {
+              AllowUsers = cfg.settings.AllowUsers;
+              KbdInteractiveAuthentication = cfg.settings.KbdInteractiveAuthentication;
+              PasswordAuthentication = cfg.settings.PasswordAuthentication;
+              PermitRootLogin = cfg.settings.PermitRootLogin;
+            };
           };
         };
-      };
     };
-}
+  }
+  args

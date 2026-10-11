@@ -1,41 +1,49 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.programs.cli.fastfetch;
-    in
-    {
-      options.modules.programs.cli.fastfetch = {
-        enable = lib.mkEnableOption "fastfetch";
+{ lib, mkModule, pkgs, ... }@args:
+let
+  enableOptionDescription = "fastfetch";
+in
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "cli"
+      "fastfetch"
+    ];
+    systemModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-
-      config = lib.mkIf cfg.enable {
-        environment.systemPackages = [
-          pkgs.fastfetch
-        ];
-      };
-    };
-
-  userModule = {
-    programs.cli.fastfetch =
-      { }:
-      { username }:
-      { lib, pkgs, ... }:
-      {
-        users.users.${username}.packages = lib.mkAfter [
-          pkgs.fastfetch
-        ];
-      };
-  };
-
-  homeManagerModule = {
-    programs.cli.fastfetch =
-      { }:
-      { username }:
-      { ... }:
-      {
-        programs.fastfetch = {
-          enable = true;
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          environment.systemPackages = [
+            pkgs.fastfetch
+          ];
         };
+    };
+    userModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-  };
-}
+      mkConfig = { cfg, username }:
+        lib.mkIf cfg.enable
+        {
+          users.users.${username}.packages = lib.mkAfter [
+            pkgs.fastfetch
+          ];
+        };
+    };
+    homeManagerModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
+      };
+      mkConfig = { cfg, username }: { ... }@homeManagerArgs:
+        lib.mkIf cfg.enable
+        {
+          programs.fastfetch = {
+            enable = true;
+          };
+        };
+    };
+  }
+  args

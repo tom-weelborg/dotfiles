@@ -1,18 +1,24 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.programs.gui.gaming.steam;
-    in
-    {
-      options.modules.programs.gui.gaming.steam = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "gui"
+      "gaming"
+      "steam"
+    ];
+    systemModule = {
+      options = {
         enable = lib.mkEnableOption "steam";
       };
-
-      config = lib.mkIf cfg.enable {
-        programs.steam = {
-          enable = true;
-          remotePlay.openFirewall = true;
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          programs.steam = {
+            enable = true;
+            remotePlay.openFirewall = true;
+          };
         };
-      };
     };
-}
+  }
+  args

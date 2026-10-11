@@ -5,105 +5,155 @@
       cli = {
         development = {
           direnv = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
           docker = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
         };
         fastfetch = {
-          enable = overrideFunction true;
+          systemModule = {
+            enable = overrideFunction true;
+          };
         };
         gaming = {
           cowsay = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
           fortune = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
           sl = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
         };
         vpn = {
           openvpn = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
           wireguard = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
         };
       };
       gui = {
         communication = {
           mumble = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
           signal = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
         };
         development = {
           bruno = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
           dbeaver = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
           virtualbox = {
-            enable = overrideFunction false;
+            systemModule = {
+              enable = overrideFunction false;
+            };
           };
         };
         drawio = {
-          enable = overrideFunction true;
+          systemModule = {
+            enable = overrideFunction true;
+          };
         };
         keepassxc = {
-          enable = overrideFunction true;
+          systemModule = {
+            enable = overrideFunction true;
+          };
         };
         libreoffice = {
-          enable = overrideFunction true;
+          systemModule = {
+            enable = overrideFunction true;
+          };
         };
         media = {
           pinta = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
           shotcut = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
           vlc = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
         };
         microsoft = {
           onedrive = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
           teams = {
-            enable = overrideFunction true;
+            systemModule = {
+              enable = overrideFunction true;
+            };
           };
         };
         obsidian = {
-          enable = overrideFunction true;
+          systemModule = {
+            enable = overrideFunction true;
+          };
         };
       };
     };
     system = {
       hardware = {
         displaylink = {
-          enable = overrideFunction true;
+          systemModule = {
+            enable = overrideFunction true;
+          };
         };
         razer = {
-          enable = overrideFunction true;
+          systemModule = {
+            enable = overrideFunction true;
+          };
         };
       };
       xdg = {
         mime = {
-          enable = overrideFunction true;
-          browsers = overrideFunction [
-            "firefox.desktop"
-            "brave-browser.desktop"
-            "vivaldi-stable.desktop"
-          ];
+          systemModule = {
+            enable = overrideFunction true;
+            browsers = overrideFunction [
+              "firefox.desktop"
+              "brave-browser.desktop"
+              "vivaldi-stable.desktop"
+            ];
+          };
         };
       };
     };

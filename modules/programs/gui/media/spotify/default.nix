@@ -1,41 +1,13 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.programs.gui.media.spotify;
-    in
-    {
-      options.modules.programs.gui.media.spotify = {
-        enable = lib.mkEnableOption "spotify";
-      };
-
-      config = lib.mkIf cfg.enable {
-        environment.systemPackages = [
-          pkgs.spotify
-        ];
-      };
-    };
-
-  userModule = {
-    programs.gui.media.spotify =
-      { }:
-      { username }:
-      { lib, pkgs, ... }:
-      {
-        users.users.${username}.packages = lib.mkAfter [
-          pkgs.spotify
-        ];
-      };
-  };
-
-  homeManagerModule = {
-    programs.gui.media.spotify =
-      { }:
-      { username }:
-      { pkgs, ... }:
-      {
-        home.packages = [
-          pkgs.spotify
-        ];
-      };
-  };
-}
+{ mkStandardModule, pkgs, ... }@args:
+mkStandardModule
+  {
+    modulePath = [
+      "programs"
+      "gui"
+      "media"
+      "spotify"
+    ];
+    enableOptionDescription = "spotify";
+    packageName = "spotify";
+  }
+  args

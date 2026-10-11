@@ -1,11 +1,18 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.programs.cli.shells.bash;
-    in
-    {
-      options.modules.programs.cli.shells.bash = {
-        enable = lib.mkEnableOption "bash";
+{ lib, mkModule, pkgs, ... }@args:
+let
+  enableOptionDescription = "bash";
+in
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "cli"
+      "shells"
+      "bash"
+    ];
+    systemModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
         shellAliases = lib.mkOption {
           type = lib.types.attrs;
           default = {
@@ -16,37 +23,43 @@
           };
         };
       };
-
-      config = lib.mkIf cfg.enable {
-        programs.bash = {
-          enable = cfg.enable;
-          shellAliases = cfg.shellAliases;
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          programs.bash = {
+            enable = true;
+            shellAliases = cfg.shellAliases;
+          };
         };
-      };
     };
-
-  userModule = {
-    programs.cli.shells.bash =
-      { }:
-      { username }:
-      { lib, pkgs, ... }:
-      {
-        users.users.${username}.packages = lib.mkAfter [
-          pkgs.bash
-        ];
+    userModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
-  };
-
-  homeManagerModule = {
-    programs.cli.shells.bash =
-      { shellAliases ? {} }:
-      { username }:
-      { ... }:
-      {
-        programs.bash = {
-          enable = true;
-          shellAliases = shellAliases;
+      mkConfig = { cfg, username }:
+        lib.mkIf cfg.enable
+        {
+          users.users.${username}.packages = lib.mkAfter [
+            pkgs.bash
+          ];
+        };
+    };
+    homeManagerModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
+        shellAliases = lib.mkOption {
+          type = lib.types.attrs;
+          default = {};
         };
       };
-  };
-}
+      mkConfig = { cfg, username }: { ... }@homeManagerArgs:
+        lib.mkIf cfg.enable
+        {
+          programs.bash = {
+            enable = true;
+            shellAliases = cfg.shellAliases;
+          };
+        };
+    };
+  }
+  args

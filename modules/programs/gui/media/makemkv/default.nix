@@ -1,125 +1,145 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.programs.gui.media.makemkv;
-    in
-    {
-      options.modules.programs.gui.media.makemkv = {
-        enable = lib.mkEnableOption "makemkv";
+{ lib, mkModule, pkgs, ... }@args:
+let
+  enableOptionDescription = "makemkv";
+in
+mkModule
+  {
+    modulePath = [
+      "programs"
+      "gui"
+      "media"
+      "makemkv"
+    ];
+    systemModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
       };
+      mkConfig = { cfg }:
+        lib.mkIf cfg.enable
+        {
+          boot.kernelModules = lib.mkAfter [
+            "sg"
+          ];
 
-      config = lib.mkIf cfg.enable {
-        boot.kernelModules = lib.mkAfter [
-          "sg"
-        ];
-
-        environment.systemPackages = [
-          pkgs.makemkv
-        ];
-      };
+          environment.systemPackages = [
+            pkgs.makemkv
+          ];
+        };
     };
-
-  userModule = {
-    programs.gui.media.makemkv =
-      {
-        package ? null,
-        tokenPath ? null,
-        settingsDefault ? {
-          "app_DefaultSelectionString" = builtins.concatStringsSep "," [
-            "+sel:all"
-            "-sel:angle"
-          ];
-          "app_DestinationDir" = "";
-          "app_ExpertMode" = "1";
-          "app_Java" = "";
-          "app_Key" = "$key";
-          "app_Proxy" = "";
-          "app_ccextractor" = "";
-          "sdf_Stop" = "";
-        },
-        settingsOverride ? {}
-      }:
-      { username }:
-      { lib, pkgs, ... }:
-      let
-        settings = settingsDefault // settingsOverride;
-
-        settingsFileContent = lib.generators.toINIWithGlobalSection {} {
-          globalSection = builtins.mapAttrs (_: value: ''"${value}"'') settings;
+    userModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
+        package = lib.mkOption {
+          type = lib.types.package;
+          default = pkgs.makemkv;
         };
-      in
-      {
-        boot.kernelModules = lib.mkAfter [
-          "sg"
-        ];
-
-        users.users.${username} = {
-          packages = lib.mkAfter [
-            (if (package != null) then package else pkgs.makemkv)
-          ];
-
-          extraGroups = lib.mkAfter [
-            "cdrom"
-            "plugdev"
-            "video"
-          ];
+        tokenPath = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
         };
+        settingsDefault = lib.mkOption {
+          type = lib.types.attrs;
+          default = {
+            "app_DefaultSelectionString" = builtins.concatStringsSep "," [
+              "+sel:all"
+              "-sel:angle"
+            ];
+            "app_DestinationDir" = "";
+            "app_ExpertMode" = "1";
+            "app_Java" = "";
+            "app_Key" = "$key";
+            "app_Proxy" = "";
+            "app_ccextractor" = "";
+            "sdf_Stop" = "";
+          };
+        };
+        settingsOverride = lib.mkOption {
+          type = lib.types.attrs;
+          default = {};
+        };
+      };
+      mkConfig = { cfg, username }:
+        let
+          settings = cfg.settingsDefault // cfg.settingsOverride;
 
-        systemd.services.makemkv-config = {
-          description = "Generate MakeMKV configuration";
-
-          wantedBy = [
-            "multi-user.target"
+          settingsFileContent = lib.generators.toINIWithGlobalSection {} {
+            globalSection = builtins.mapAttrs (_: value: ''"${value}"'') settings;
+          };
+        in
+        lib.mkIf cfg.enable
+        {
+          boot.kernelModules = lib.mkAfter [
+            "sg"
           ];
 
-          before = [
-            "makemkv.service"
-          ];
+          users.users.${username} = {
+            packages = lib.mkAfter [
+              cfg.package
+            ];
 
-          serviceConfig = {
-            Type = "oneshot";
-            User = username;
-            UMask = "0077";
+            extraGroups = lib.mkAfter [
+              "cdrom"
+              "plugdev"
+              "video"
+            ];
           };
 
-          script = ''
-            set -euo pipefail
+          systemd.services.makemkv-config = {
+            description = "Generate MakeMKV configuration";
 
-            config_dir=/home/${username}/.MakeMKV/
-            config_file="$config_dir/settings.conf"
+            wantedBy = [
+              "multi-user.target"
+            ];
 
-            mkdir -p "$config_dir"
+            before = [
+              "makemkv.service"
+            ];
 
-            key=${lib.optionalString (tokenPath != null) "$(cat ${tokenPath})"}
+            serviceConfig = {
+              Type = "oneshot";
+              User = username;
+              UMask = "0077";
+            };
 
-            cat > "$config_file" <<EOF
-            ${settingsFileContent}
-            EOF
+            script = ''
+              set -euo pipefail
 
-            chmod 600 "$config_file"
-          '';
+              config_dir=/home/${username}/.MakeMKV/
+              config_file="$config_dir/settings.conf"
+
+              mkdir -p "$config_dir"
+
+              key=${lib.optionalString (cfg.tokenPath != null) "$(cat ${cfg.tokenPath})"}
+
+              cat > "$config_file" <<EOF
+              ${settingsFileContent}
+              EOF
+
+              chmod 600 "$config_file"
+            '';
+          };
+
+          systemd.services.makemkv = {
+            requires = [
+              "makemkv-config.service"
+            ];
+            after = [
+              "makemkv-config.service"
+            ];
+          };
         };
-
-        systemd.services.makemkv = {
-          requires = [
-            "makemkv-config.service"
-          ];
-          after = [
-            "makemkv-config.service"
+    };
+    homeManagerModule = {
+      options = {
+        enable = lib.mkEnableOption enableOptionDescription;
+      };
+      mkConfig = { cfg, username }: { pkgs, ... }@homeManagerArgs:
+        lib.mkIf cfg.enable
+        {
+          home.packages = [
+            pkgs.makemkv
           ];
         };
-      };
-  };
-
-  homeManagerModule = {
-    programs.gui.media.makemkv =
-      { }:
-      { username }:
-      { pkgs, ... }:
-      {
-        home.packages = [
-          pkgs.makemkv
-        ];
-      };
-  };
-}
+    };
+  }
+  args

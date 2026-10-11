@@ -1,18 +1,21 @@
-{
-  systemModule = { config, lib, ... }:
-    let
-      cfg = config.modules.system.system;
-    in
-    {
-      options.modules.system.system = {
+{ lib, mkModule, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "system"
+      "system"
+    ];
+    systemModule = {
+      options = {
         stateVersion = lib.mkOption {
           type = lib.types.str;
           default = "25.05";
         };
       };
-
-      config = {
-        system.stateVersion = cfg.stateVersion;
-      };
+      mkConfig = { cfg }:
+        {
+          system.stateVersion = cfg.stateVersion;
+        };
     };
-}
+  }
+  args

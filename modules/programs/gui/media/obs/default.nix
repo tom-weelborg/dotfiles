@@ -1,41 +1,13 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.programs.gui.media.obs;
-    in
-    {
-      options.modules.programs.gui.media.obs = {
-        enable = lib.mkEnableOption "obs";
-      };
-
-      config = lib.mkIf cfg.enable {
-        environment.systemPackages = [
-          pkgs.obs-studio
-        ];
-      };
-    };
-
-  userModule = {
-    programs.gui.media.obs =
-      { }:
-      { username }:
-      { lib, pkgs, ... }:
-      {
-        users.users.${username}.packages = lib.mkAfter [
-          pkgs.obs-studio
-        ];
-      };
-  };
-
-  homeManagerModule = {
-    programs.gui.media.obs =
-      { }:
-      { username }:
-      { pkgs, ... }:
-      {
-        home.packages = [
-          pkgs.obs-studio
-        ];
-      };
-  };
-}
+{ mkStandardModule, pkgs, ... }@args:
+mkStandardModule
+  {
+    modulePath = [
+      "programs"
+      "gui"
+      "media"
+      "obs"
+    ];
+    enableOptionDescription = "obs";
+    packageName = "obs-studio";
+  }
+  args

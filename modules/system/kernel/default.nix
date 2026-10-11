@@ -1,10 +1,12 @@
-{
-  systemModule = { config, lib, pkgs, ... }:
-    let
-      cfg = config.modules.system.kernel;
-    in
-    {
-      options.modules.system.kernel = {
+{ lib, mkModule, pkgs, ... }@args:
+mkModule
+  {
+    modulePath = [
+      "system"
+      "kernel"
+    ];
+    systemModule = {
+      options = {
         modules = lib.mkOption {
           type = lib.types.listOf lib.types.str;
           default = [ ];
@@ -14,13 +16,14 @@
           default = pkgs.linuxPackages_latest;
         };
       };
+      mkConfig = { cfg }:
+        {
+          boot = {
+            kernelModules = lib.mkAfter cfg.modules;
 
-      config = {
-        boot = {
-          kernelModules = lib.mkAfter cfg.modules;
-
-          kernelPackages = cfg.packages;
+            kernelPackages = cfg.packages;
+          };
         };
-      };
     };
-}
+  }
+  args
