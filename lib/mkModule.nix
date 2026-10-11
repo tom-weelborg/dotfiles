@@ -28,11 +28,11 @@ let
         users
     );
 
-  mkSystemModuleConfig = { mkCfg, mkConfig }: mkConfig {
+  mkSystemModuleConfig = { config, mkCfg, mkConfig }: mkConfig {
     cfg = mkCfg null;
   };
 
-  mkUserModuleConfig = { mkCfg, mkConfig }: mkModuleConfigForUsers {
+  mkUserModuleConfig = { config, mkCfg, mkConfig }: mkModuleConfigForUsers {
     inherit
       mkCfg
       mkConfig
@@ -40,14 +40,16 @@ let
     wrapConfig = c: username: c;
   };
 
-  mkHomeManagerModuleConfig = { mkCfg, mkConfig }: mkModuleConfigForUsers {
+  mkHomeManagerModuleConfig = { config, mkCfg, mkConfig }: mkModuleConfigForUsers {
     inherit
       mkCfg
       mkConfig
       ;
-    wrapConfig = c: username: {
-      home-manager.users.${username} = c;
-    };
+    wrapConfig = c: username:
+      lib.mkIf config.modules.system.home-manager.homeManagerModule.${username}.enable
+      {
+        home-manager.users.${username} = c;
+      };
   };
 
   mkModule =
@@ -86,14 +88,17 @@ let
 
       config = lib.mkMerge [
         (mkSystemModuleConfig {
+          inherit config;
           mkCfg = mkSystemModuleCfg;
           mkConfig = systemModule.mkConfig;
         })
         (mkUserModuleConfig {
+          inherit config;
           mkCfg = mkUserModuleCfg;
           mkConfig = userModule.mkConfig;
         })
         (mkHomeManagerModuleConfig {
+          inherit config;
           mkCfg = mkHomeManagerModuleCfg;
           mkConfig = homeManagerModule.mkConfig;
         })
