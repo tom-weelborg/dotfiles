@@ -28,7 +28,7 @@
   outputs = { self, nixpkgs, ... }@inputs:
   let
     lib = nixpkgs.lib;
-    
+
     utils = import ./lib lib;
   in
   {
