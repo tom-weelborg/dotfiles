@@ -8,9 +8,9 @@ with pkgs.vscode-extensions;
   github.copilot
   github.copilot-chat
   # github.copilot-workspace
-  
+
   # ms-azure-load-testing.microsoft-testing
-  
+
   # ms-azuretools.vscode-azure-github-copilot
   # ms-azuretools.vscode-azure-mcp-server
 
