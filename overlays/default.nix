@@ -1,14 +1,35 @@
 { ... }@inputs:
+let
+  lib = inputs.nixpkgs.lib;
+  
+  defaultFile = "default.nix";
+
+  discoveredOverlays = map
+    (name: import (./. + "/${name}"))
+    (builtins.attrNames (
+      lib.filterAttrs
+        (name: value:
+          (
+            value == "regular"
+            &&
+            lib.hasSuffix ".nix" name
+            &&
+            name != defaultFile
+          )
+          ||
+          (
+            value == "directory"
+            &&
+            builtins.pathExists (./. + "/${name}/${defaultFile}")
+          )
+        )
+        (builtins.readDir ./.)
+    ))
+  ;
+in
 {
   nixpkgs.overlays = [
     inputs.firefox-addons.outputs.overlays.default
     inputs.nix-vscode-extensions.overlays.default
-
-    (import ./arcmenu.nix)
-    (import ./jaspersoft-studio.nix)
-    (import ./lib.nix)
-    (import ./makemkv-2026-08.nix)
-    (import ./requestly-firefox-addon.nix)
-    (import ./soapui.nix)
-  ];
+  ] ++ discoveredOverlays;
 }
