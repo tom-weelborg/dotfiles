@@ -104,6 +104,7 @@
                     github = true;
                     gitlab = true;
                     html = true;
+                    http = true;
                     java = true;
                     javascript = true;
                     latex = true;
