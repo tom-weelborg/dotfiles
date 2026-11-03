@@ -56,5 +56,9 @@ final: prev: {
       Categories=Development;IDE;
       EOF
     '';
+
+    extraPreBwrapCmds = ''
+      ignored+=( /mnt )
+    '';
   };
 }
