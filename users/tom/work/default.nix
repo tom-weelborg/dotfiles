@@ -124,6 +124,15 @@
               };
             };
           };
+          communication = {
+            ruumble-client = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+          };
           development = {
             jaspersoft-studio = {
               userModule = {
