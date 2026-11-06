@@ -31,5 +31,6 @@ in
   nixpkgs.overlays = [
     inputs.firefox-addons.outputs.overlays.default
     inputs.nix-vscode-extensions.overlays.default
+    inputs.ruumble-client.overlays.default
   ] ++ discoveredOverlays;
 }
