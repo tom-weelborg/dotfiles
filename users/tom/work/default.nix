@@ -96,6 +96,7 @@
                   enable = true;
                   extraExtensions = [
                     "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
+                    "fcoeoabgfenejglbffodgkkbkcdhcgfn" # Claude
                     "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
                   ];
                 };
@@ -118,6 +119,7 @@
                   enable = true;
                   extraExtensions = [
                     "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
+                    "fcoeoabgfenejglbffodgkkbkcdhcgfn" # Claude
                     "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
                   ];
                 };
