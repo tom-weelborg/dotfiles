@@ -235,6 +235,7 @@
                   "org.keepassxc.KeePassXC.desktop"
                   "teams-for-linux.desktop"
                   "info.mumble.Mumble.desktop"
+                  "ruumble-client.desktop"
                   "idea.desktop"
                   "codium.desktop"
                   "obsidian.desktop"
