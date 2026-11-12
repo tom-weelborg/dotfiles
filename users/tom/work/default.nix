@@ -199,7 +199,6 @@
               userModule = {
                 ${username} = {
                   enable = true;
-                  package = pkgs.makemkv-2026-08;
                   tokenPath = config.sops.secrets.makemkv-token.path;
                 };
               };
