@@ -21,6 +21,16 @@ in
             };
           };
         };
+        ssh = {
+          systemModule = {
+            hosts = [
+              {
+                name = "nas";
+                hostname = "192.168.178.94";
+              }
+            ];
+          };
+        };
         vpn = {
           openvpn = {
             systemModule = {
