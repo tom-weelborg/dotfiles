@@ -11,4 +11,3 @@ mkStandardModule
     packageName = "ruumble-client";
   }
   args
-
