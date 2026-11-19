@@ -11,4 +11,3 @@ mkStandardModule
     packageName = "mumble";
   }
   args
-
