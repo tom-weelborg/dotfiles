@@ -11,5 +11,3 @@ mkStandardModule
     packageName = "claude-code";
   }
   args
-
-
