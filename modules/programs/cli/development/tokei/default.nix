@@ -11,5 +11,3 @@ mkStandardModule
     packageName = "tokei";
   }
   args
-
-
