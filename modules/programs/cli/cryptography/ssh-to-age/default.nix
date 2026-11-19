@@ -11,4 +11,3 @@ mkStandardModule
     packageName = "ssh-to-age";
   }
   args
-
