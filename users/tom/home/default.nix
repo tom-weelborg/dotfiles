@@ -131,6 +131,15 @@
               };
             };
           };
+          gaming = {
+            mgba = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+          };
           media = {
             makemkv = {
               userModule = {
