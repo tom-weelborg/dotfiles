@@ -79,6 +79,13 @@
                 };
               };
             };
+            tokei = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
           };
           rclone = {
             homeManagerModule = {
