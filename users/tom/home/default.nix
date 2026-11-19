@@ -52,6 +52,13 @@
                 };
               };
             };
+            tokei = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
           };
         };
         gui = {
