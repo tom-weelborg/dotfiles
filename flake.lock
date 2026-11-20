@@ -117,11 +117,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793973292,
-        "narHash": "sha256-rde/AlMnXi+xJllxEyCEA+dQYhliLuryyG0yCtLrXLY=",
+        "lastModified": 1795178962,
+        "narHash": "sha256-Qg3vjfhKcFXa65bIrw8/v59HBQJv+AAsI2z0WSseJGQ=",
         "ref": "main",
-        "rev": "040a420c9cc2e3b537c474aca4b5ea61bddaffb8",
-        "revCount": 59,
+        "rev": "ee08142585ed20fe13dcb49db3e2d96b77f6dfe2",
+        "revCount": 92,
         "submodules": true,
         "type": "git",
         "url": "ssh://git@github.com/ruumble-project/ruumble-client"
