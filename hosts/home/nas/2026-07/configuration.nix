@@ -146,8 +146,20 @@ in
     };
   };
 
-  sops.secrets.access-tokens = {
-    sopsFile = ../../../../secrets.yaml;
+  sops.secrets = {
+    access-tokens = {
+      sopsFile = ../../../../secrets.yaml;
+    };
+    zdata-keyfile = {
+      sopsFile = ./zdata-keyfile.json;
+      format = "binary";
+
+      path = "/etc/zfs/data.key";
+
+      owner = "root";
+      group = "root";
+      mode = "0400";
+    };
   };
 
   users.users.root.openssh.authorizedKeys.keys = authorizedSshKeys;
