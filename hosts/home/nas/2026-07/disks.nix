@@ -126,7 +126,7 @@ in
 
           encryption = "aes-256-gcm";
           keyformat = "passphrase";
-          keylocation = "file:///etc/zfs/data.key";
+          keylocation = "file://" + (import ./zdata-keyfile-path.nix);
         };
 
         options = {

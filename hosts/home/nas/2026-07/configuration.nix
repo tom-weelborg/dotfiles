@@ -154,7 +154,7 @@ in
       sopsFile = ./zdata-keyfile.json;
       format = "binary";
 
-      path = "/etc/zfs/data.key";
+      path = import ./zdata-keyfile-path.nix;
 
       owner = "root";
       group = "root";
