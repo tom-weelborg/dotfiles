@@ -159,6 +159,13 @@
                 };
               };
             };
+            mongodb-compass = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
             virtualbox = {
               userModule = {
                 ${username} = {
