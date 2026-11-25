@@ -22,6 +22,7 @@ let
               packages = moduleConfig.extensions;
             };
             settings = {
+              "browser.bookmarks.openInTabClosesMenu" = false;
               "browser.translations.neverTranslateLanguages" = "de,en";
             };
           };
