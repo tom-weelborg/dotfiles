@@ -109,6 +109,13 @@
                 };
               };
             };
+            chromium = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
             firefox = {
               homeManagerModule = {
                 ${username} = {
