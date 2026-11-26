@@ -39,7 +39,7 @@ mkModule
       options = {
         enable = lib.mkEnableOption enableOptionDescription;
         vmoptions = lib.mkOption {
-          type = lib.types.str;
+          type = lib.types.lines;
           default = ''
             -Dawt.toolkit.name=XToolkit
             -Xmx4096m
