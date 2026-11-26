@@ -9,7 +9,7 @@ mkModule
       options = {
         modules = lib.mkOption {
           type = lib.types.listOf lib.types.str;
-          default = [ ];
+          default = [];
         };
         packages = lib.mkOption {
           type = lib.types.raw;
