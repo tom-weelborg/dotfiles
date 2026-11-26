@@ -29,7 +29,7 @@ mkModule
       mkConfig = { cfg, username }:
         lib.mkIf cfg.enable
         {
-          users.users.${username}.extraGroups = lib.mkAfter [
+          users.users.${username}.extraGroups = [
             "docker"
           ];
         };
