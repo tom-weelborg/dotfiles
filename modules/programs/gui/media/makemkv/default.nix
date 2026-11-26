@@ -17,7 +17,7 @@ mkModule
       mkConfig = { cfg }:
         lib.mkIf cfg.enable
         {
-          boot.kernelModules = lib.mkAfter [
+          boot.kernelModules = [
             "sg"
           ];
 
@@ -68,16 +68,16 @@ mkModule
         in
         lib.mkIf cfg.enable
         {
-          boot.kernelModules = lib.mkAfter [
+          boot.kernelModules = [
             "sg"
           ];
 
           users.users.${username} = {
-            packages = lib.mkAfter [
+            packages = [
               cfg.package
             ];
 
-            extraGroups = lib.mkAfter [
+            extraGroups = [
               "cdrom"
               "plugdev"
               "video"
