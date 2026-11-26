@@ -17,7 +17,7 @@ mkModule
       mkConfig = { cfg }:
         lib.mkIf cfg.enable
         {
-          networking.networkmanager.plugins = lib.mkAfter [
+          networking.networkmanager.plugins = [
             pkgs.networkmanager-openvpn
           ];
 
