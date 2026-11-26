@@ -30,7 +30,7 @@ mkModule
       mkConfig = { cfg, username }:
         lib.mkIf cfg.enable
         {
-          users.extraGroups.vboxusers.members = lib.mkAfter [
+          users.extraGroups.vboxusers.members = [
             username
           ];
         };
