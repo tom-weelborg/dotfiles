@@ -22,28 +22,23 @@ mkModule
           type = lib.types.bool;
           default = true;
         };
-        settings = lib.mkOption {
-          type = lib.types.submodule {
-            options = {
-              AllowUsers = lib.mkOption {
-                type = lib.types.nullOr (lib.types.listOf lib.types.str);
-                default = null;
-              };
-              KbdInteractiveAuthentication = lib.mkOption {
-                type = lib.types.bool;
-                default = false;
-              };
-              PasswordAuthentication = lib.mkOption {
-                type = lib.types.bool;
-                default = false;
-              };
-              PermitRootLogin = lib.mkOption {
-                type = lib.types.str;
-                default = "no";
-              };
-            };
+        settings = {
+          AllowUsers = lib.mkOption {
+            type = lib.types.nullOr (lib.types.listOf lib.types.str);
+            default = null;
           };
-          default = {};
+          KbdInteractiveAuthentication = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+          PasswordAuthentication = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+          PermitRootLogin = lib.mkOption {
+            type = lib.types.str;
+            default = "no";
+          };
         };
       };
       mkConfig = { cfg }:
