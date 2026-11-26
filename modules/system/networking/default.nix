@@ -26,12 +26,14 @@ mkModule
       };
       mkConfig = { cfg }:
         {
-          networking.hostId = cfg.hostId;
+          networking = {
+            hostId = cfg.hostId;
 
-          networking.hostName = cfg.hostName;
+            hostName = cfg.hostName;
 
-          networking.networkmanager = {
-            enable = cfg.networkmanager.enable;
+            networkmanager = {
+              enable = cfg.networkmanager.enable;
+            };
           };
         };
     };
