@@ -33,7 +33,7 @@ mkModule
         lib.mkIf cfg.enable
         {
           hardware.openrazer = {
-            users = lib.mkAfter [
+            users = [
               username
             ];
           };
