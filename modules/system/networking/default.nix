@@ -17,6 +17,11 @@ mkModule
           default = "nixos";
         };
 
+        hosts = lib.mkOption {
+          type = lib.types.attrsOf (lib.types.listOf lib.types.str);
+          default = {};
+        };
+
         networkmanager = {
           enable = lib.mkOption {
             type = lib.types.bool;
@@ -30,6 +35,8 @@ mkModule
             hostId = cfg.hostId;
 
             hostName = cfg.hostName;
+
+            hosts = cfg.hosts;
 
             networkmanager = {
               enable = cfg.networkmanager.enable;
