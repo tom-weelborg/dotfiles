@@ -12,6 +12,15 @@
     modules = {
       programs = {
         cli = {
+          browser-utils = {
+            chromedriver = {
+              userModule = {
+                ${username} = {
+                  enable = true;
+                };
+              };
+            };
+          };
           cryptography = {
             age = {
               userModule = {
