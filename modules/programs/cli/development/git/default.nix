@@ -51,7 +51,7 @@ mkModule
       mkConfig = { cfg, username }:
         lib.mkIf cfg.enable
         {
-          users.users.${username}.packages = lib.mkAfter [
+          users.users.${username}.packages = [
             pkgs.git
           ];
         };
