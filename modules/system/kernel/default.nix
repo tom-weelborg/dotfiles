@@ -19,7 +19,7 @@ mkModule
       mkConfig = { cfg }:
         {
           boot = {
-            kernelModules = lib.mkAfter cfg.modules;
+            kernelModules = cfg.modules;
 
             kernelPackages = cfg.packages;
           };
