@@ -174,41 +174,39 @@ in
       };
     };
     programs = {
-      cli = {
-        development = {
-          docker = {
-            systemModule = {
-              enable = true;
-            };
-          };
-          git = {
-            systemModule = {
-              enable = true;
-              name = "Tom Weelborg";
-              email = "135610355+tom-weelborg@users.noreply.github.com";
-            };
-          };
-        };
-        fastfetch = {
+      development = {
+        docker = {
           systemModule = {
             enable = true;
           };
         };
-        openssh = {
-          server = {
-            systemModule = {
-              enable = true;
-              openFirewall = true;
-              settings = {
-                PermitRootLogin = "prohibit-password";
-              };
+        git = {
+          systemModule = {
+            enable = true;
+            name = "Tom Weelborg";
+            email = "135610355+tom-weelborg@users.noreply.github.com";
+          };
+        };
+      };
+      fastfetch = {
+        systemModule = {
+          enable = true;
+        };
+      };
+      openssh = {
+        server = {
+          systemModule = {
+            enable = true;
+            openFirewall = true;
+            settings = {
+              PermitRootLogin = "prohibit-password";
             };
           };
         };
-        ssh = {
-          systemModule = {
-            startAgent = true;
-          };
+      };
+      ssh = {
+        systemModule = {
+          startAgent = true;
         };
       };
     };

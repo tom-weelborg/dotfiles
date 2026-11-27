@@ -13,29 +13,27 @@ in
 
   modules = {
     programs = {
-      cli = {
-        shells = {
-          bash = {
-            systemModule = {
-              enable = true;
-            };
-          };
-        };
-        ssh = {
+      shells = {
+        bash = {
           systemModule = {
-            hosts = [
-              {
-                name = "nas";
-                hostname = "192.168.178.94";
-              }
-            ];
+            enable = true;
           };
         };
-        vpn = {
-          openvpn = {
-            systemModule = {
-              vpnDir = "/home/${username}/vpn";
-            };
+      };
+      ssh = {
+        systemModule = {
+          hosts = [
+            {
+              name = "nas";
+              hostname = "192.168.178.94";
+            }
+          ];
+        };
+      };
+      vpn = {
+        openvpn = {
+          systemModule = {
+            vpnDir = "/home/${username}/vpn";
           };
         };
       };

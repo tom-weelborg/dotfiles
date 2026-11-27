@@ -11,241 +11,235 @@
   configFunction = username: { config, lib, pkgs, ... }: {
     modules = {
       programs = {
-        cli = {
-          browser-utils = {
-            chromedriver = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
-              };
-            };
-          };
-          cryptography = {
-            age = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
-              };
-            };
-            sops = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
-              };
-            };
-            ssh-to-age = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
-              };
-            };
-          };
-          development = {
-            claude-code = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
-              };
-            };
-            docker = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
-              };
-            };
-            git = {
-              homeManagerModule = {
-                ${username} = {
-                  enable = true;
-                  name = "Tom Weelborg";
-                  email = null;
-                  extraSettings = {
-                    core = {
-                      autocrlf = "input";
-                      longpaths = true;
-                    };
-                    credential.helper = "manager";
-                    init.defaultBranch = "main";
-                    merge = {
-                      ff = false;
-                    };
-                    pull = {
-                      ff = "only";
-                      rebase = false;
-                    };
-                  };
-                  secretOptions = {
-                    user = {
-                      email = config.sops.secrets.git-email.path;
-                    };
-                  };
-                };
-              };
-            };
-            tokei = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
-              };
-            };
-          };
-          rclone = {
-            homeManagerModule = {
+        browser-utils = {
+          chromedriver = {
+            userModule = {
               ${username} = {
                 enable = true;
               };
             };
           };
         };
-        gui = {
-          browsers = {
-            brave = {
-              homeManagerModule = {
-                ${username} = {
-                  enable = true;
-                  extraExtensions = [
-                    "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
-                    "fcoeoabgfenejglbffodgkkbkcdhcgfn" # Claude
-                    "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
-                  ];
-                };
-              };
-            };
-            chromium = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
-              };
-            };
-            firefox = {
-              homeManagerModule = {
-                ${username} = {
-                  enable = true;
-                  extraExtensions = with pkgs.firefox-addons; [
-                    aws-extend-switch-roles3
-                    requestly
-                  ];
-                };
-              };
-            };
-            vivaldi = {
-              homeManagerModule = {
-                ${username} = {
-                  enable = true;
-                  extraExtensions = [
-                    "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
-                    "fcoeoabgfenejglbffodgkkbkcdhcgfn" # Claude
-                    "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
-                  ];
-                };
+        browsers = {
+          brave = {
+            homeManagerModule = {
+              ${username} = {
+                enable = true;
+                extraExtensions = [
+                  "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
+                  "fcoeoabgfenejglbffodgkkbkcdhcgfn" # Claude
+                  "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
+                ];
               };
             };
           };
-          communication = {
-            ruumble-client = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
+          chromium = {
+            userModule = {
+              ${username} = {
+                enable = true;
               };
             };
           };
-          development = {
-            jaspersoft-studio = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
+          firefox = {
+            homeManagerModule = {
+              ${username} = {
+                enable = true;
+                extraExtensions = with pkgs.firefox-addons; [
+                  aws-extend-switch-roles3
+                  requestly
+                ];
               };
             };
-            jetbrains = {
-              intellij = {
-                homeManagerModule = {
-                  ${username} = {
-                    enable = true;
+          };
+          vivaldi = {
+            homeManagerModule = {
+              ${username} = {
+                enable = true;
+                extraExtensions = [
+                  "jpmkfafbacpgapdghgdpembnojdlgkdl" # AWS Extend Switch Roles
+                  "fcoeoabgfenejglbffodgkkbkcdhcgfn" # Claude
+                  "mdnleldcmiljblolnjhpnblkcekpdkpa" # Requestly: Supercharge your Development & QA
+                ];
+              };
+            };
+          };
+        };
+        communication = {
+          ruumble-client = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+        };
+        cryptography = {
+          age = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+          sops = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+          ssh-to-age = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+        };
+        development = {
+          claude-code = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+          docker = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+          git = {
+            homeManagerModule = {
+              ${username} = {
+                enable = true;
+                name = "Tom Weelborg";
+                email = null;
+                extraSettings = {
+                  core = {
+                    autocrlf = "input";
+                    longpaths = true;
+                  };
+                  credential.helper = "manager";
+                  init.defaultBranch = "main";
+                  merge = {
+                    ff = false;
+                  };
+                  pull = {
+                    ff = "only";
+                    rebase = false;
+                  };
+                };
+                secretOptions = {
+                  user = {
+                    email = config.sops.secrets.git-email.path;
                   };
                 };
               };
             };
-            mongodb-compass = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
+          };
+          jaspersoft-studio = {
+            userModule = {
+              ${username} = {
+                enable = true;
               };
             };
-            virtualbox = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
-              };
-            };
-            soapui = {
+          };
+          jetbrains = {
+            intellij = {
               homeManagerModule = {
                 ${username} = {
                   enable = true;
-                };
-              };
-            };
-            vscodium = {
-              homeManagerModule = {
-                ${username} = {
-                  enable = true;
-                  extensionProfiles = {
-                    angular = true;
-                    bootstrap = true;
-                    docker = true;
-                    git = true;
-                    github = true;
-                    gitlab = true;
-                    html = true;
-                    http = true;
-                    java = true;
-                    javascript = true;
-                    markdown = true;
-                    nix = true;
-                    python = true;
-                    rust = true;
-                    tailwind = true;
-                    typescript = true;
-                    vue = true;
-                    xml = true;
-                  };
                 };
               };
             };
           };
-          media = {
-            makemkv = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                  tokenPath = config.sops.secrets.makemkv-token.path;
+          mongodb-compass = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+          soapui = {
+            homeManagerModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+          tokei = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+          virtualbox = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+          vscodium = {
+            homeManagerModule = {
+              ${username} = {
+                enable = true;
+                extensionProfiles = {
+                  angular = true;
+                  bootstrap = true;
+                  docker = true;
+                  git = true;
+                  github = true;
+                  gitlab = true;
+                  html = true;
+                  http = true;
+                  java = true;
+                  javascript = true;
+                  markdown = true;
+                  nix = true;
+                  python = true;
+                  rust = true;
+                  tailwind = true;
+                  typescript = true;
+                  vue = true;
+                  xml = true;
                 };
               };
             };
-            obs = {
-              homeManagerModule = {
-                ${username} = {
-                  enable = true;
-                };
+          };
+        };
+        media = {
+          makemkv = {
+            userModule = {
+              ${username} = {
+                enable = true;
+                tokenPath = config.sops.secrets.makemkv-token.path;
               };
             };
-            xreader = {
-              userModule = {
-                ${username} = {
-                  enable = true;
-                };
+          };
+          obs = {
+            homeManagerModule = {
+              ${username} = {
+                enable = true;
               };
+            };
+          };
+          xreader = {
+            userModule = {
+              ${username} = {
+                enable = true;
+              };
+            };
+          };
+        };
+        rclone = {
+          homeManagerModule = {
+            ${username} = {
+              enable = true;
             };
           };
         };
