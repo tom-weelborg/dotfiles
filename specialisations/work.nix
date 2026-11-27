@@ -41,6 +41,14 @@
           };
         };
       };
+      dnsmasq = {
+        systemModule = {
+          enable = overrideFunction true;
+          settings = overrideFunction {
+            address = "/local/127.0.0.1";
+          };
+        };
+      };
       drawio = {
         systemModule = {
           enable = overrideFunction true;
