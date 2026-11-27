@@ -2,6 +2,8 @@
 mkModule
   {
     modulePath = [
+      "programs"
+      "media"
       "jellyfin"
       "server"
     ];

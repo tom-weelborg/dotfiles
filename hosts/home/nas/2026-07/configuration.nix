@@ -165,14 +165,6 @@ in
   users.users.root.openssh.authorizedKeys.keys = authorizedSshKeys;
 
   modules = {
-    jellyfin = {
-      server = {
-        systemModule = {
-          enable = true;
-          openFirewall = true;
-        };
-      };
-    };
     programs = {
       development = {
         docker = {
@@ -191,6 +183,16 @@ in
       fastfetch = {
         systemModule = {
           enable = true;
+        };
+      };
+      media = {
+        jellyfin = {
+          server = {
+            systemModule = {
+              enable = true;
+              openFirewall = true;
+            };
+          };
         };
       };
       openssh = {
